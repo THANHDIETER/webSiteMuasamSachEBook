@@ -18,7 +18,13 @@
         }
         function product(){
             $products=$this->homeModel->allProduct();
+            $danhmucs=$this->homeModel->alldanhmuc(); 
             require_once 'views/product.php';
+        }
+        function dmshow($id){
+            $dmuc=$this->homeModel->dmshowid($id);
+            $danhmucs=$this->homeModel->alldanhmuc();
+            require_once 'views/dMuc_id.php';
         }
         function cart(){
            

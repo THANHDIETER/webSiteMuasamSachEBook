@@ -13,5 +13,6 @@
         'login' =>(new homeController())->login(),
         'logout' =>(new homeController())->logout(),
         'product' =>(new homeController())->product(),
+        'dmid'=> (new homeController())->dmshow($_GET['id']),
     }
 ?>

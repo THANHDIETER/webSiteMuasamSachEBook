@@ -76,18 +76,18 @@
 
                 <div class="row">
                     <!-- Product Item -->
-                     <?php foreach($products as $key): ?>
+                     <?php foreach($dmuc as $ke): ?>
                     <div class="col-md-3 mb-3">
                         <div class="card">
-                       
-                            <img style=" height:280px;  padding: 20px; "  src="./assets/images/prod/books/<?php echo $key['img'] ?>" class="card-img-top" alt="Về Đi Con - Bìa Cứng">
+                            <input type="hidden" name="" value="<?php echo $ke['danh_muc_id'] ?>" id="">
+                            <img style=" height:280px;  padding: 20px; "  src="./assets/images/prod/books/<?php echo $ke['img'] ?>" class="card-img-top" alt="Về Đi Con - Bìa Cứng">
                             <div class="card-body"> 
-                                <h6 class="card-title"><?php echo $key['ten'] ?></h6>
-                                <p class="text-success"><?php echo $key['tac_gia'] ?></p>
+                                <h6 class="card-title"><?php echo $ke['ten'] ?></h6>
+                                <p class="text-success"><?php echo $ke['tac_gia'] ?></p>
                                 <div class="d-flex justify-content-between">
-                                    <p class="text-danger font-weight-bold"><?php echo $key['gia'] ?></p>
-                                    <p class="text-muted"><del><?php echo $price=$key['gia']-($key['gia']/100)*$key['sale'] ?></del> <span
-                                            class="badge badge-danger">-<?php echo $key['sale'] ?>%</span></p>
+                                    <p class="text-danger font-weight-bold"><?php echo $ke['gia'] ?></p>
+                                    <p class="text-muted"><del><?php echo $price=$ke['gia']-($ke['gia']/100)*$ke['sale'] ?></del> <span
+                                            class="badge badge-danger">-<?php echo $ke['sale'] ?>%</span></p>
                                 </div>
                             </div>
                         </div>
