@@ -79,7 +79,6 @@
                      <?php foreach($products as $key): ?>
                     <div class="col-md-3 mb-3">
                         <div class="card">
-                       
                             <img style=" height:280px;  padding: 20px; "  src="./assets/images/prod/books/<?php echo $key['img'] ?>" class="card-img-top" alt="Về Đi Con - Bìa Cứng">
                             <div class="card-body"> 
                                 <h6 class="card-title"><?php echo $key['ten'] ?></h6>

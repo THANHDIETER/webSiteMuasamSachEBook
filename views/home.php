@@ -81,7 +81,7 @@ a:hover{
    <?php  require_once 'components/header.php'; ?>
 
 <!-- Main Content -->
-<main class="container my-4">#
+<main class="container my-4">
     <div class="row">
         <!-- Sidebar for categories -->
         <aside class="col-md-3">
@@ -89,7 +89,7 @@ a:hover{
             <h1 class="h5 border-bottom pb-2">Danh mục</h1>
             <ul class="list-unstyled">
             <?php foreach ($danhmuc as $value) { ?>
-                <li><a href="#" class="text-secondary text-decoration-none d-block py-1"><?php echo $value['name'] ?></a></li>
+                <li><a href="?act=dmid&id=<?=$value['id'] ?>" class="text-secondary text-decoration-none d-block py-1"><?php echo $value['name'] ?></a></li>
                 <?php } ?>
                
             </ul>
@@ -167,11 +167,7 @@ a:hover{
 </main>
 
 <!-- Footer -->
-<footer class="bg-dark text-white py-3">
-    <div class="container text-center">
-        <p>&copy; 2024 Bookbuy.vn. All rights reserved.</p>
-    </div>
-</footer>
+<?php  require_once 'components/footer.php'; ?>
 
    </div>
     <!-- Bootstrap JS, Popper.js, and jQuery -->
