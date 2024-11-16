@@ -73,7 +73,7 @@ a:hover{
 </head>
 <body>
 
-    <!-- Top Navigation -->
+    <!-- Top Navigation
     <div class="bg-light py-2 border-bottom">
     <div class="container d-flex justify-content-between">
         <div class="link-hover">
@@ -93,8 +93,8 @@ a:hover{
     </div>
 </div>
 
-    <!-- Header -->
-    <header class="bg-white py-3 border-bottom">
+    <!- Header -->
+    <!-- <header class="bg-white py-3 border-bottom">
         <div class="container d-flex align-items-center justify-content-between">
             <h1 class="text-warning font-weight-bold">Bookbuy.vn</h1>
             <div class="input-group w-50">
@@ -105,7 +105,8 @@ a:hover{
             </div>
             <a href="#" class="text-secondary text-decoration-none"><i class="bi bi-cart4"></i> Giỏ hàng (0)</a>
         </div>
-    </header>
+    </header> -->
+    <?php  require_once 'components/header.php'; ?>
 
     <!-- Main Content -->
     <main class="container my-4">
@@ -120,23 +121,17 @@ a:hover{
                     <?php } ?>
                    
                 </ul>
-                <h1 class="h5 border-bottom pb-2">Tác giả tiêu biểu</h1>
+                <h1 class="h5 border-bottom pb-2">Tác giả </h1>
                 <ul class="list-unstyled">
-                <?php foreach ($tac_gia as $value) { ?>
-                    <li><a href="#" class="text-secondary text-decoration-none d-block py-1"><?php echo $value['name'] ?></a></li>
-                    <?php } ?>
+                <?php foreach($products as $value): ?>
+                    <li><a href="#" class="text-secondary text-decoration-none d-block py-1"><?php echo $value['tac_gia'] ?></a></li>
+                    <?php endforeach ?>
                 </ul>
                 <h1></h1>
 
-                <h1 class="h5 border-bottom pb-2">Theo độ tuổi</h1>
-                <ul class="list-unstyled">
-                <?php foreach ($tac_gia as $value) { ?>
-                    <li><a href="#" class="text-secondary text-decoration-none d-block py-1"><?php echo $value['name'] ?></a></li>
-                    <?php } ?>
-
-                </ul>
-                <h1 class="h5 border-bottom pb-2">Theo giá</h1>
-                <ul class="list-unstyled">
+                
+                <!-- <h1 class="h5 border-bottom pb-2">Theo giá</h1> -->
+                <!-- <ul class="list-unstyled">
                     <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Giá nhỏ hơn 50.000đ</a></li>
                     <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Giá từ 50.000 - 100.000đ</a></li>
                     <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Giá từ 100.000 - 200.000đ</a></li>
@@ -145,7 +140,7 @@ a:hover{
                     <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Giá từ 400.000 - 500.000đ</a></li>
                     <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Giá từ 500.000 - 1.000.000đ</a></li>
                     <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Giá lớn hơn 1.000.000đ</a></li>
-                </ul>       
+                </ul>        -->
             </aside>
  <!-- Banner and Book List -->
  <div class="col-md-9">
@@ -177,23 +172,22 @@ a:hover{
     <h2 class="h5 mb-3">Sách mới</h2>
     <div class="row">
         <!-- Sách 1 -->
-        <div class="col-6 col-sm-4 col-md-3 mb-4">
-            <div class="">
-                <img src="https://bookbuy.vn/Res/Images/Product/hieu-bo-nao-ly-giai-ung-ung-tuoi-teen_133341_1.jpg" class="card-img-top" alt="Hiểu Bộ Não - Lý Giải Ứng Xử Tuổi Teen">
-                <div class="card-body text-center">
-                    <h6 class="card-title font-weight-bold">Hiểu Bộ Não - Lý Giải Ứng Xử Tuổi Teen</h6>
-                    <p class="card-text text-warning">Nicola Morgan</p>
-                    <!-- Giá -->
-                    <div class="price-wrapper d-flex flex-column align-items-center">
-                        <div class="d-flex align-items-center">
-                            <span class="old-price text-muted" style="text-decoration: line-through; margin-right: 10px;">300,000₫</span>
-                            <span class="new-price text-danger font-weight-bold" style="font-size: 1.2rem;">255,000₫</span>
+        <?php foreach($top8 as $key): ?>
+                    <div class="col-md-3 mb-3">
+                        <div class="card">
+                            <a href=""><img style=" height:280px;  padding: 20px; "  src="./assets/images/prod/books/<?php echo $key['img'] ?>" class="card-img-top" alt="Về Đi Con - Bìa Cứng"></a>
+                            <div class="card-body"> 
+                                <h6 class="card-title"><?php echo $key['ten'] ?></h6>
+                                <p class="text-success"><?php echo $key['tac_gia'] ?></p>
+                                <div class="d-flex justify-content-between">
+                                    <p class="text-danger font-weight-bold"><?php echo $key['gia'] ?></p>
+                                    <p class="text-muted"><del><?php echo $price=$key['gia']-($key['gia']/100)*$key['sale'] ?></del> <span
+                                            class="badge badge-danger">-<?php echo $key['sale'] ?>%</span></p>
+                                </div>
+                            </div>
                         </div>
-                        <span class="badge badge-danger mt-2" style="font-size: 0.9rem;">Sale 15%</span>
                     </div>
-                </div>
-            </div>
-        </div>
+                    <?php  endforeach; ?>
         
 
 </section>

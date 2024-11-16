@@ -6,45 +6,28 @@
         }
         
     function allProduct() {
-        try {
-            $sql = "SELECT * FROM `products`";
+            $sql = "SELECT * FROM products ORDER BY id DESC";
             return $this->conn->query($sql)->fetchAll();
-           
-        } catch (Exception $err) {
-            echo "<h1>";
-            echo "Lỗi hàm all trong model: " . $err->getMessage();
-            echo "</h1>";
         }
-    }
-    function danhMuc() {
-        try {
-            $sql = "SELECT * FROM `danh_muc`";
-            return $this->conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-        } catch ( Exception $err) {
-            echo "<h1>";
-            echo "Lỗi hàm all trong model: " . $err->getMessage();
-            echo "</h1>";
+        function dmshowid($id){
+            $sql="SELECT * FROM  products  WHERE danh_muc_id=$id";
+            return $this->conn->query($sql)->fetchAll();
+        }   
+        function alldanhmuc() {
+       
+            $sql = "SELECT * FROM danh_muc ORDER BY id DESC";
+            return $this->conn->query($sql)->fetchAll();
         }
-    }
-    function tac_gia() {
-        try {
-            $sql = "SELECT * FROM `tac_gia`";
-            return $this->conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-        } catch ( Exception $err) {
-            echo "<h1>";
-            echo "Lỗi hàm all trong model: " . $err->getMessage();
-            echo "</h1>";
-        }
+        
+    
+    function top8Product() {
+        $sql = "SELECT * FROM products ORDER BY id DESC LIMIT 8";
+        return $this->conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // function top6Product() {
-    //     $sql = "SELECT * FROM product ORDER BY pro_id DESC LIMIT 6";
-    //     return $this->conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-    // }
-
-    // function findProductById($id) {
-    //     $sql = "SELECT * FROM product WHERE pro_id =$id";
-    //     return $this->conn->query($sql)->fetch();
-    // }
+    function findProductById($id) {
+        $sql = "SELECT * FROM products WHERE id =$id";
+        return $this->conn->query($sql)->fetch();
+    }
     }
 ?>
