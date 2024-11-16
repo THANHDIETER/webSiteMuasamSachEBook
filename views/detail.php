@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chi tiết sản phẩm</title>
     <link rel="stylesheet" href="styte/css/styte.css">
-    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+     <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -13,7 +13,7 @@
 
 </head>
 <body >
-    <?php require_once '../components/header.php' ?><hr>
+    <?php require_once './components/header.php' ?><hr>
     <div class="bg-light">
     <div style="display: grid; gap:40px;"  class="container  ">
     <br><p class="wrapper">Trang chủ / sách hay / nguyên tắc lập quốc - những tư tưởng căn bản của các nhà lập quốc hoa kỳ</p>
@@ -45,16 +45,17 @@
     <div class="row">
         <div class="col-9">
         <div class="table ">
-        <div class="table table-striped bg-white">
-        <h2>THÔNG TIN CHI TIẾT</h2><hr>
-        <p>Nhà xuất bản: NXB Thế Giới</p><hr>
-        <p>Ngày xuất bản: 16/11/2024</p><hr>
-        <p>Nhà phát hành: Nhã Nam</p><hr>
-        <p>Kích thước: 15.5 x 24.0 x 2.0 cm</p><hr>
-        <p>Số trang: 412 trang</p><hr>
-        <p>Trọng lượng: 600 gram </p><hr>
-        </div>
-        <div class="table2 bg-white">
+        <table class="table table-striped-columns">
+        <th>THÔNG TIN CHI TIẾT</th><br>
+        <td>Nhà xuất bản: NXB Thế Giới</td>
+        <td>Ngày xuất bản: 16/11/2024</td>
+        <td>Nhà phát hành: Nhã Nam</td>
+        <td>Kích thước: 15.5 x 24.0 x 2.0 cm</td>
+        <td>Số trang: 412 trang</td>
+        <td>Trọng lượng: 600 gram </td>
+        </table><br>
+        <div style="padding: 20px;" class="table2 bg-white">
+          <br>  
             <h2>Giới thiệu sản phẩm</h2>
             <h2>Nguyên Tắc Lập Quốc</h2>
             <h2>Những Tư Tưởng Căn Bản Của Các Nhà Lập Quốc Hoa Kỳ</h2>

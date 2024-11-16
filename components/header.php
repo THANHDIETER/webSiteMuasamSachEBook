@@ -1,4 +1,17 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
       <!-- nav 1 -->
      <nav style="background-color: lightgray;" class="navbar navbar-expand-lg  ">
           <div class="container  container-fluid">
@@ -35,7 +48,7 @@
         <nav  class="navbar navbar-expand-lg  bg-body-tertiary ">
           <div class="container-fluid .bg-light p-2  ">
             <div style="display: flex; gap:80px; justify-content: space-between;" class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-              <a class="" href="#"><img style="width:150px;" src="../styte/img/logo.png" alt=""></a>
+              <a class="" href="#"><img style="width:150px;" src="./styte/img/logo.png" alt=""></a>
               <a class="nav-link active" href="#">Tất Cả</a>
                <form class="d-flex" role="search">
                   <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -76,3 +89,5 @@
           </div>
         
     </header>
+</body>
+</html>

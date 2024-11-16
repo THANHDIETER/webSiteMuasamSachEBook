@@ -8,16 +8,23 @@
             $this->homeModel=new homeModel();
         }
         function home(){
-            $product = $this->homeModel->allProduct();
-           include "views/home.php";
+            $product=$this->homeModel->top6product();
+            require_once 'views/home.php';
         }
-        //rtgyhujkl
-        // function detail($id){
-        //     $productOne=$this->homeModel->findProductById($id);
-        //     require_once 'views/detail.php';
-        // }
+        
+        function detail($id){
+            $productOne=$this->homeModel->findProductById($id);
+            require_once 'views/detail.php';
+        }
         function product(){
-            
+            $products=$this->homeModel->allProduct();
+            $danhmucs=$this->homeModel->alldanhmuc(); 
+            require_once 'views/product.php';
+        }
+        function dmshow($id){
+            $dmuc=$this->homeModel->dmshowid($id);
+            $danhmucs=$this->homeModel->alldanhmuc();
+            require_once 'views/dMuc_id.php';
         }
         function cart(){
            
