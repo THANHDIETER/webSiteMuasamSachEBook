@@ -20,8 +20,8 @@
         }
         
     
-    function top6Product() {
-        $sql = "SELECT * FROM products ORDER BY id DESC LIMIT 6";
+    function top8Product() {
+        $sql = "SELECT * FROM products ORDER BY id DESC LIMIT 8";
         return $this->conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 

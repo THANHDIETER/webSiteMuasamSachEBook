@@ -2,7 +2,6 @@
     require_once 'connect/function.php';
     require_once 'controllers/homeController.php';
     require_once 'models/homeModel.php';
-    include_once "models/book.php";
 
     $act=$_GET['act']??'/';
     match($act){
