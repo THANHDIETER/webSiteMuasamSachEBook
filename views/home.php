@@ -7,9 +7,69 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../styte/style.js">
-    <link rel="stylesheet" href="../../webSiteMuasamSachEBook/styte/css/styte.css">
+    <link rel="stylesheet" href="../style/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
- 
+    <style>
+        
+/* Thay đổi màu nền của nút */
+.carousel-control-prev,
+.carousel-control-next {
+    background-color: transparent;
+    margin-top: 20%; /* Đẩy các nút xuống dưới */
+    border: none;
+}
+
+/* Thay đổi kích thước của các nút */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 40px; 
+    height: 40px; 
+    background-color:darkgrey;
+}
+/* Tùy chỉnh kích thước của nút điều khiển */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 60px; 
+    height: 60px; 
+  
+}
+a{
+    color: aqua;
+}
+a:hover{
+    background-color:gray;
+    color: aliceblue;
+}
+.link-hover a {
+    transition: color 0.3s ease; /* Thêm hiệu ứng chuyển màu mượt mà */
+}
+
+.link-hover a:hover {
+    color: white !important; 
+    transition: ease 1s ;
+}
+
+/* css sản phẩm */
+.card-img-top {
+    object-fit: cover;
+    height: 200px;
+    width: 100%;
+}
+.card-body {
+    padding: 15px;
+}
+.card-title {
+    font-size: 1rem;
+    color: #333;
+}
+.card-text {
+    font-size: 0.875rem;
+    color: #ff8c00;
+}
+
+
+
+    </style>
 </head>
 <body>
 
@@ -25,7 +85,7 @@
         <div class="link-hover">
             <a href="#" class="text-warning text-decoration-none mr-3"><i class="bi bi-phone-vibrate"></i> 0332371912</a>
             <a href="#" class="text-secondary text-decoration-none  mr-3"><i class="bi bi-box-seam"></i> Kiểm tra đơn hàng</a>
-            <a href="#" class="text-secondary text-decoration-none mr-3">
+            <a href="?act=log" class="text-secondary text-decoration-none mr-3">
             <i class="bi bi-box-arrow-in-right"> Đăng Nhập</i>
             </a>
             <a href="#" class="text-secondary">Đăng ký</a>
@@ -55,30 +115,25 @@
      
                 <h1 class="h5 border-bottom pb-2">Danh mục</h1>
                 <ul class="list-unstyled">
-                <?php foreach ($product as $value) { ?>
-                    <li><a href="#" class="text-secondary text-decoration-none d-block py-1"><?php echo"$value->img" ?></a></li>
+                <?php foreach ($danhmuc as $value) { ?>
+                    <li><a href="#" class="text-secondary text-decoration-none d-block py-1"><?php echo $value['name'] ?></a></li>
                     <?php } ?>
-                    <!-- Thêm danh mục khác nếu cần -->
+                   
                 </ul>
                 <h1 class="h5 border-bottom pb-2">Tác giả tiêu biểu</h1>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Ayn Rand (2)</a></li>
-                    <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Nguyễn Nhật Ánh (172)</a></li>
-                    <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Nguyễn Đông Thức (13)</a></li>
-                    <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Phạm Lữ Ân (6)</a></li>
-                    <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Nguyễn Thiên Ngân (17)</a></li>
-                    <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Hạ Chi (3)</a></li>
+                <?php foreach ($tac_gia as $value) { ?>
+                    <li><a href="#" class="text-secondary text-decoration-none d-block py-1"><?php echo $value['name'] ?></a></li>
+                    <?php } ?>
                 </ul>
                 <h1></h1>
 
                 <h1 class="h5 border-bottom pb-2">Theo độ tuổi</h1>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Sách 2 - 3 tuổi (183)</a></li>
-                    <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Sách 3 - 6 tuổi (495)</a></li>
-                    <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Sách 6 - 9 tuổi (707)</a></li>
-                    <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Sách 9 - 12 tuổi (783)</a></li>
-                    <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Sách 12 - 18 tuổi (1388)</a></li>
-                    <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Sách > 18 tuổi (1772)</a></li>
+                <?php foreach ($tac_gia as $value) { ?>
+                    <li><a href="#" class="text-secondary text-decoration-none d-block py-1"><?php echo $value['name'] ?></a></li>
+                    <?php } ?>
+
                 </ul>
                 <h1 class="h5 border-bottom pb-2">Theo giá</h1>
                 <ul class="list-unstyled">
@@ -92,20 +147,19 @@
                     <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Giá lớn hơn 1.000.000đ</a></li>
                 </ul>       
             </aside>
-
-            <!-- Banner and Book List -->
-            <div class="col-md-9">
+ <!-- Banner and Book List -->
+ <div class="col-md-9">
                 <!-- Banner -->
-                <div id="carouselExampleDark" class="carousel carousel-dark slide carousel-fade" data-bs-ride="carousel">
+    <div id="carouselExampleDark" class="carousel carousel-dark slide carousel-fade" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active" data-bs-interval="2000">
-            <a href="#"><img src="../1.png" class="d-block w-100" alt="Slide 1"></a>
+            <a href="#"><img src="https://bookbuy.vn/Res/Images/Album/4ef6e847-be96-46b0-8421-e24587989776.png?w=920&h=420&mode=crop" class="d-block w-100" alt="Slide 1"></a>
         </div>
         <div class="carousel-item" data-bs-interval="2000">
-            <a href="#"><img src="../2.png" class="d-block w-100" alt="Slide 2"></a>
+            <a href="#"><img src="https://bookbuy.vn/Res/Images/Album/ffd62e0e-02fb-4e7a-96fe-42ed8966c89b.png?w=920&h=420&mode=crop" class="d-block w-100" alt="Slide 2"></a>
         </div>
         <div class="carousel-item" data-bs-interval="2000">
-            <a href="#"><img src="../3.png" class="d-block w-100" alt="Slide 3"></a>
+            <a href="#"><img src="https://bookbuy.vn/Res/Images/Album/00456729-e290-44a5-bbe9-da9a261ff77b.png?w=920&h=420&mode=crop" class="d-block w-100" alt="Slide 3"></a>
         </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
@@ -141,63 +195,7 @@
             </div>
         </div>
         
-        <!-- Sách 2 -->
-        <div class="col-6 col-sm-4 col-md-3 mb-4">
-            <div class="">
-                <img src="https://bookbuy.vn/Res/Images/Product/hieu-tam-ly-xoa-bo-lo-lang-tuoi-tin_133340_1.jpg" class="card-img-top" alt="Hiểu Tâm Lý, Xóa Bỏ Lo Lắng Tuổi Teen">
-                <div class="card-body text-center">
-                    <h6 class="card-title font-weight-bold">Hiểu Tâm Lý, Xóa Bỏ Lo Lắng Tuổi Teen</h6>
-                    <p class="card-text text-warning">Nicola Morgan</p>
-                    <!-- Giá -->
-                    <div class="price-wrapper d-flex flex-column align-items-center">
-                        <div class="d-flex align-items-center">
-                            <span class="old-price text-muted" style="text-decoration: line-through; margin-right: 10px;">250,000₫</span>
-                            <span class="new-price text-danger font-weight-bold" style="font-size: 1.2rem; margin-right:10; margin-top:10px;">200,000₫</span>
-                        </div>
-                        <span class="badge badge-danger mt-2" style="font-size: 0.9rem;">Sale 20%</span>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Sách 3 -->
-        <div class="col-6 col-sm-4 col-md-3 mb-4">
-            <div class="">
-                <img src="https://bookbuy.vn/Res/Images/Product/mat-rong_133338_1.jpg?w=135&scale=canvas&h=190" class="card-img-top" alt="Mắt Rồng">
-                <div class="card-body text-center">
-                    <h6 class="card-title font-weight-bold">Mắt Rồng</h6>
-                    <p class="card-text text-warning">John Smith</p>
-                    <!-- Giá -->
-                    <div class="price-wrapper d-flex flex-column align-items-center">
-                        <div class="d-flex align-items-center ">
-                            <span class="old-price text-muted" style="text-decoration: line-through; margin-right:10; margin-top: 40px; ">350,000₫</span>
-                            <span class="new-price text-danger font-weight-bold" style="font-size: 1.2rem; margin-right:10; margin-top: 40px;">300,000₫</span>
-                        </div>
-                        <span class="badge badge-danger mt-2" style="font-size: 0.9rem;">Sale 15%</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Sách 4 -->
-        <div class="col-6 col-sm-4 col-md-3 mb-4">
-            <div class="">
-                <img src="https://bookbuy.vn/Res/Images/Product/danh-gia-ky-nhan-sinh-tan-man-ve-the-gioi_133339_1.jpg?w=135&scale=canvas&h=190" class="card-img-top" alt="Đánh Giá Ký Nhân Sinh Tân Man Về Thế Giới">
-                <div class="card-body text-center">
-                    <h6 class="card-title font-weight-bold">Đánh Giá Ký Nhân Sinh Tân Man Về Thế Giới</h6>
-                    <p class="card-text text-warning">Jane Doe</p>
-                    <!-- Giá -->
-                    <div class="price-wrapper d-flex flex-column align-items-center">
-                        <div class="d-flex align-items-center">
-                            <span class="old-price text-muted" style="text-decoration: line-through; margin-right: 10px;">400,000₫</span>
-                            <span class="new-price text-danger font-weight-bold" style="font-size: 1.2rem;">340,000₫</span>
-                        </div>
-                        <span class="badge badge-danger mt-2" style="font-size: 0.9rem;">Sale 15%</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </section>
 <hr>
 <h3>why you keep buying books you don’t read</h3>

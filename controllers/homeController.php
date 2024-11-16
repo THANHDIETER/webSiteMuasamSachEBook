@@ -9,7 +9,9 @@
         }
         function home(){
             $product = $this->homeModel->allProduct();
-           include "views/home.php";
+            $danhmuc = $this->homeModel->danhMuc();
+            $tac_gia = $this->homeModel->tac_gia();
+           require "views/home.php";
         }
         //rtgyhujkl
         // function detail($id){
@@ -19,6 +21,7 @@
         function product(){
             
         }
+        
         function cart(){
            
         }

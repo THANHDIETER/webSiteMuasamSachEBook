@@ -8,28 +8,33 @@
     function allProduct() {
         try {
             $sql = "SELECT * FROM `products`";
-            $data = $this->conn->query($sql)->fetchAll();
-            // Convert mảng databse sang ob
-            foreach ($data as $value) {
-                $ob = new Book();
-                $ob->id = $value['id'];
-                $ob->ten = $value['ten'];
-                $ob->danhmuc = $value['danh_muc_id'];
-                $ob->nha_xuat_ban = $value['nha_san_xuat_id'];
-                $ob->img = $value['img'];
-                $ob->gia = $value['gia'];
-                $ob->mota = $value['mo_ta'];
-                $ob->luotban = $value['luot_ban'];
-                $danhsach [] = $ob;
-            }
-            return $danhsach;
+            return $this->conn->query($sql)->fetchAll();
+           
         } catch (Exception $err) {
             echo "<h1>";
             echo "Lỗi hàm all trong model: " . $err->getMessage();
             echo "</h1>";
         }
-        
-        
+    }
+    function danhMuc() {
+        try {
+            $sql = "SELECT * FROM `danh_muc`";
+            return $this->conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        } catch ( Exception $err) {
+            echo "<h1>";
+            echo "Lỗi hàm all trong model: " . $err->getMessage();
+            echo "</h1>";
+        }
+    }
+    function tac_gia() {
+        try {
+            $sql = "SELECT * FROM `tac_gia`";
+            return $this->conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        } catch ( Exception $err) {
+            echo "<h1>";
+            echo "Lỗi hàm all trong model: " . $err->getMessage();
+            echo "</h1>";
+        }
     }
 
     // function top6Product() {
