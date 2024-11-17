@@ -30,15 +30,15 @@ class danhmucController
             }
         }
     }
-    //     function delete($id)
-//     {
-//         if ($this->productModel->delete($id)) {
-//             header("location:?act=listproduct");
-//         } else {
-//             echo "Lỗi";
-//         }
-//     }
-//     function update($id)
+    function delete($id)
+    {
+        if ($this->danhmucModel->deleteDmuc($id)) {
+            header("location:?act=listDmuc");
+        } else {
+            echo "Lỗi";
+        }
+    }
+    //     function update($id)
 //     {
 //         $Product = $this->productModel->print($id);
 //         require_once 'views/updateProduct.php';

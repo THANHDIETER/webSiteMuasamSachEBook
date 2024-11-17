@@ -19,12 +19,12 @@ class danhmucModel
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute();
     }
-    // function delete($id)
-    // {
-    //     $sql = "delete from danh_muc where id=$id";
-    //     $stmt = $this->conn->prepare($sql);
-    //     return $stmt->execute();
-    // }
+    function deleteDmuc($id)
+    {
+        $sql = "delete from danh_muc where id=$id";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute();
+    }
     // public function print($id)
     // {
     //     $sql = "SELECT * FROM products WHERE id=$id";

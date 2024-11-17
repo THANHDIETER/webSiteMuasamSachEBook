@@ -43,7 +43,7 @@
                             <a href="?act=update&id=<?php echo $key['id']; ?>" class="btn btn-sm btn-outline-primary">
                                 Edit
                             </a>
-                            <a href="?act=delete&id=<?php echo urlencode($key['id']); ?>"
+                            <a href="?act=deleteDmuc&id=<?php echo urlencode($key['id']); ?>"
                                 class="btn btn-sm btn-outline-danger" onclick="return confirmDelete()">Remove
                             </a>
                             <!-- <a href="#" class="btn btn-sm btn-outline-secondary">Thêm bìa</a> -->
