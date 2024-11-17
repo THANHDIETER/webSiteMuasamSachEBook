@@ -31,7 +31,7 @@
             <a href="index.php" class="nav-link text-light px-3"><i class="fa-solid fa-house me-2"></i>Trang chủ</a>
             <a href="index.php?act=listproduct" class="nav-link text-light px-3"><i
                     class="fa-solid fa-book me-2"></i>Sách</a>
-            <a href="index.php?act=listDm" class="nav-link text-light px-3"><i class="fa-solid fa-list me-2"></i>Danh
+            <a href="index.php?act=listDmuc" class="nav-link text-light px-3"><i class="fa-solid fa-list me-2"></i>Danh
                 mục</a>
             <a href="index.php?act=listTacGia" class="nav-link text-light px-3"><i class="fa-solid fa-at me-2"></i>Tác
                 giả</a>
