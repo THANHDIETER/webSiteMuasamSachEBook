@@ -26,6 +26,7 @@ match ($act) {
     'listDmuc' => (new danhmucController())->listDmuc(),
     'addDmuc' => (new danhmucController())->addDmuc(),
     'deleteDmuc' => (new danhmucController())->delete($_GET['id']),
+    'updateDmuc' => (new danhmucController())->update($_GET['id']),
 
 }
     ?>

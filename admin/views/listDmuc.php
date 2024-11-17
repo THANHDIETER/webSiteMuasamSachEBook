@@ -40,7 +40,7 @@
                         <td><?php echo $key['id'] ?></td>
                         <td><?php echo $key['name'] ?></td>
                         <td>
-                            <a href="?act=update&id=<?php echo $key['id']; ?>" class="btn btn-sm btn-outline-primary">
+                            <a href="?act=updateDmuc&id=<?php echo $key['id']; ?>" class="btn btn-sm btn-outline-primary">
                                 Edit
                             </a>
                             <a href="?act=deleteDmuc&id=<?php echo urlencode($key['id']); ?>"
