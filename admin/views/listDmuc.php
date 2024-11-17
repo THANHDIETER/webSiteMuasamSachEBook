@@ -18,7 +18,7 @@
 
 
     <div class="container my-4 ms-auto " style="margin-left: 250px;">
-        <div class=""><a href="index.php?act=insert" class="btn btn-success">Nhập
+        <div class=""><a href="index.php?act=addDmuc" class="btn btn-success">Nhập
                 thêm</a></div>
     </div>
     <h1 class="fw-bold text-center">Danh sách danh mục</h1>

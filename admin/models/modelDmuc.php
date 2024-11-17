@@ -13,15 +13,15 @@ class danhmucModel
         $sql .= " ORDER BY id desc";
         return $this->conn->query($sql);
     }
-    // public function insert($ten, $tac_gia, $danh_muc_id, $nha_xuat_ban_id, $gia, $img)
-    // {
-    //     $sql = "INSERT INTO products VALUE (null,'$ten', '$tac_gia','$danh_muc_id', '$nha_xuat_ban_id', '$gia','$img')";
-    //     $stmt = $this->conn->prepare($sql);
-    //     return $stmt->execute();
-    // }
+    public function addDmuc($name)
+    {
+        $sql = "INSERT INTO danh_muc VALUE (null,'$name')";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute();
+    }
     // function delete($id)
     // {
-    //     $sql = "delete from products where id=$id";
+    //     $sql = "delete from danh_muc where id=$id";
     //     $stmt = $this->conn->prepare($sql);
     //     return $stmt->execute();
     // }

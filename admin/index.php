@@ -24,6 +24,7 @@ match ($act) {
 
     // Danhmuc
     'listDmuc' => (new danhmucController())->listDmuc(),
+    'addDmuc' => (new danhmucController())->addDmuc(),
 
 }
     ?>
