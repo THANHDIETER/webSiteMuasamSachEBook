@@ -37,7 +37,7 @@
                     <h5 class="font-weight-bold text-danger">Danh mục</h5>
                     <ul class="list-unstyled">
                     <?php foreach($danhmucs as $key): ?>
-                        <li><a href="?act=dmid&id=<?=$key['id'] ?>" class=" nav-link btn-primary"><?php echo $key['name'] ?></a> </li>
+                        <li><a href="?act=dmid&id=<?=$key['dm_id'] ?>" class=" nav-link btn-primary"><?php echo $key['name'] ?></a> </li>
                         <?php  endforeach; ?>
                     </ul>
                 </div>
@@ -84,8 +84,12 @@
                                 <h6 class="card-title"><?php echo $key['ten'] ?></h6>
                                 <p class="text-success"><?php echo $key['tac_gia'] ?></p>
                                 <div class="d-flex justify-content-between">
-                                    <p class="text-danger font-weight-bold"><?php echo $key['gia'] ?></p>
-                                    <p class="text-muted"><del><?php echo $price=$key['gia']-($key['gia']/100)*$key['sale'] ?></del> <span
+                                    <p class="text-danger font-weight-bold"><?php $price= $key['gia'];
+                                    $formatted_price = number_format($price, 0, ',', '.'); 
+                                    echo $formatted_price . 'đ'; ?></p>
+                                    <p class="text-muted"><del><?php  $price=$key['gia']-($key['gia']/100)*$key['sale'];
+                                    $formatted_price = number_format($price, 0, ',', '.'); 
+                                    echo $formatted_price . 'đ'; ?></del> <span
                                             class="badge badge-danger">-<?php echo $key['sale'] ?>%</span></p>
                                 </div>
                             </div>
