@@ -22,6 +22,13 @@ class productModel
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute();
     }
+    function delete($id)
+    {
+        $sql = "delete from products where id=$id";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute();
+    }
+
 
 
 }

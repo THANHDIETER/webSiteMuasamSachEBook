@@ -36,5 +36,13 @@ class productController
                }
           }
      }
+     function delete($id)
+     {
+          if ($this->productModel->delete($id)) {
+               header("location:?act=listproduct");
+          } else {
+               echo "Lỗi";
+          }
+     }
 }
 ?>

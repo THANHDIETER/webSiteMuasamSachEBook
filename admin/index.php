@@ -16,7 +16,7 @@ match ($act) {
     // '/' => (new productController)->login(),
     'insert' => (new productController())->insert(),
     'listproduct' => (new productController())->listProduct(),
-// 'delete' => (new productController())->delete($_GET['id']),
+    'delete' => (new productController())->delete($_GET['id']),
 // 'update' => (new productController())->update($_GET['id']),
 // 'cart' => (new productController())->cart(),
 
