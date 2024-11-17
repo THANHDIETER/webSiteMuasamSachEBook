@@ -16,6 +16,13 @@ class productModel
         $sql .= " ORDER BY products.id DESC";
         return $this->conn->query($sql);
     }
+    public function insert($ten, $tac_gia, $danh_muc_id, $nha_xuat_ban_id, $gia, $img)
+    {
+        $sql = "INSERT INTO products VALUE (null,'$ten', '$tac_gia','$danh_muc_id', '$nha_xuat_ban_id', '$gia','$img')";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute();
+    }
+
 
 }
 ?>
