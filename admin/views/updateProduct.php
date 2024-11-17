@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>them san pham</title>
+    <title>Cap nhat san pham</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -19,33 +19,29 @@
 
 <body>
 
-
     <div class="container">
-        <h1 class="fw-bold text-center mt-5">Thêm sản phẩm</h1>
+
         <br><br>
         <form action="" enctype="multipart/form-data" method="post">
+            <input type="hidden" name="id" value="<?= $Product['id'] ?>" id="">
             <div class="form-group">
                 <label>Tên sách</label>
-                <input class="form-control" type="text" name="ten" ?>
+                <input class="form-control" value="<?= $Product['ten'] ?>" type="text" name="ten" ?>
             </div><br>
             <div class="form-group">
                 <label for=>Hình ảnh</label>
-                <input class="form-control" type="file" name="img" ?>
+                <img src="../assets/images/prod/books/<?php echo $Product['img'] ?>" alt="">
+                <input class="form-control" value="<?= $Product['img'] ?>" type="file" name="img" ?>
             </div><br>
             <div class="form-group">
                 <label>Tác giả</label>
-                <input class="form-control" type="text" name="tac_gia" ?>
-            </div><br>
-            <div class="form-group">
-                <label>Mô tả</label>
-                <textarea class="form-control" name="mo_ta"></textarea>
-
+                <input class="form-control" value="<?= $Product['tac_gia'] ?>" type="text" name="tac_gia" ?>
             </div><br>
             <div class="form-group">
                 <label for="exampleFormControlSelect2">Thể loại</label>
-                <select multiple class="form-control" value="<?= $Product['genre_id'] ?>" type="text" id="genre_id"
-                    name="genre_id">
-                    <option value="1">Novel</option>
+                <select multiple class="form-control" value="<?= $Product['danh_muc_id'] ?>" type="text"
+                    id="danh_muc_id" name="danh_muc_id">
+                    <!-- <option value="1">Novel</option>
                     <option value="2">Short Story</option>
                     <option value="3">Poetry</option>
                     <option value="4">Drama</option>
@@ -69,14 +65,18 @@
                     <option value="22">Detective</option>
                     <option value="23">Thriller</option>
                     <option value="24">Music</option>
-                    <option value="25">Cinema</option>
+                    <option value="25">Cinema</option> -->
                 </select>
             </div><br>
             <div class="form-group">
                 <label>Giá</label>
-                <input class="form-control" type="text" name="gia" ?>
+                <input class="form-control"
+                    placeholder=" <?php echo $formattedPrice = number_format($Product['gia'], 0, ',', '.'); ?>" value=" <?php
+                            $Product['gia']
+                                ?>" type="number" name="gia" ?>
             </div><br>
-            <input type="submit" name="btn_insert" id="" value="ADD PRODUCT" style="width: 200px; "
+
+            <input type="submit" name="btn_update" id="" value="UPDATE PRODUCT" style="width: 200px; "
                 class="btn btn-primary">
         </form>
 
