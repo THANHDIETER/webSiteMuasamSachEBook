@@ -1,8 +1,9 @@
 <?php
 session_start();
 // Require toàn bộ file Commons
-require_once '../connect/function.php';
-// Require toàn bộ file Controllers
+ require_once '../connect/function.php';
+ // Require toàn bộ file Controllers
+
 
 require_once 'controllers/controller.php';
 // Require toàn bộ file Models

@@ -17,135 +17,145 @@
     <div class="bg-light">
     <div style="display: grid; gap:40px;"  class="container  ">
     <br><p class="wrapper">Trang chủ / sách hay / nguyên tắc lập quốc - những tư tưởng căn bản của các nhà lập quốc hoa kỳ</p>
+    <?php foreach($productOne as $name): ?>
     <div class="row bg-white">
-    <div class="col">
-    <img src="../styte/img/logo.png" class="top-pro-img" alt="">
+    <div class="col-4">
+    <img src="./assets/images/prod/books/<?php echo $name['img'] ?>" class="top-pro-img" alt="">
     </div>
-    <div class="col">
-    <h2>    <br>
-            Nguyên Tắc Lập Quốc - Những Tư Tưởng Căn Bản Của Các Nhà Lập Quốc Hoa Kỳ</h2>
-            <h4>Thomas E. Ricks  (Tác giả)</h4>
-            <h4>Sơn Phạm  Vũ Hoàng Linh  (Dịch giả)</h4>
-            <p class="price">150.000đ</p>
-            <p class="TIETKIEM">150.000đ</p>
-            <p class="sale">150.000đ</p>
-            <p class="TINHTRANG">Tình trạng: Sắp có hàng            </p>
-            <p class="tags">Lịch sử - Địa lý Sách hay trong tuần           </p>
-            <p>so luong</p>
-            <a href="#">Them vaof gio hang</a>
-            <a href="#">dat truoc</a>
-            <p>Gọi đặt hàng: <a href="#">0972150772</a>hoac: <a href="">0972150772</a></p>
+    
+    <div class="col-8">
+
+            <input type="hidden" name="" value="<?php echo $name['id'] ?>" id="">
+            <h2> <br><?php echo $name['ten'] ?></h2>
+            <p><?php echo $name['tac_gia'] ?>  (Tác giả)</p><br>
+            <h3 class=""><del>Giá thị trường: <?php $price= $name['gia'];
+            $formatted_price = number_format($price, 0, ',', '.'); 
+            echo $formatted_price . 'đ';
+            ?></del></h3>
+            <h3 class="text-danger">Sale còn: <?php  $price=$name['gia']-($name['gia']/100)*$name['sale'];
+            $formatted_price = number_format($price, 0, ',', '.'); 
+            echo $formatted_price . 'đ';
+            ?></h3>
+            
+            <p class="text-warning">Tiết kiệm: <?php  $price=($name['gia']/100)*$name['sale'] ;
+            $formatted_price = number_format($price, 0, ',', '.'); 
+            echo $formatted_price . 'đ';
+            ?> (<?php echo $name['sale'] ?>%)</p>
+            <p class="TINHTRANG">Tình trạng: <?php if($name['so_luong']>0){echo 'còn '; echo $name['so_luong']; echo' sản phẩm'; }
+            else{echo "sắp có hàng";} ?>       </p>
+           
+            <p class="tags"><?php echo $name['name'] ?>  </p>
+           
+            <a style="width: 200px; height:40px; background-color:red; line-height:40px;" class=" nav-link btn   text-white" href="?act=cart&id=<?php echo $name['id'] ?>">Thêm vào giỏ hàng</a>
+            <br>
+            <p>Gọi đặt hàng: 0972.150.772 hoac: 0972.150.772</p>
             <h3>Thông tin & Khuyến mãi</h3>
             <p>Đổi trả hàng trong vòng 7 ngày
                 Sử dụng mỗi 3.000 BBxu để được giảm 10.000đ. <br>
                  Làm sao để lấy BBxu? Freeship nội thành Sài Gòn từ 150.000đ*. <br>
                 Chi tiết tại đây Freeship toàn quốc từ 250.000đ</p>
+                
     </div>
+   
   </div>
     <div class="row">
         <div class="col-9">
         <div class="table ">
         <table class="table table-striped-columns">
         <th>THÔNG TIN CHI TIẾT</th><br>
-        <td>Nhà xuất bản: NXB Thế Giới</td>
+        <td>Nhà xuất bản: <?php echo $name['name'] ?></td>
         <td>Ngày xuất bản: 16/11/2024</td>
         <td>Nhà phát hành: Nhã Nam</td>
         <td>Kích thước: 15.5 x 24.0 x 2.0 cm</td>
-        <td>Số trang: 412 trang</td>
+        <td>Số trang: ... trang</td>
         <td>Trọng lượng: 600 gram </td>
         </table><br>
-        <div style="padding: 20px;" class="table2 bg-white">
-          <br>  
-            <h2>Giới thiệu sản phẩm</h2>
-            <h2>Nguyên Tắc Lập Quốc</h2>
-            <h2>Những Tư Tưởng Căn Bản Của Các Nhà Lập Quốc Hoa Kỳ</h2>
-            <P>Hoa Kỳ hiện tại là một đất nước như thế nào? Đó có phải là những gì được thiết kế hoặc dự định bởi những nhà lập quốc? 
-                Cuốn sách này sẽ đưa chúng ta theo chân bốn nhà lập quốc đầu tiên của Hoa Kỳ – Washington, Adams, Jefferson và Madison –
-                 từ khi còn trẻ cho đến khi trưởng thành, cùng họ vật lộn với các câu hỏi về độc lập và cách xây dựng cũng như duy trì một quốc gia mới. 
-                Bốn vị tổng thống đầu tiên của Hợp chúng quốc tiếp cận tri thức cổ điển theo những cách khác nhau: 
-                Washington hấp thụ nó từ văn hóa ưu tú thời đại mình; Adams say mê luật pháp và thuật hùng biện của La Mã;
-                 Jefferson đắm mình trong triết học cổ điển, đặc biệt là chủ nghĩa khoái lạc; còn Madison, vừa là nhà nghiên 
-                 cứu tiên phong vừa là một chính trị gia khéo léo, đã dành nhiều năm nghiên cứu thế giới cổ đại như một nhà
-                  khoa học chính trị. Những trải nghiệm và tri kiến độc đáo của họ đã đóng vai trò thiết yếu trong việc hình 
-                  thành Hiến pháp và chính phủ Hoa Kỳ.
-
-                Khi xem xét cách thức và nội dung họ đã đọc và nghiên cứu, nhìn họ dưới ánh sáng khác lạ của thế giới cổ điển, tác giả đã vẽ
-                nên những bức chân dung mới mẻ và hấp dẫn về bốn con người lỗi lạc và kiệt xuất ấy. Nguyễn tắc lập quốc không
-                chỉ giúp chúng ta hiểu được tác động của thế giới cổ đại lên từng người và cách nó định hình nên đất nước Hoa 
-                Kỳ ngày nay, mà còn mang đến những hiểu biết mới mẻ và đăng kinh ngạc về thế hệ Cách mạng này.</P>
-                <p><a href="#">Mua sách online tại Bookbuy.vn và nhận nhiều ưu đãi.</a></p>
-                <button >mua ngay</button>
+        <div style="padding: 20px; min-height:600px" class="table2 bg-white">
+          <br>    
+            <h2>Giới thiệu sản phẩm:</h2>
+            <h2><?php echo $name['ten'] ?></h2>
+            <P><?php echo $name['mo_ta'] ?></P>
+                <p><a href="?act=/">Mua sách online tại EBOok.vn và nhận nhiều ưu đãi.</a></p>
         </div>
         </div>
+        <?php  endforeach; ?>
         </div>
         <div  class="col-3 bg-white;">
             
-        <aside style=" display:grid;  ">
-            <div class="" >
-                <h2>sản phẩm bán chạy</h2>
-                <img  src="../styte/img/ads-left.png" alt="">
-                <p>name book</p>
-                <p>tac gia</p>
-                <p>price:100000$</p>
+        <aside class="bg-white text-center" style=" max-width:100%; display:grid;  padding:20px; ">
+        <h3>sản phẩm bán chạy</h3><hr>
+        <button class="btn btn-primary w-100" id="scrollUp">▲</button>
+        <div class="overflow-hidden" style="height: 540px;" id="bookList">
+            <div class="d-flex p-2 border-bottom"></div>
+        <?php foreach($top8 as $key): ?>
+            <div class="text-center" >
+                <img style="max-width:100%"  src="./assets/images/prod/books/<?php echo $key['img'] ?>" alt="">
+                <p><?php echo $key['ten'] ?></p>
+                <p><?php echo $key['tac_gia'] ?></p>
+                <p><?php 
+                $price=$key['gia']-($key['gia']/100)*$key['sale'];
+                $formatted_price = number_format($price, 0, ',', '.'); 
+                echo $formatted_price . 'đ';
+                ?>
+              </p><hr>
             </div>
-        </aside>
+            <?php  endforeach; ?>
+            </div>
+            <button class="btn btn-primary w-100" id="scrollDown">▼</button>
+            </div>
+            <div class="border rounded bg-white w-100" style="max-width: 300px;">
+    </div>
+    </aside>
+        </div>
+    <div class="container my-4">
+        <h5 class="mb-3">Sản phẩm cùng loại</h5>
+        <div class="position-relative">
+            <!-- Danh sách sản phẩm -->
+            <div class="d-flex overflow-hidden" id="productContainer" style="scroll-behavior: smooth;">
+            <?php foreach($top8 as $key): ?>
+                <a class="bg-white nav-link" href="?act=detail&id=<?php echo $key['id'] ?>">
+                <div class="card me-3" style="width: 200px;">
+                    <img src="./assets/images/prod/books/<?php echo $key['img'] ?>" class="card-img-top" alt="Book 1">
+                    <div class="card-body text-center">
+                        <p class="card-title fw-bold mb-1"><?php echo $key['ten'] ?></p>
+                        <p class="card-text text-muted small"><?php echo $key['tac_gia'] ?></p>
+                        <p class="text-danger">
+                        <?php
+                          $price=$key['gia']-($key['gia']/100)*$key['sale'];
+                          $formatted_price = number_format($price, 0, ',', '.'); 
+                          echo $formatted_price . 'đ';
+                          ?>
+
+                          
+                    </div>
+                </div>
+                </a>
+                <?php  endforeach; ?>
+                
+            </div>
         </div>
     </div>
-    <div class="container ">
-    <nav style="background-color: white;" class="navbar navbar-expand-lg  ">
-          <div class="container  container-fluid">
-           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-                <li class="nav-item">
-                  <a class="nav-link active position-relative" aria-current="page" href="#"> <i class="bi bi-info-circle"></i> Sản phẩm cùng loại </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link active position-relative" aria-current="page" href="#"> <i class="bi bi-info-circle"></i> Đã xem</a>
-                </li>
-                
-              </ul>
-              <ul class="d-flex navbar-nav  mb-2 mb-lg-0">
-              <li class="nav-item">
-                  <a class="nav-link active position-relative" aria-current="page" href="#"> <i class="bi bi-info-circle"></i> Xem tất cả 
-                  </a>
-                </li>
-              </ul>
-              <hr>
-            </div>
-           
-          </div>
-          
-        </nav>
-        <div style="border: 1px solid black; border-left:solid 1px" class="row bg-white">
-            <div class="col">
-                <img style="width: 100px; height:300px;" src="../styte/img/logo.png" alt="">
-                <h6>sachs </h6>
-                <p>tac gia: nguyenex van thanh</p>
-                <p>price: 1000T</p>
-            </div>
-            <div class="col"><img style="width: 100px; height:300px;" src="../styte/img/logo.png" alt="">
-                <h6>sachs </h6>
-                <p>tac gia: nguyenex van thanh</p>
-                <p>price: 1000T</p></div>
-            <div class="col"><img style="width: 100px; height:300px;" src="../styte/img/logo.png" alt="">
-                <h6>sachs </h6>
-                <p>tac gia: nguyenex van thanh</p>
-                <p>price: 1000T</p></div>
-            <div class="col"><img style="width: 100px; height:300px;" src="../styte/img/logo.png" alt="">
-                <h6>sachs </h6>
-                <p>tac gia: nguyenex van thanh</p>
-                <p>price: 1000T</p></div>
-            </div>  
+
         
     </div>
-    <div class="container  bg-white "><br>
-        <h2>NHẬN XÉT CỦA KHÁCH HÀNG</h2>
-        <ul>
-            <p>Bạn cần đăng nhập để có thể bình luận. </p><li><a href="#">Đăng nhập tại đây.</a></li>
-        </ul>
-        <h2>Chưa có đánh giá</h2>
-    </div>
+          
+    <br>
+    <script>
+        const scrollUpBtn = document.getElementById('scrollUp');
+        const scrollDownBtn = document.getElementById('scrollDown');
+        const bookList = document.getElementById('bookList');
+
+        scrollUpBtn.addEventListener('click', () => {
+            bookList.scrollBy({ top: -100, behavior: 'smooth' });
+        });
+
+        scrollDownBtn.addEventListener('click', () => {
+            bookList.scrollBy({ top: 100, behavior: 'smooth' });
+        });
+       
+    </script>
     
-    <?php require_once '../components/footer.php' ?>
+   
+    <?php require_once './components/footer.php' ?>
 </body>
 </html>

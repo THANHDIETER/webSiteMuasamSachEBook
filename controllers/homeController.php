@@ -8,12 +8,15 @@
             $this->homeModel=new homeModel();
         }
         function home(){
-            $product=$this->homeModel->top6product();
-            require_once 'views/home.php';
+            $products = $this->homeModel->allProduct();
+            $top8 = $this->homeModel->top8Product();
+            $danhmuc = $this->homeModel->alldanhmuc();
+           require "views/home.php";
         }
         
         function detail($id){
             $productOne=$this->homeModel->findProductById($id);
+            $top8 = $this->homeModel->top6Product();
             require_once 'views/detail.php';
         }
         function product(){

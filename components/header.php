@@ -66,16 +66,10 @@
         <nav  class="navbar navbar-expand-lg  bg-body-white ">
           <div class="container-fluid .bg-light p-2  ">
             <div style="display: flex; gap:160px; justify-content: space-between;" class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-              <li class="nav-link dropdown"  >
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i style="font-size:30px; line-height: 40px;  "  class="bi bi-list"></i> DANH MỤC SẢN PHẨM
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-              </li>
+              <li class="nav-link"  >
+              <a class="nav-link " href="?act=product" role="button" aria-expanded="false">
+              <i style="font-size:30px; line-height: 40px;  "class="bi bi-list"></i> DANH MỤC SẢN PHẨM </a>
+                </li>
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i style="font-size:20px; color:red;" class="bi bi-2-circle"></i> giảm thêm 2%
                 </a>

@@ -13,21 +13,29 @@
             $sql="SELECT * FROM  products  WHERE danh_muc_id=$id";
             return $this->conn->query($sql)->fetchAll();
         }   
+        
         function alldanhmuc() {
        
-            $sql = "SELECT * FROM danh_muc ORDER BY id DESC";
+            $sql = "SELECT * FROM danh_muc ORDER BY dm_id DESC";
             return $this->conn->query($sql)->fetchAll();
         }
         
     
+    function top8Product() {
+        $sql = "SELECT * FROM products ORDER BY id DESC LIMIT 8";
+        return $this->conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    }
     function top6Product() {
         $sql = "SELECT * FROM products ORDER BY id DESC LIMIT 6";
         return $this->conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
     function findProductById($id) {
-        $sql = "SELECT * FROM products WHERE id =$id";
-        return $this->conn->query($sql)->fetch();
+        $sql = "SELECT * FROM products 
+                JOIN danh_muc ON products.danh_muc_id = danh_muc.dm_id 
+                JOIN nha_san_xua on products.nha_san_xuat_id = nha_san_xua.nxb_id
+                WHERE id = $id";
+        return $this->conn->query($sql)->fetchAll();
     }
     }
 ?>
