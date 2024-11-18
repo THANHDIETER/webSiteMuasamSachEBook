@@ -15,64 +15,65 @@
 </head>
 
 <body>
+    <div class="main-content">
+        <div class="container ms-auto ">
+            <div class=""><a href="index.php?act=addDmuc" class="btn btn-success">Nhập
+                    thêm</a></div>
+        </div>
+        <h1 class="fw-bold text-center mb-4">Danh sách danh mục</h1>
+
+        <!-- Danh muc Table -->
+        <div class="table-responsive">
+            <section>
+                <table class="table table-bordered table-striped text-center">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tên danh mục</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <?php foreach ($allDmuc as $key): ?>
+                        <tr>
+                            <td><?php echo $key['id'] ?></td>
+                            <td><?php echo $key['name'] ?></td>
+                            <td>
+                                <a href="?act=updateDmuc&id=<?php echo $key['id']; ?>"
+                                    class="btn btn-sm btn-outline-primary">
+                                    Edit
+                                </a>
+                                <a href="?act=deleteDmuc&id=<?php echo urlencode($key['id']); ?>"
+                                    class="btn btn-sm btn-outline-danger" onclick="return confirmDelete()">Remove
+                                </a>
+                                <!-- <a href="#" class="btn btn-sm btn-outline-secondary">Thêm bìa</a> -->
+                            </td>
+                        </tr>
 
 
-    <div class="container my-4 ms-auto " style="margin-left: 250px;">
-        <div class=""><a href="index.php?act=addDmuc" class="btn btn-success">Nhập
-                thêm</a></div>
+
+
+
+                        <script>
+                            function confirmDelete() {
+                                return confirm('Bạn xác nhận xóa danh mục này!');
+                            }
+                        </script>
+                    <?php endforeach; ?>
+                    </tbody>
+
+                </table>
+
+
+
+            </section>
+
+
+
+        </div>
+
+
     </div>
-    <h1 class="fw-bold text-center">Danh sách danh mục</h1>
-
-    <!-- Danh muc Table -->
-    <div class="table-responsive">
-        <section>
-            <table class="table table-bordered table-striped text-center">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Tên danh mục</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-
-                <?php foreach ($allDmuc as $key): ?>
-                    <tr>
-                        <td><?php echo $key['id'] ?></td>
-                        <td><?php echo $key['name'] ?></td>
-                        <td>
-                            <a href="?act=updateDmuc&id=<?php echo $key['id']; ?>" class="btn btn-sm btn-outline-primary">
-                                Edit
-                            </a>
-                            <a href="?act=deleteDmuc&id=<?php echo urlencode($key['id']); ?>"
-                                class="btn btn-sm btn-outline-danger" onclick="return confirmDelete()">Remove
-                            </a>
-                            <!-- <a href="#" class="btn btn-sm btn-outline-secondary">Thêm bìa</a> -->
-                        </td>
-                    </tr>
-
-
-
-
-
-                    <script>
-                        function confirmDelete() {
-                            return confirm('Bạn xác nhận xóa danh mục này!');
-                        }
-                    </script>
-                <?php endforeach; ?>
-                </tbody>
-
-            </table>
-
-
-
-        </section>
-
-
-
-    </div>
-
-
     </div>
 
 </body>

@@ -18,23 +18,22 @@
 </head>
 
 <body>
+    <div class="main-content">
+        <div class="container">
+            <h1 class="fw-bold text-center">Cập nhật danh mục</h1>
+            <form action="" enctype="multipart/form-data" method="post">
+                <input type="hidden" name="id" value="<?= $Product['id'] ?>" id="">
+                <div class="form-group">
+                    <label>Tên danh mục</label>
+                    <input class="form-control" value="<?= $Product['name'] ?>" type="text" name="name" ?>
+                </div><br>
 
-    <div class="container">
+                <input type="submit" name="btn_update" id="" value=" Cập nhật" style="width: 200px; "
+                    class="btn btn-primary">
+            </form>
 
-        <br><br>
-        <form action="" enctype="multipart/form-data" method="post">
-            <input type="hidden" name="id" value="<?= $Product['id'] ?>" id="">
-            <div class="form-group">
-                <label>Tên danh mục</label>
-                <input class="form-control" value="<?= $Product['name'] ?>" type="text" name="name" ?>
-            </div><br>
-
-            <input type="submit" name="btn_update" id="" value=" Cập nhật" style="width: 200px; "
-                class="btn btn-primary">
-        </form>
-
+        </div>
     </div>
-
 </body>
 
 </html>

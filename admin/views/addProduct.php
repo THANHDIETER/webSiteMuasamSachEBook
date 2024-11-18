@@ -19,67 +19,68 @@
 
 <body>
 
+    <div class="main-content">
+        <div class="container">
+            <h1 class="fw-bold text-center">Thêm sản phẩm</h1>
+            <br><br>
+            <form action="" enctype="multipart/form-data" method="post">
+                <div class="form-group">
+                    <label>Tên sách</label>
+                    <input class="form-control" type="text" name="ten" ?>
+                </div><br>
+                <div class="form-group">
+                    <label for=>Hình ảnh</label>
+                    <input class="form-control" type="file" name="img" ?>
+                </div><br>
+                <div class="form-group">
+                    <label>Tác giả</label>
+                    <input class="form-control" type="text" name="tac_gia" ?>
+                </div><br>
+                <div class="form-group">
+                    <label>Mô tả</label>
+                    <textarea class="form-control" name="mo_ta"></textarea>
 
-    <div class="container">
-        <h1 class="fw-bold text-center mt-5">Thêm sản phẩm</h1>
-        <br><br>
-        <form action="" enctype="multipart/form-data" method="post">
-            <div class="form-group">
-                <label>Tên sách</label>
-                <input class="form-control" type="text" name="ten" ?>
-            </div><br>
-            <div class="form-group">
-                <label for=>Hình ảnh</label>
-                <input class="form-control" type="file" name="img" ?>
-            </div><br>
-            <div class="form-group">
-                <label>Tác giả</label>
-                <input class="form-control" type="text" name="tac_gia" ?>
-            </div><br>
-            <div class="form-group">
-                <label>Mô tả</label>
-                <textarea class="form-control" name="mo_ta"></textarea>
+                </div><br>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect2">Thể loại</label>
+                    <select multiple class="form-control" value="<?= $Product['danh_muc_id'] ?>" type="text"
+                        id="danh_muc_id" name="danh_muc_id">
+                        <option value="1">Novel</option>
+                        <option value="2">Short Story</option>S
+                        <option value="3">Poetry</option>
+                        <option value="4">Drama</option>
+                        <option value="5">Autobiography </option>
+                        <option value="6">Biography</option>
+                        <option value="7">History</option>
+                        <option value="8">Science</option>
+                        <option value="9">Business</option>
+                        <option value="10">Psychology</option>
+                        <option value="11">Self-help</option>
+                        <option value="12">Fairy Tales</option>
+                        <option value="13">Educational Stories</option>
+                        <option value="14">Fantasy</option>
+                        <option value="15">Science Fiction</option>
+                        <option value="16">Epic Fantasy</option>
+                        <option value="17">Mystery</option>
+                        <option value="18">Romance</option>
+                        <option value="19">Family Romance</option>
+                        <option value="20">Friendship</option>
+                        <option value="21">Horror</option>
+                        <option value="22">Detective</option>
+                        <option value="23">Thriller</option>
+                        <option value="24">Music</option>
+                        <option value="25">Cinema</option>
+                    </select>
+                </div><br>
+                <div class="form-group">
+                    <label>Giá</label>
+                    <input class="form-control" type="text" name="gia" ?>
+                </div><br>
+                <input type="submit" name="btn_insert" id="" value="ADD PRODUCT" style="width: 200px; "
+                    class="btn btn-primary">
+            </form>
 
-            </div><br>
-            <div class="form-group">
-                <label for="exampleFormControlSelect2">Thể loại</label>
-                <select multiple class="form-control" value="<?= $Product['genre_id'] ?>" type="text" id="genre_id"
-                    name="genre_id">
-                    <option value="1">Novel</option>
-                    <option value="2">Short Story</option>
-                    <option value="3">Poetry</option>
-                    <option value="4">Drama</option>
-                    <option value="5">Autobiography </option>
-                    <option value="6">Biography</option>
-                    <option value="7">History</option>
-                    <option value="8">Science</option>
-                    <option value="9">Business</option>
-                    <option value="10">Psychology</option>
-                    <option value="11">Self-help</option>
-                    <option value="12">Fairy Tales</option>
-                    <option value="13">Educational Stories</option>
-                    <option value="14">Fantasy</option>
-                    <option value="15">Science Fiction</option>
-                    <option value="16">Epic Fantasy</option>
-                    <option value="17">Mystery</option>
-                    <option value="18">Romance</option>
-                    <option value="19">Family Romance</option>
-                    <option value="20">Friendship</option>
-                    <option value="21">Horror</option>
-                    <option value="22">Detective</option>
-                    <option value="23">Thriller</option>
-                    <option value="24">Music</option>
-                    <option value="25">Cinema</option>
-                </select>
-            </div><br>
-            <div class="form-group">
-                <label>Giá</label>
-                <input class="form-control" type="text" name="gia" ?>
-            </div><br>
-            <input type="submit" name="btn_insert" id="" value="ADD PRODUCT" style="width: 200px; "
-                class="btn btn-primary">
-        </form>
-
+        </div>
     </div>
 
 </body>

@@ -4,7 +4,7 @@ session_start();
 require_once '../connect/function.php';
 // Require toàn bộ file Controllers
 
-// require_once "header.php";
+require_once "header.php";
 
 require_once 'controllers/controller.php';
 require_once 'controllers/controllerDmuc.php';

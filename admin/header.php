@@ -10,12 +10,54 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Admin Panel</title>
+    <style>
+        .sidebar {
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            background-color: #343a40;
+            color: #ffffff;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .sidebar a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .sidebar .nav-link:hover {
+            background-color: #495057;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            /* Sidebar width */
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .main-content .table-responsive {
+            overflow-x: auto;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .main-content {
+                margin-left: 200px;
+            }
+        }
+    </style>
 </head>
 
 <body class="text-dark bg-light">
-
     <!-- Sidebar -->
-    <div class="d-flex flex-column bg-dark text-light vh-100 position-fixed" style="width: 250px;">
+    <div class="sidebar">
         <div class="p-3 border-bottom border-secondary">
             <a href="index.php" class="d-flex align-items-center text-light text-decoration-none">
                 <img src="<?php echo isset($_SESSION['user'])
@@ -49,11 +91,8 @@
     </div>
 
     <!-- Main Content -->
-    <div class="ms-auto" style="margin-left: 250px;">
+    <div class="main-content">
         <header class="bg-white shadow-sm py-2 px-4 d-flex align-items-center sticky-top">
-            <button class="btn btn-outline-secondary d-md-none me-3">
-                <i class="ri-menu-line"></i>
-            </button>
             <nav class="breadcrumb mb-0">
                 <a href="#" class="breadcrumb-item">Dashboard</a>
                 <span class="breadcrumb-item active">Analytics</span>

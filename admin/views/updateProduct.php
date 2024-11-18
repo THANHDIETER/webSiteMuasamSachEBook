@@ -18,30 +18,31 @@
 </head>
 
 <body>
+    <div class="main-content">
+        <div class="container">
+            <h1 class="fw-bold text-center">Cập nhật sản phẩm</h1>
+            <form action="" enctype="multipart/form-data" method="post">
+                <input type="hidden" name="id" value="<?= $Product['id'] ?>" id="">
+                <div class="form-group">
+                    <label>Tên sách</label>
+                    <input class="form-control" value="<?= $Product['ten'] ?>" type="text" name="ten" ?>
+                </div><br>
+                <div class="form-group">
+                    <label for=>Hình ảnh</label>
+                    <img src="../assets/images/prod/books/<?php echo $Product['img'] ?>" alt="" class="ms-3 mb-4"
+                        style="width:200px; height:auto">
 
-    <div class="container">
-
-        <br><br>
-        <form action="" enctype="multipart/form-data" method="post">
-            <input type="hidden" name="id" value="<?= $Product['id'] ?>" id="">
-            <div class="form-group">
-                <label>Tên sách</label>
-                <input class="form-control" value="<?= $Product['ten'] ?>" type="text" name="ten" ?>
-            </div><br>
-            <div class="form-group">
-                <label for=>Hình ảnh</label>
-                <img src="../assets/images/prod/books/<?php echo $Product['img'] ?>" alt="">
-                <input class="form-control" value="<?= $Product['img'] ?>" type="file" name="img" ?>
-            </div><br>
-            <div class="form-group">
-                <label>Tác giả</label>
-                <input class="form-control" value="<?= $Product['tac_gia'] ?>" type="text" name="tac_gia" ?>
-            </div><br>
-            <div class="form-group">
-                <label for="exampleFormControlSelect2">Thể loại</label>
-                <select multiple class="form-control" value="<?= $Product['danh_muc_id'] ?>" type="text"
-                    id="danh_muc_id" name="danh_muc_id">
-                    <!-- <option value="1">Novel</option>
+                    <input class="form-control" value="<?= $Product['img'] ?>" type="file" name="img" ?>
+                </div><br>
+                <div class="form-group">
+                    <label>Tác giả</label>
+                    <input class="form-control" value="<?= $Product['tac_gia'] ?>" type="text" name="tac_gia" ?>
+                </div><br>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect2">Thể loại</label>
+                    <select multiple class="form-control" value="<?= $Product['danh_muc_id'] ?>" type="text"
+                        id="danh_muc_id" name="danh_muc_id">
+                        <!-- <option value="1">Novel</option>
                     <option value="2">Short Story</option>
                     <option value="3">Poetry</option>
                     <option value="4">Drama</option>
@@ -66,22 +67,23 @@
                     <option value="23">Thriller</option>
                     <option value="24">Music</option>
                     <option value="25">Cinema</option> -->
-                </select>
-            </div><br>
-            <div class="form-group">
-                <label>Giá</label>
-                <input class="form-control"
-                    placeholder=" <?php echo $formattedPrice = number_format($Product['gia'], 0, ',', '.'); ?>" value=" <?php
-                            $Product['gia']
-                                ?>" type="number" name="gia" ?>
-            </div><br>
+                    </select>
+                </div><br>
+                <div class="form-group">
+                    <label>Giá</label>
+                    <input class="form-control"
+                        placeholder=" <?php echo $formattedPrice = number_format($Product['gia'], 0, ',', '.'); ?>"
+                        value=" <?php
+                        $Product['gia']
+                            ?>" type="number" name="gia" ?>
+                </div><br>
 
-            <input type="submit" name="btn_update" id="" value="UPDATE PRODUCT" style="width: 200px; "
-                class="btn btn-primary">
-        </form>
+                <input type="submit" name="btn_update" id="" value="UPDATE PRODUCT" style="width: 200px; "
+                    class="btn btn-primary">
+            </form>
 
+        </div>
     </div>
-
 </body>
 
 </html>
