@@ -87,19 +87,21 @@
         <button class="btn btn-primary w-100" id="scrollUp">▲</button>
         <div class="overflow-hidden" style="height: 540px;" id="bookList">
             <div class="d-flex p-2 border-bottom"></div>
-        <?php foreach($top8 as $key): ?>
-            <div class="text-center" >
-                <img style="max-width:100%"  src="./assets/images/prod/books/<?php echo $key['img'] ?>" alt="">
-                <p><?php echo $key['ten'] ?></p>
-                <p><?php echo $key['tac_gia'] ?></p>
-                <p><?php 
-                $price=$key['gia']-($key['gia']/100)*$key['sale'];
-                $formatted_price = number_format($price, 0, ',', '.'); 
-                echo $formatted_price . 'đ';
-                ?>
-              </p><hr>
-            </div>
-            <?php  endforeach; ?>
+                    <?php foreach($top8 as $key): ?>
+                            <div class="text-center" >
+                                <a class="bg-white nav-link" href="?act=detail&id=<?php echo $key['id'] ?>"></a>
+                                <img style="max-width:100%"  src="./assets/images/prod/books/<?php echo $key['img'] ?>" alt=""></a>
+                                <a class="bg-white nav-link" href="?act=detail&id=<?php echo $key['id'] ?>"><?php echo $key['ten'] ?></a>
+                                <a class="bg-white nav-link" href="?act=detail&id=<?php echo $key['id'] ?>"><?php echo $key['tac_gia'] ?></pa>
+                                <p style="color:red;"><?php 
+                                $price=$key['gia']-($key['gia']/100)*$key['sale'];
+                                $formatted_price = number_format($price, 0, ',', '.'); 
+                                echo $formatted_price . 'đ';
+                                ?>
+                                
+                            </div>
+                    <?php  endforeach; ?>
+                
             </div>
             <button class="btn btn-primary w-100" id="scrollDown">▼</button>
             </div>

@@ -48,8 +48,8 @@
         <nav  class="navbar navbar-expand-lg  bg-body-tertiary ">
           <div class="container-fluid .bg-light p-2  ">
             <div style="display: flex; gap:80px; justify-content: space-between;" class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-              <a class="" href="#"><img style="width:150px;" src="./styte/img/logo.png" alt=""></a>
-              <a class="nav-link active" href="#">Tất Cả</a>
+              <a class="" href="?act=home "><img style="width:150px;" src="./styte/img/logo.png" alt=""></a>
+              <a class="nav-link active" href="?act=product">Tất Cả</a>
                <form class="d-flex" role="search">
                   <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                   <button class="btn btn-outline-success" type="submit">Search</button>

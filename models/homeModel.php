@@ -15,7 +15,6 @@
         }   
         
         function alldanhmuc() {
-       
             $sql = "SELECT * FROM danh_muc ORDER BY dm_id DESC";
             return $this->conn->query($sql)->fetchAll();
         }

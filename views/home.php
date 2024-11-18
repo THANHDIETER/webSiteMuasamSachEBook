@@ -37,12 +37,10 @@
     height: 60px; 
   
 }
-a{
-    color: aqua;
-}
+
 a:hover{
-    background-color:gray;
-    color: aliceblue;
+    background-color:lightgray;
+    color: white;
 }
 .link-hover a {
     transition: color 0.3s ease; /* Thêm hiệu ứng chuyển màu mượt mà */
@@ -88,9 +86,9 @@ a:hover{
  
             <h1 class="h5 border-bottom pb-2">Danh mục</h1>
             <ul class="list-unstyled">
-            <?php foreach ($danhmuc as $value) { ?>
-                <li><a href="?act=dmid&id=<?=$value['id'] ?>" class="text-secondary text-decoration-none d-block py-1"><?php echo $value['name'] ?></a></li>
-                <?php } ?>
+            <?php foreach ($danhmuc as $value) : ?>
+                <li><a href="?act=dmid&id=<?php echo $value['dm_id'] ?>" class="nav-link "><?php echo $value['name'] ?></a></li>
+            <?php endforeach ?>
                
             </ul>
             <h1 class="h5 border-bottom pb-2">Tác giả </h1>
