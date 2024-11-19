@@ -26,7 +26,10 @@
             <form action="" enctype="multipart/form-data" method="post">
                 <div class="form-group">
                     <label>Tên danh mục</label>
-                    <input class="form-control" type="text" name="name" ?>
+                    <input class="form-control" type="text" name="name" placeholder="Nhập tên danh mục" ?>
+                    <?php if (isset($errors['name'])) { ?>
+                        <p class="text-danger"><?= $errors['name'] ?></p>
+                    <?php } ?>
                 </div><br>
 
                 <input type="submit" name="btn_insert" id="" value="Thêm danh mục" style="width: 200px; "

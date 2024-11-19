@@ -21,12 +21,12 @@
 
     <div class="main-content">
         <div class="container">
-            <h1 class="fw-bold text-center">Thêm sản phẩm</h1>
+            <h1 class="fw-bold text-center mt-0">Thêm sản phẩm</h1>
             <br><br>
             <form action="" enctype="multipart/form-data" method="post">
                 <div class="form-group">
                     <label>Tên sách</label>
-                    <input class="form-control" type="text" name="ten" ?>
+                    <input class="form-control" type="text" name="ten" required ?>
                 </div><br>
                 <div class="form-group">
                     <label for=>Hình ảnh</label>
@@ -74,7 +74,7 @@
                 </div><br>
                 <div class="form-group">
                     <label>Giá</label>
-                    <input class="form-control" type="text" name="gia" ?>
+                    <input class="form-control" type="text" name="gia" required ?>
                 </div><br>
                 <input type="submit" name="btn_insert" id="" value="ADD PRODUCT" style="width: 200px; "
                     class="btn btn-primary">

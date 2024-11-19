@@ -17,24 +17,22 @@
 <body>
     <div class="main-content">
         <div class="container ms-auto ">
-            <div class=""><a href="index.php?act=addDmuc" class="btn btn-success">Nhập
-                    thêm</a></div>
+            <div class=""><a href="index.php?act=addDanhMuc" class="btn btn-success">Thêm danh mục</a></div>
         </div>
-        <h1 class="fw-bold text-center mb-4">Danh sách danh mục</h1>
-
+        <h1 class="bg-primary text-white py-2 rounded-top mb-3 mt-4 text-center">Danh sách danh mục</h1>
         <!-- Danh muc Table -->
         <div class="table-responsive">
             <section>
                 <table class="table table-bordered table-striped text-center">
                     <thead>
-                        <tr>
+                        <tr class="table-info text-white">
                             <th>ID</th>
                             <th>Tên danh mục</th>
                             <th>Action</th>
                         </tr>
                     </thead>
 
-                    <?php foreach ($allDmuc as $key): ?>
+                    <?php foreach ($listDanhMuc as $key): ?>
                         <tr>
                             <td><?php echo $key['id'] ?></td>
                             <td><?php echo $key['name'] ?></td>

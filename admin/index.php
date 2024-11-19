@@ -7,7 +7,7 @@ require_once '../connect/function.php';
 require_once "header.php";
 
 require_once 'controllers/controller.php';
-require_once 'controllers/controllerDmuc.php';
+require_once 'controllers/controllerDanhMuc.php';
 // Require toàn bộ file Models
 require_once 'models/model.php';
 require_once 'models/modelDmuc.php';
@@ -23,8 +23,8 @@ match ($act) {
     // 'cart' => (new productController())->cart(),
 
     // Danhmuc
-    'listDmuc' => (new danhmucController())->listDmuc(),
-    'addDmuc' => (new danhmucController())->addDmuc(),
+    'listdanhmuc' => (new danhmucController())->listDanhMuc(),
+    'addDanhMuc' => (new danhmucController())->addDanhMuc(),
     'deleteDmuc' => (new danhmucController())->delete($_GET['id']),
     'updateDmuc' => (new danhmucController())->update($_GET['id']),
 
