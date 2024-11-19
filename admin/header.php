@@ -78,7 +78,7 @@
                 mục</a>
             <a href="index.php?act=listtacgia" class="nav-link text-light px-3"><i class="fa-solid fa-at me-2"></i>Tác
                 giả</a>
-            <a href="index.php?act=nhaXuatBan" class="nav-link text-light px-3"><i
+            <a href="index.php?act=listNhaXuatBan" class="nav-link text-light px-3"><i
                     class="fa-solid fa-bookmark me-2"></i>Nhà xuất bản</a>
             <a href="index.php?act=order" class="nav-link text-light px-3"><i
                     class="fa-solid fa-cart-shopping me-2"></i>Đơn hàng</a>

@@ -9,10 +9,12 @@ require_once "header.php";
 require_once 'controllers/controller.php';
 require_once 'controllers/controllerDanhMuc.php';
 require_once 'controllers/controllerTacGia.php';
+require_once 'controllers/controllerNhaXuatBan.php';
 // Require toàn bộ file Models
 require_once 'models/model.php';
 require_once 'models/modelDmuc.php';
 require_once 'models/modelTacGia.php';
+require_once 'models/modelNhaXuatBan.php';
 // Route
 $act = $_GET['act'] ?? '/';
 match ($act) {
@@ -36,5 +38,7 @@ match ($act) {
     'deleteTacGia' => (new tacgiaController())->deleteTacGia($_GET['id']),
     'updateTacGia' => (new tacgiaController())->updateTacGia($_GET['id']),
 
+    //NXB
+    'listNhaXuatBan' => (new nhaXuatBanController())->listNhaXuatBan(),
 }
     ?>
