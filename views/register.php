@@ -12,6 +12,7 @@
 </head>
 
 <body>
+            <?php    if(isset($message)){ echo 'Đăng ký thành công';} ?>
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <div class="card border-0 shadow-lg" style="max-width:800px; border-radius: 12px;">
             <div class="row no-gutters">
@@ -19,22 +20,22 @@
                     <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGJvb2t8ZW58MHx8MHx8fDA%3D"
                         alt="Book Image" class="img-fluid h-100 rounded-left">
                 </div>
-
+            
                 <!-- Form đăng ký bên phải -->
                 <div class="col-md-6 p-5">
                     <h3 class="card-title text-primary font-weight-bold text-center">Đăng ký</h3>
                     <p class="text-muted">Nếu bạn đã có tài khoản hãy đăng nhập</p>
-                    <form action="">
+                    <form action="?act=login" method="post">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Username">
+                            <input type="text" name="name" class="form-control" placeholder="Username">
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Email">
+                            <input type="email" name="email" class="form-control" placeholder="Email">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Password">
+                            <input type="password" name="password" class="form-control" placeholder="Password">
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">Đăng ký</button>
+                        <button type="submit"   class="btn btn-primary btn-block">Đăng ký</button>
                     </form>
                     <div class="mt-3">
                         <a href="#" class="text-primary">Quên mật khẩu</a>

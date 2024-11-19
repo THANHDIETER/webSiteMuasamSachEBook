@@ -38,7 +38,7 @@
                     <h5 class="font-weight-bold text-danger">Danh mục</h5>
                     <ul class="list-unstyled">
                     <?php foreach($danhmucs as $key): ?>
-                        <li><a href="?act=dmid&id=<?=$key['dm_id'] ?>" class=" nav-link btn-primary"><?php echo $key['name'] ?></a> </li>
+                        <li><a href="?act=dmid&id=<?=$key['id'] ?>" class=" nav-link btn-primary"><?php echo $key['name'] ?></a> </li>
                         <?php  endforeach; ?>
                     </ul>
                 </div>
@@ -62,7 +62,7 @@
             <!-- Product List -->
             <div class="col-md-9">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="font-weight-bold">Văn học</h5>
+                    <h5 class="font-weight-bold"><?php echo $key['name'] ?></h5>
                     <div>
                         <select class="form-control d-inline-block w-auto mr-2">
                             <option>Sản phẩm bán chạy</option>
@@ -75,7 +75,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row">   
                     <!-- Product Item -->
                      <?php foreach($dmuc as $ke): ?>
                     <div class="col-md-3 mb-3">
@@ -86,10 +86,10 @@
                                 <h6 class="card-title"><?php echo $ke['ten'] ?></h6>
                                 <p class="text-success"><?php echo $ke['tac_gia'] ?></p>
                                 <div class="d-flex justify-content-between">
-                                    <p class="text-danger font-weight-bold"><?php $price= $ke['gia'];
+                                    <p class="text-danger font-weight-bold"><?php $price=$ke['gia']-($ke['gia']/100)*$ke['sale'];
                                     $formatted_price = number_format($price, 0, ',', '.'); 
                                     echo $formatted_price . 'đ'; ?></p>
-                                    <p class="text-muted"><del><?php  $price=$ke['gia']-($ke['gia']/100)*$ke['sale'];
+                                    <p class="text-muted"><del><?php  $price= $ke['gia'];
                                     $formatted_price = number_format($price, 0, ',', '.'); 
                                     echo $formatted_price . 'đ';
                                     ?></del> <span

@@ -137,7 +137,28 @@
             </div>
         </div>
     </div>
-
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span>0 bình luận</span>
+                <div class="dropdown">
+                    <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="sortComments" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sắp xếp theo
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="sortComments">
+                        <li><a class="dropdown-item" href="#">Mới nhất</a></li>
+                        <li><a class="dropdown-item" href="#">Cũ nhất</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <textarea class="form-control" rows="3" placeholder="Bình luận..."></textarea>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary btn-sm">Đăng</button>
+            </div>
+        </div>
+    </div>            
         
     </div>
           

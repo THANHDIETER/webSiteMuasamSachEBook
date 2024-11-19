@@ -29,12 +29,24 @@
             $danhmucs=$this->homeModel->alldanhmuc();
             require_once 'views/dMuc_id.php';
         }
+        
         function cart(){
            
         }
         function login(){
-           
+           require_once 'views/login.php';
         }
+       
+        function register(){
+            if(isset($_POST['name'])){
+                $add_user=$this->homeModel->add_user($_POST['email'],$_POST['name'],$_POST['password']);
+                $message = 'đang ký thành công';
+            }else{
+                $message = 'đang ký Không thành công';
+            }
+            require_once 'views/register.php';
+         }
+
         function logout(){
             
         }

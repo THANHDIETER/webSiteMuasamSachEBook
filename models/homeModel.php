@@ -5,7 +5,7 @@
             $this->conn = connectDB();
         }
         
-    function allProduct() {
+ function allProduct() {
             $sql = "SELECT * FROM products ORDER BY id DESC";
             return $this->conn->query($sql)->fetchAll();
         }
@@ -15,7 +15,7 @@
         }   
         
         function alldanhmuc() {
-            $sql = "SELECT * FROM danh_muc ORDER BY dm_id DESC";
+            $sql = "SELECT * FROM categories ORDER BY id DESC";
             return $this->conn->query($sql)->fetchAll();
         }
         
@@ -35,6 +35,11 @@
                 JOIN nha_san_xua on products.nha_san_xuat_id = nha_san_xua.nxb_id
                 WHERE id = $id";
         return $this->conn->query($sql)->fetchAll();
+    }
+    function add_user($email,$name,$password){
+        $sql= "INSERT INTO users (email, name, password) VALUES ('$email', '$name', '$password')";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute();
     }
     }
 ?>

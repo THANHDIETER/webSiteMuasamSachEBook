@@ -74,9 +74,9 @@ a:hover{
     </style>
 </head>
 <body>
-
+<?php  require_once 'components/header.php'; ?>
    <div class="container">
-   <?php  require_once 'components/header.php'; ?>
+   
 
 <!-- Main Content -->
 <main class="container my-4">
@@ -87,7 +87,7 @@ a:hover{
             <h1 class="h5 border-bottom pb-2">Danh mục</h1>
             <ul class="list-unstyled">
             <?php foreach ($danhmuc as $value) : ?>
-                <li><a href="?act=dmid&id=<?php echo $value['dm_id'] ?>" class="nav-link "><?php echo $value['name'] ?></a></li>
+                <li><a href="?act=dmid&id=<?php echo $value['id'] ?>" class="nav-link "><?php echo $value['name'] ?></a></li>
             <?php endforeach ?>
                
             </ul>
