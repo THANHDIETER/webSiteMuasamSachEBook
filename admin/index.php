@@ -8,9 +8,11 @@ require_once "header.php";
 
 require_once 'controllers/controller.php';
 require_once 'controllers/controllerDanhMuc.php';
+require_once 'controllers/controllerTacGia.php';
 // Require toàn bộ file Models
 require_once 'models/model.php';
 require_once 'models/modelDmuc.php';
+require_once 'models/modelTacGia.php';
 // Route
 $act = $_GET['act'] ?? '/';
 match ($act) {
@@ -27,6 +29,9 @@ match ($act) {
     'addDanhMuc' => (new danhmucController())->addDanhMuc(),
     'deleteDmuc' => (new danhmucController())->delete($_GET['id']),
     'updateDmuc' => (new danhmucController())->update($_GET['id']),
+
+    // Tacgia
+    'listtacgia' => (new tacgiaController())->listTacGia(),
 
 }
     ?>
