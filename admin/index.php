@@ -33,6 +33,7 @@ match ($act) {
     // Tacgia
     'listtacgia' => (new tacgiaController())->listTacGia(),
     'addTacGia' => (new tacgiaController())->addTacGia(),
+    'deleteTacGia' => (new tacgiaController())->deleteTacGia($_GET['id']),
 
 }
     ?>

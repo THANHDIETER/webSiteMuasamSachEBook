@@ -21,6 +21,12 @@ class tacgiaModel
 
         return $stmt->execute();
     }
+    function deleteTacGia($id)
+    {
+        $sql = "delete from authors where id=$id";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute();
+    }
 
 
 }

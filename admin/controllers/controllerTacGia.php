@@ -42,6 +42,17 @@ class tacgiaController
             require_once './views/tacgia/addTacGia.php';
         }
     }
+    function deleteTacGia($id)
+    {
+        if ($this->tacgiaModel->deleteTacGia($id)) {
+            echo '<script type="text/javascript">
+            window.location.href = "?act=listtacgia";
+            alert("Bạn đã xóa thành công");
+            </script>';
+        } else {
+            echo "Lỗi";
+        }
+    }
 
 }
 ?>
