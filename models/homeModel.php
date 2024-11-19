@@ -32,18 +32,19 @@
         $sql = "SELECT * FROM products WHERE id =$id";
         return $this->conn->query($sql)->fetch();
     }
-    function checkUser($email, $password) {
-        $sql = "SELECT * FROM users WHERE email =: email AND password =:password";
+    function checkUser($email,$password) {
+        $sql = "SELECT * FROM users WHERE email = :email AND password = :password";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([
-            'email' => $email,
-            'password' => $password 
+            'email'=>$email,
+            'password'=>$password
         ]);
-        return $stmt->fetch(PDO::FETCH_ASSOC); //trả về thông tin người dùng nếu kiểm tra có trong database
+        $user = $stmt->fetch();
+        return $user ? $user : null;
     }
     
     function checkEmail($email)  {
-        $sql = "SELECT * FROM users WHERE email = :email";
+        $sql = "SELECT * FROM users WHERE email = :email ";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute(['email'=> $email]);
         return $stmt->fetch();
