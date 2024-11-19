@@ -9,7 +9,7 @@ class danhmucModel
     }
     function getAllDanhmuc()
     {
-        $sql = "SELECT * FROM categories  ";
+        $sql = "SELECT * FROM categories";
         $sql .= " ORDER BY id desc";
         return $this->conn->query($sql);
     }

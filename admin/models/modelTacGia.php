@@ -13,6 +13,14 @@ class tacgiaModel
         $sql .= " ORDER BY id desc";
         return $this->conn->query($sql);
     }
+    public function insertTacGia($name)
+    {
+        $sql = "INSERT INTO authors (name) VALUES (:name)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':name', $name);
+
+        return $stmt->execute();
+    }
 
 
 }
