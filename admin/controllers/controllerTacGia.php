@@ -53,6 +53,26 @@ class tacgiaController
             echo "Lỗi";
         }
     }
+    function updateTacGia($id)
+    {
+        $Tacgia = $this->tacgiaModel->print($id);
+        require_once './views/tacgia/updateTacGia.php';
+
+        if (isset($_POST['btn_update'])) {
+            $id = $_POST['id'];
+            $name = $_POST['name'];
+
+
+            if ($this->tacgiaModel->updateTacGia($id, $name)) {
+                echo '<script type="text/javascript">
+               window.location.href = "?act=listtacgia";
+               alert("Bạn đã cập nhật thành công");
+               </script>';
+            } else {
+                echo "Lỗi";
+            }
+        }
+    }
 
 }
 ?>

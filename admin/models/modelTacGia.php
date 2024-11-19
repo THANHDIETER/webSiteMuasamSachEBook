@@ -27,6 +27,17 @@ class tacgiaModel
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute();
     }
+    public function print($id)
+    {
+        $sql = "SELECT * FROM authors WHERE id=$id";
+        return $this->conn->query($sql)->fetch();
+    }
+    function updateTacGia($id, $name)
+    {
+        $sql = "UPDATE authors SET name='$name' WHERE id=$id";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute();
+    }
 
 
 }

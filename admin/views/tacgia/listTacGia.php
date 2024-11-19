@@ -37,7 +37,8 @@
                             <td><?php echo $key['id'] ?></td>
                             <td><?php echo $key['name'] ?></td>
                             <td>
-                                <a href="=<?php echo $key['id']; ?>" class="btn btn-sm btn-outline-primary">
+                                <a href="?act=updateTacGia&id=<?php echo $key['id']; ?>"
+                                    class="btn btn-sm btn-outline-primary">
                                     Edit
                                 </a>
                                 <a href="?act=deleteTacGia&id=<?php echo urlencode($key['id']); ?>"
