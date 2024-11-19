@@ -33,11 +33,11 @@
         return $this->conn->query($sql)->fetch();
     }
     function checkUser($email, $password) {
-        $sql = "SELECT * FROM users WHERE email = :email AND password = :password";
+        $sql = "SELECT * FROM users WHERE email =: email AND password =:password";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([
             'email' => $email,
-            'password' => md($password) //mã hóa mk 
+            'password' => $password 
         ]);
         return $stmt->fetch(PDO::FETCH_ASSOC); //trả về thông tin người dùng nếu kiểm tra có trong database
     }

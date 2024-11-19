@@ -169,7 +169,7 @@ a:hover{
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
 </button>
 </div>
-
+</div><?php se ?>
 <!-- Sách mới -->
 
 <section class="book-list">
@@ -210,6 +210,7 @@ a:hover{
 </main>
 
 <!-- Footer -->
+ 
 <footer class="bg-dark text-white py-3">
     <div class="container text-center">
         <p>&copy; 2024 Bookbuy.vn. All rights reserved.</p>
