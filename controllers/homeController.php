@@ -52,6 +52,7 @@
         }
         require 'views/login.php';
     }
+    ///anh
         function logout(){
             session_start();
             unset($_SESSION['user_id'] );
