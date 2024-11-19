@@ -4,6 +4,9 @@
         function __construct() {
             $this->conn = connectDB();
         }
+
+
+      
         
     function allProduct() {
             $sql = "SELECT * FROM products ORDER BY id DESC";
@@ -15,7 +18,7 @@
         }   
         function alldanhmuc() {
        
-            $sql = "SELECT * FROM danh_muc ORDER BY id DESC";
+            $sql = "SELECT * FROM categories ORDER BY id DESC";
             return $this->conn->query($sql)->fetchAll();
         }
         
@@ -29,5 +32,35 @@
         $sql = "SELECT * FROM products WHERE id =$id";
         return $this->conn->query($sql)->fetch();
     }
+    function checkUser($email, $password) {
+        $sql = "SELECT * FROM users WHERE email = :email AND password = :password";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([
+            'email' => $email,
+            'password' => md($password) //mã hóa mk 
+        ]);
+        return $stmt->fetch(PDO::FETCH_ASSOC); //trả về thông tin người dùng nếu kiểm tra có trong database
     }
+    
+    function checkEmail($email)  {
+        $sql = "SELECT * FROM users WHERE email = :email";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['email'=> $email]);
+        return $stmt->fetch();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
 ?>

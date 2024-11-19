@@ -36,10 +36,10 @@
                       <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-boxes"></i> - Kiểm Tra Đơn Hàng</a>
                     </li>
                   <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-box-arrow-in-left"></i> - Đăng Nhập</a>
+                      <a class="nav-link active" aria-current="page" href="?act=login"><i class="bi bi-box-arrow-in-left"></i> - Đăng Nhập</a>
                     </li>
                   <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-file-earmark-person"></i> - Đăng Ký</a>
+                      <a class="nav-link active" aria-current="page" href="?act=register"><i class="bi bi-file-earmark-person"></i> - Đăng Ký</a>
                   </li>
               </ul>
             </div>

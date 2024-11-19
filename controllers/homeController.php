@@ -30,14 +30,68 @@
         }
         
         function cart(){
-           
+        
         }
         function login(){
-           
-        }
-        function logout(){
+        if($_SERVER['REQUEST_METHOD']=== 'POST'){
+            $email = $_POST['email'] ?? '' ;
+            $password = $_POST['password'] ?? '';
             
+            $user = $this->homeModel->checkUser($email, $password);
+            if ($user) {
+                session_start();
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['user'] = $user;
+                header("Location: index.php?action=/");
+                exit();
+            }
+            else{
+                $err = "Email hoặc mặt khẩu không đúng ";
+                header("Location: index.php?action=login");
+            }
         }
+        require 'views/login.php';
+    }
+        function logout(){
+            session_start();
+            unset($_SESSION['user_id'] );
+        }
+        function register(){
+        include_once "views/register.php";
+        
+            //Kiểm tra email đã tồn tại trong database chưa 
+            $emailUser =$this->homeModel->checkEmail($email);
+           
+                //mã hóa mật khẩu 
+                $hidePassword = password_hash($password, PASSWORD_DEFAULT);
+                $success = $this->homeModel->registerUser($name,$email,$hidePassword);
+                if($success){
+                    header("Location:index.php?action=login");
+                    exit();
+                }else{
+                    $err = "Không thể đăng ký";
+                    require "views/register.php";
+                }
+            }
+            ////day laogin
         
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ?>

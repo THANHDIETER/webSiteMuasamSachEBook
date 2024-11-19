@@ -24,15 +24,15 @@
                 <div class="col-md-6 p-5">
                     <h3 class="card-title text-primary font-weight-bold text-center">Đăng ký</h3>
                     <p class="text-muted">Nếu bạn đã có tài khoản hãy đăng nhập</p>
-                    <form action="">
+                    <form action="" method="POST">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Username">
+                            <input type="text" class="form-control" placeholder="name" require>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Email">
+                            <input type="email" class="form-control" placeholder="email" require>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Password">
+                            <input type="password" class="form-control" placeholder="password" require>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Đăng ký</button>
                     </form>
