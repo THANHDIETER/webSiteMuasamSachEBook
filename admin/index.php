@@ -42,5 +42,6 @@ match ($act) {
     'listNhaXuatBan' => (new nhaXuatBanController())->listNhaXuatBan(),
     'addNhaXuatBan' => (new nhaXuatBanController())->addNhaXuatBan(),
     'deleteNhaXuatBan' => (new nhaXuatBanController())->deleteNhaXuatBan($_GET['id']),
+    'updateNhaXuatBan' => (new nhaXuatBanController())->updateNhaXuatBan($_GET['id']),
 }
     ?>

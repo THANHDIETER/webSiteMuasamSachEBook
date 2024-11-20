@@ -52,6 +52,26 @@ class nhaXuatBanController
             echo "Lỗi";
         }
     }
+    function updateNhaXuatBan($id)
+    {
+        $nhaXuatBan = $this->nhaXuatBanModel->print($id);
+        require_once './views/NXB/updateNXB.php';
+
+        if (isset($_POST['btn_update'])) {
+            $id = $_POST['id'];
+            $name = $_POST['name'];
+
+
+            if ($this->nhaXuatBanModel->updateNhaXuatBan($id, $name)) {
+                echo '<script type="text/javascript">
+               window.location.href = "?act=listNhaXuatBan";
+               alert("Bạn đã cập nhật thành công");
+               </script>';
+            } else {
+                echo "Lỗi";
+            }
+        }
+    }
 
 
 

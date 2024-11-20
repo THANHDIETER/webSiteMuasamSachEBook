@@ -27,6 +27,18 @@ class nhaXuatBanModel
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute();
     }
+    public function print($id)
+    {
+        $sql = "SELECT * FROM publisher WHERE id=$id";
+        return $this->conn->query($sql)->fetch();
+    }
+    function updateNhaXuatBan($id, $name)
+    {
+        $sql = "UPDATE publisher SET name='$name' WHERE id=$id";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute();
+    }
+
 
 
 
