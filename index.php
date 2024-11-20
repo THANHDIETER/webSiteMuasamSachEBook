@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once 'connect/function.php';
     require_once 'controllers/homeController.php';
     require_once 'models/homeModel.php';
@@ -15,5 +16,6 @@
         'register' =>(new homeController())->register(),
         // 'store_register' =>(new homeController())->store_register(),
         'dmid'=> (new homeController())->dmshow($_GET['id']),
+       
     }
 ?>

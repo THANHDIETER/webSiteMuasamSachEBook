@@ -31,25 +31,70 @@
         }
         
         function cart(){
-           
+        
         }
         function login(){
-           require_once 'views/login.php';
+            if(isset($_POST['btn_submit'])){;
+                $user = $this->homeModel->checkUser($_POST['email'],$_POST['password']);
+                if($user){
+                    session_start();
+                    $_SESSION['id'] = $user['id'];
+                    echo '<script type="text/javascript">
+                        window.location.href = "?act=home";
+                        alert("Bạn đã login thành công");
+                    </script>';
+                }else{
+                    echo "<script>alert('Đăng nhập thất bại');</script>";
+                }
+            }
+            require "views/login.php";
         }
+        
        
         function register(){
+            
             if(isset($_POST['name'])){
                 $add_user=$this->homeModel->add_user($_POST['email'],$_POST['name'],$_POST['password']);
-                $message = 'đang ký thành công';
+               return    $message = 'đang ký thành công';
             }else{
                 $message = 'đang ký Không thành công';
             }
             require_once 'views/register.php';
          }
-
+// $hidePassword = password_hash($password, PASSWORD_DEFAULT);
+            //     $success = $this->homeModel->registerUser($name,$email,$hidePassword);
+            //     if($success){
+            //         header("Location:index.php?action=login");
+            //         exit();
+            //     }else{
+            //         $err = "Không thể đăng ký";
+            //         require "views/register.php";
+            //     }
         function logout(){
-            
-        }
-        
+            session_unset();
+            // unset($_SESSION['user_id'] );
+            echo '<script type="text/javascript">
+                        window.location.href = "?act=login";
+                        alert("Bạn đã login thành công");
+                    </script>';
+        }        
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ?>

@@ -8,12 +8,12 @@
 </head>
 <body>
      <footer>
-          <div class="card container">
+          <div class="card ">
           <div class="card-header " >
           <img style="width: 80px;" src="./styte/img/logo.png" alt="">    
           </div>
-          <div class="card-body">
-          <div class="row">
+          <div class="card-body container">
+          <div class="row ">
                <div class="col">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                          <h3>HỖ TRỢ KHÁCH HÀNG</h3>
@@ -67,10 +67,10 @@
                     </div>
                     <div>
                     Làm bạn với EBook : 
-                    <img style="width: 40px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1024px-Facebook_Logo_%282019%29.png" alt="">
-                    <img style="width: 40px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Icon_of_Zalo.svg/2048px-Icon_of_Zalo.svg.png" alt="">
-                    <img style="width: 40px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNkpxfsJZXIpz7pcSUkTTHdFJtbrUOyTUjgw&s" alt="">
-                    <img style="width: 40px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQR_zuEOmVdXkjVgDXJvMJb_RTtb0bt5xaP8A&s" alt="">
+                    <a href="https://www.facebook.com/profile.php?id=61565623306055"><img style="width: 40px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1024px-Facebook_Logo_%282019%29.png" alt=""></a>
+                    <a href="https://www.facebook.com/profile.php?id=61565623306055"><img style="width: 40px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Icon_of_Zalo.svg/2048px-Icon_of_Zalo.svg.png" alt=""></a>
+                    <a href="https://www.tiktok.com/@thanh_dieter?lang=vi-VN"> <img style="width: 40px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNkpxfsJZXIpz7pcSUkTTHdFJtbrUOyTUjgw&s" alt=""></a>
+                    <a href="https://www.facebook.com/profile.php?id=61565623306055"><img style="width: 40px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQR_zuEOmVdXkjVgDXJvMJb_RTtb0bt5xaP8A&s" alt=""></a>
                     </div>
 
           </div>

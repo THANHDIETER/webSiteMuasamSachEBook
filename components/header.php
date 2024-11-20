@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,12 +36,32 @@
                   <li class="nav-item">
                       <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-boxes"></i> - Kiểm Tra Đơn Hàng</a>
                     </li>
-                  <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-box-arrow-in-left"></i> - Đăng Nhập</a>
-                    </li>
-                  <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="?act=register"><i class="bi bi-file-earmark-person"></i> - Đăng Ký</a>
-                  </li>
+                    <?php
+                  
+
+                  
+                  if (isset($_SESSION['id'])) { // Check if the user session exists
+                                   // $userName = htmlspecialchars(); 
+                                   echo '
+                                   <li class="nav-item">
+                                       <a class="nav-link active" aria-current="page" href="?act=profile"><i class="bi bi-person-circle"></i> </a>
+                                   </li>
+                                   <li class="nav-item">
+                                       <a class="nav-link active" aria-current="page" href="?act=logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                                   </li>';
+                               } else {
+                                   echo '
+                                   <li class="nav-item">
+                                       <a class="nav-link active" aria-current="page" href="?act=login"><i class="bi bi-box-arrow-in-left"></i> Login</a>
+                                   </li>
+                                   <li class="nav-item">
+                                       <a class="nav-link active" aria-current="page" href="?act=register"><i class="bi bi-file-earmark-person"></i> Register</a>
+                                   </li>';
+                               }
+             ?>
+                   
+
+
               </ul>
             </div>
           </div>

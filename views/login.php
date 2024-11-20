@@ -11,7 +11,12 @@
         crossorigin="anonymous"></script>
 </head>
 
+
 <body>
+    <?php if (isset($err)) : ?>
+    <div class="alert alert-danger"><?php echo htmlspecialchars($err); ?></div>
+<?php endif; ?>
+
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <div class="card border-0 shadow-lg" style="max-width: 900px; border-radius: 12px;">
             <div class="row no-gutters d-flex align-items-stretch">
@@ -19,14 +24,14 @@
                 <div class="col-md-6 p-5">
                     <h3 class="card-title text-primary font-weight-bold text-center">Đăng nhập</h3>
                     <p class="text-muted">Nếu bạn chưa có tài khoản hãy đăng ký</p>
-                    <form action="">
+                    <form action="?act=login" method="POST">
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Email">
+                            <input type="text" class="form-control" placeholder="Email" name="email" required>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Password">
+                            <input type="password" name="password" class="form-control" placeholder="password" required>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block mb-3">Đăng nhập</button>
+                        <button type="submit" name="btn_submit" class="btn btn-primary btn-block mb-3">Đăng nhập</button>
                     </form>
                     <div class="text-center text-muted mb-3">HOẶC</div>
                     <button type="button" class="btn btn-outline-primary btn-block mb-3">
@@ -34,11 +39,15 @@
                             class="mr-2">
                         Login with Google
                     </button>
+                    <?php if (isset($err)) : ?>
+    <div class="alert alert-danger"><?php echo htmlspecialchars($err); ?></div>
+<?php endif; ?>
+
                     <div class="text-center">
                         <a href="#" class="text-primary">Quên mật khẩu</a>
                     </div>
                     <hr>
-                    <p class="text-center">Bạn chưa có tài khoản? <a href="#" class="text-primary">Đăng ký ngay</a></p>
+                    <p class="text-center">Bạn chưa có tài khoản? <a href="?act=register" class="text-primary">Đăng ký ngay</a></p>
                 </div>
 
                 <!-- Phần hình ảnh bên phải -->

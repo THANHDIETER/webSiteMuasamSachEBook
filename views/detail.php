@@ -16,32 +16,32 @@
     <?php require_once './components/header.php' ?><hr>
     <div class="bg-light">
     <div style="display: grid; gap:40px;"  class="container  ">
-    <br><p class="wrapper">Trang chủ / sách hay / nguyên tắc lập quốc - những tư tưởng căn bản của các nhà lập quốc hoa kỳ</p>
+    <br><p class="wrapper">Trang chi tiết sản phẩm </p>
     <?php foreach($productOne as $name): ?>
     <div class="row bg-white">
     <div class="col-4">
-    <img src="./assets/images/prod/books/<?php echo $name['img'] ?>" class="top-pro-img" alt="">
+    <img style=" max-width:100%;" src="./assets/images/prod/books/<?php echo $name['img'] ?>" class="top-pro-img" alt="">
     </div>
     
     <div class="col-8">
 
             <input type="hidden" name="" value="<?php echo $name['id'] ?>" id="">
-            <h2> <br><?php echo $name['ten'] ?></h2>
-            <p><?php echo $name['tac_gia'] ?>  (Tác giả)</p><br>
-            <h3 class=""><del>Giá thị trường: <?php $price= $name['gia'];
+            <h2> <br><?php echo $name['name'] ?></h2>
+            <p><?php echo $name['author'] ?>  (Tác giả)</p><br>
+            <h3 class=""><del>Giá thị trường: <?php $price= $name['price'];
             $formatted_price = number_format($price, 0, ',', '.'); 
             echo $formatted_price . 'đ';
             ?></del></h3>
-            <h3 class="text-danger">Sale còn: <?php  $price=$name['gia']-($name['gia']/100)*$name['sale'];
+            <h3 class="text-danger">Sale còn: <?php  $price=$name['price']-($name['price']/100)*$name['sale'];
             $formatted_price = number_format($price, 0, ',', '.'); 
             echo $formatted_price . 'đ';
             ?></h3>
             
-            <p class="text-warning">Tiết kiệm: <?php  $price=($name['gia']/100)*$name['sale'] ;
+            <p class="text-warning">Tiết kiệm: <?php  $price=($name['price']/100)*$name['sale'] ;
             $formatted_price = number_format($price, 0, ',', '.'); 
             echo $formatted_price . 'đ';
             ?> (<?php echo $name['sale'] ?>%)</p>
-            <p class="TINHTRANG">Tình trạng: <?php if($name['so_luong']>0){echo 'còn '; echo $name['so_luong']; echo' sản phẩm'; }
+            <p class="TINHTRANG">Tình trạng: <?php if($name['quantity']>0){echo 'còn '; echo $name['quantity']; echo' sản phẩm'; }
             else{echo "sắp có hàng";} ?>       </p>
            
             <p class="tags"><?php echo $name['name'] ?>  </p>
@@ -73,8 +73,8 @@
         <div style="padding: 20px; min-height:600px" class="table2 bg-white">
           <br>    
             <h2>Giới thiệu sản phẩm:</h2>
-            <h2><?php echo $name['ten'] ?></h2>
-            <P><?php echo $name['mo_ta'] ?></P>
+            <h2><?php echo $name['name'] ?></h2>
+            <P><?php echo $name['description'] ?></P>
                 <p><a href="?act=/">Mua sách online tại EBOok.vn và nhận nhiều ưu đãi.</a></p>
         </div>
         </div>
@@ -91,10 +91,9 @@
                             <div class="text-center" >
                                 <a class="bg-white nav-link" href="?act=detail&id=<?php echo $key['id'] ?>"></a>
                                 <img style="max-width:100%"  src="./assets/images/prod/books/<?php echo $key['img'] ?>" alt=""></a>
-                                <a class="bg-white nav-link" href="?act=detail&id=<?php echo $key['id'] ?>"><?php echo $key['ten'] ?></a>
-                                <a class="bg-white nav-link" href="?act=detail&id=<?php echo $key['id'] ?>"><?php echo $key['tac_gia'] ?></pa>
+                                <a class="bg-white nav-link" href="?act=detail&id=<?php echo $key['id'] ?>"><?php echo $key['name'] ?></a>
                                 <p style="color:red;"><?php 
-                                $price=$key['gia']-($key['gia']/100)*$key['sale'];
+                                $price=$key['price']-($key['price']/100)*$key['sale'];
                                 $formatted_price = number_format($price, 0, ',', '.'); 
                                 echo $formatted_price . 'đ';
                                 ?>
@@ -119,11 +118,11 @@
                 <div class="card me-3" style="width: 200px;">
                     <img src="./assets/images/prod/books/<?php echo $key['img'] ?>" class="card-img-top" alt="Book 1">
                     <div class="card-body text-center">
-                        <p class="card-title fw-bold mb-1"><?php echo $key['ten'] ?></p>
-                        <p class="card-text text-muted small"><?php echo $key['tac_gia'] ?></p>
+                        <p class="card-title fw-bold mb-1"><?php echo $key['name'] ?></p>
+                        <p class="card-text text-muted small"><?php echo $key['author_id'] ?></p>
                         <p class="text-danger">
                         <?php
-                          $price=$key['gia']-($key['gia']/100)*$key['sale'];
+                          $price=$key['price']-($key['price']/100)*$key['sale'];
                           $formatted_price = number_format($price, 0, ',', '.'); 
                           echo $formatted_price . 'đ';
                           ?>

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -77,7 +78,6 @@ a:hover{
 <?php  require_once 'components/header.php'; ?>
    <div class="container">
    
-
 <!-- Main Content -->
 <main class="container my-4">
     <div class="row">
@@ -94,7 +94,7 @@ a:hover{
             <h1 class="h5 border-bottom pb-2">Tác giả </h1>
             <ul class="list-unstyled">
             <?php foreach($products as $value): ?>
-                <li><a href="#" class="text-secondary text-decoration-none d-block py-1"><?php echo $value['tac_gia'] ?></a></li>
+                <li><a href="#" class="text-secondary text-decoration-none d-block py-1"><?php echo $value['author_id'] ?></a></li>
                 <?php endforeach ?>
             </ul>
             <h1></h1>
@@ -138,7 +138,7 @@ a:hover{
                         <a href="?act=detail&id=<?php echo $key['id']?>"><img style=" height:280px;  padding: 20px; "  src="./assets/images/prod/books/<?php echo $key['img'] ?>" class="card-img-top" alt="Về Đi Con - Bìa Cứng"></a>
                         <div class="card-body"> 
                             <h6 class="card-title"><?php echo $key['ten'] ?></h6>
-                            <p class="text-success"><?php echo $key['tac_gia'] ?></p>
+                            <p class="text-success"><?php echo $key['author_id'] ?></p>
                             <div class="d-flex justify-content-between">
                                 <p class="text-danger font-weight-bold"><?php echo $key['gia'] ?></p>
                                 <p class="text-muted"><del><?php echo $price=$key['gia']-($key['gia']/100)*$key['sale'] ?></del> <span
