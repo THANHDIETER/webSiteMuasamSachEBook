@@ -49,27 +49,8 @@
             require "views/login.php";
         }
         
-         header("Location:views/login.php");
-        if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            $email = $_POST['email']  ;
-            $password = $_POST['password'] ;
-            
-            $user = $this->homeModel->checkUser();
-            if ($user =! null ) {
-                session_start();
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['user'] = $user['email'];
-                header("Location: ?act=/");
-                exit();
-            }
-            else{
-                $err = "Email hoặc mặt khẩu không đúng ";
-                header("Location:views/home.php");
-            }
-        }
      
     }
-    ///anh
         function logout(){
             session_start();
             session_unset();
@@ -91,9 +72,6 @@
                     require "views/register.php";
                 }
             }
-            ////day laogin
-        
-    }
 
 
 

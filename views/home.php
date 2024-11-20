@@ -77,39 +77,7 @@ a:hover{
 </head>
 <body>
 
-    <!-- Top Navigation
-    <div class="bg-light py-2 border-bottom">
-    <div class="container d-flex justify-content-between">
-        <div class="link-hover">
-            <a href="#" class="text-secondary text-decoration-none mr-3 "><i class="bi bi-exclamation-lg"></i> Trợ giúp</a>
-            <a href="#" class="text-secondary text-decoration-none mr-3"><i class="bi bi-chat-square-dots-fill"></i> Tin tức</a>
-            <a href="#" class="text-secondary text-decoration-none"><i class="bi bi-cash-coin"></i>  Khuyến mãi</a>
-        </div>
-    
-        <div class="link-hover">
-            <a href="#" class="text-warning text-decoration-none mr-3"><i class="bi bi-phone-vibrate"></i> 0332371912</a>
-            <a href="#" class="text-secondary text-decoration-none  mr-3"><i class="bi bi-box-seam"></i> Kiểm tra đơn hàng</a>
-            <a href="?act=log" class="text-secondary text-decoration-none mr-3">
-            <i class="bi bi-box-arrow-in-right"> Đăng Nhập</i>
-            </a>
-            <a href="#" class="text-secondary">Đăng ký</a>
-        </div>
-    </div>
-</div>
-
-    <!- Header -->
-    <!-- <header class="bg-white py-3 border-bottom">
-        <div class="container d-flex align-items-center justify-content-between">
-            <h1 class="text-warning font-weight-bold">Bookbuy.vn</h1>
-            <div class="input-group w-50">
-                <input type="text" class="form-control" placeholder="Bạn cần tìm gì?">
-                <div class="input-group-append">
-                    <button class="btn btn-warning" type="button">Tìm kiếm</button>
-                </div>
-            </div>
-            <a href="#" class="text-secondary text-decoration-none"><i class="bi bi-cart4"></i> Giỏ hàng (0)</a>
-        </div>
-    </header> -->
+   
    <div class="container">
    <?php  require_once 'components/header.php'; ?>
 
@@ -134,18 +102,7 @@ a:hover{
             </ul>
             <h1></h1>
 
-            
-            <!-- <h1 class="h5 border-bottom pb-2">Theo giá</h1> -->
-            <!-- <ul class="list-unstyled">
-                <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Giá nhỏ hơn 50.000đ</a></li>
-                <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Giá từ 50.000 - 100.000đ</a></li>
-                <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Giá từ 100.000 - 200.000đ</a></li>
-                <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Giá từ 200.000 - 300.000đ</a></li>
-                <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Giá từ 300.000 - 400.000đ</a></li>
-                <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Giá từ 400.000 - 500.000đ</a></li>
-                <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Giá từ 500.000 - 1.000.000đ</a></li>
-                <li><a href="#" class="text-secondary text-decoration-none d-block py-1">Giá lớn hơn 1.000.000đ</a></li>
-            </ul>        -->
+           
         </aside>
 <!-- Banner and Book List -->
 <div class="col-md-9">
@@ -169,7 +126,7 @@ a:hover{
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
 </button>
 </div>
-</div><?php se ?>
+</div>
 <!-- Sách mới -->
 
 <section class="book-list">
@@ -205,7 +162,7 @@ a:hover{
                     <!-- Thêm sách khác nếu cần -->
                 </div>
             </section>
-        </div>
+        </div> 
     </div>
 </main>
 
