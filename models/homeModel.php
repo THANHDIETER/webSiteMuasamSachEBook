@@ -32,6 +32,11 @@
         $sql = "SELECT * FROM products WHERE id =$id";
         return $this->conn->query($sql)->fetch();
     }
+      function add_user($email,$name,$password){
+        $sql= "INSERT INTO users (email, name, password) VALUES ('$email', '$name', '$password')";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute();
+    }
     function checkUser($email,$password) {
         $sql = "SELECT * FROM users WHERE email = :email AND password = :password";
         $stmt = $this->conn->prepare($sql);
