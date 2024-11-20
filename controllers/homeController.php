@@ -56,22 +56,19 @@
             session_unset();
         }
         function register(){
-        include_once "views/register.php";
-        
-            //Kiểm tra email đã tồn tại trong database chưa 
-            $emailUser =$this->homeModel->checkEmail($email);
-           
-                //mã hóa mật khẩu 
-                $hidePassword = password_hash($password, PASSWORD_DEFAULT);
-                $user = $this->homeModel->allUser();
-                if($success){
-                    header("Location:index.php?action=login");
-                    exit();
-                }else{
-                    $err = "Không thể đăng ký";
-                    require "views/register.php";
-                }
+            if(isset($_POST['name'])){
+                $add_user=$this->homeModel->add_user($_POST['email'],$_POST['name'],$_POST['password']);
+                $message = 'đang ký thành công';
+            }else{
+                $message = 'đang ký Không thành công';
             }
+            require_once 'views/register.php';
+         }
+
+        function logout(){
+            
+        }
+}
 
 
 
