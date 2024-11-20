@@ -80,6 +80,7 @@
         </div>
         <?php  endforeach; ?>
         </div>
+        
         <div  class="col-3 bg-white;">
             
         <aside class="bg-white text-center" style=" max-width:100%; display:grid;  padding:20px; ">
@@ -104,13 +105,15 @@
             </div>
             <button class="btn btn-primary w-100" id="scrollDown">▼</button>
             </div>
-            <div class="border rounded bg-white w-100" style="max-width: 300px;">
-    </div>
+           
     </aside>
         </div>
-    <div class="container my-4">
-        <h5 class="mb-3">Sản phẩm cùng loại</h5>
+       
+        </div>
+    <div class="container my-4 bg-white ">
+        
         <div class="position-relative">
+        <h5 class="mb-3">Sản phẩm cùng loại</h5>
             <!-- Danh sách sản phẩm -->
             <div class="d-flex overflow-hidden" id="productContainer" style="scroll-behavior: smooth;">
             <?php foreach($top8 as $key): ?>
@@ -119,7 +122,7 @@
                     <img src="./assets/images/prod/books/<?php echo $key['img'] ?>" class="card-img-top" alt="Book 1">
                     <div class="card-body text-center">
                         <p class="card-title fw-bold mb-1"><?php echo $key['name'] ?></p>
-                        <p class="card-text text-muted small"><?php echo $key['author_id'] ?></p>
+                     
                         <p class="text-danger">
                         <?php
                           $price=$key['price']-($key['price']/100)*$key['sale'];

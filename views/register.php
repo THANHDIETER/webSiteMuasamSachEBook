@@ -25,7 +25,7 @@
                 <div class="col-md-6 p-5">
                     <h3 class="card-title text-primary font-weight-bold text-center">Đăng ký</h3>
                     <p class="text-muted">Nếu bạn đã có tài khoản hãy đăng nhập</p>
-                    <form action="?act=login" method="post">
+                    <form action="?act=register" method="post">
                         <div class="form-group">
                             <input type="text" name="name" class="form-control" placeholder="Username">
                         </div>
@@ -35,7 +35,7 @@
                         <div class="form-group">
                             <input type="password" name="password" class="form-control" placeholder="Password">
                         </div>
-                        <button type="submit"   class="btn btn-primary btn-block">Đăng ký</button>
+                        <button type="submit" name="btn_dk" class="btn btn-primary btn-block">Đăng ký</button>
                     </form>
                     <div class="mt-3">
                         <a href="#" class="text-primary">Quên mật khẩu</a>

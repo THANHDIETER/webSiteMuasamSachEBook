@@ -29,7 +29,7 @@
             $danhmucs=$this->homeModel->alldanhmuc();
             require_once 'views/dMuc_id.php';
         }
-        
+       
         function cart(){
         
         }
@@ -38,7 +38,7 @@
                 $user = $this->homeModel->checkUser($_POST['email'],$_POST['password']);
                 if($user){
                     session_start();
-                    $_SESSION['id'] = $user['id'];
+                    $_SESSION['id'] = $user['id'] ;
                     echo '<script type="text/javascript">
                         window.location.href = "?act=home";
                         alert("Bạn đã login thành công");
@@ -53,7 +53,7 @@
        
         function register(){
             
-            if(isset($_POST['name'])){
+            if(isset($_POST['btn_dk'])){
                 $add_user=$this->homeModel->add_user($_POST['email'],$_POST['name'],$_POST['password']);
                return    $message = 'đang ký thành công';
             }else{

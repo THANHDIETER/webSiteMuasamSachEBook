@@ -82,13 +82,13 @@
                         <a href="?act=detail&id=<?php echo $key['id']?>">
                             <img style=" height:280px;  padding: 20px; "  src="./assets/images/prod/books/<?php echo $key['img'] ?>" class="card-img-top" alt="Về Đi Con - Bìa Cứng"></a>
                             <div class="card-body"> 
-                            <a class="nav-link" href="?act=detail&id=<?php echo $key['id']?>"> <h6 class="card-title "><?php echo $key['ten'] ?></h6></a>
-                            <a class="nav-link" href="?act=detail&id=<?php echo $key['id']?>"> <p class="text-success"><?php echo $key['tac_gia'] ?></p></a>
+                            <a class="nav-link" href="?act=detail&id=<?php echo $key['id']?>"> <h6 class="card-title "><?php echo $key['name'] ?></h6></a>
+                            <a class="nav-link" href="?act=detail&id=<?php echo $key['id']?>"> <p class="text-success"><?php echo $key['author'] ?></p></a>
                                 <div class="d-flex justify-content-between">
-                                    <p class="text-danger font-weight-bold"><?php $price=$key['gia']-($key['gia']/100)*$key['sale'];
+                                    <p class="text-danger font-weight-bold"><?php $price=$key['price']-($key['price']/100)*$key['sale'];
                                     $formatted_price = number_format($price, 0, ',', '.'); 
                                     echo $formatted_price . 'đ'; ?></p>
-                                    <p class="text-muted"><del><?php  $price= $key['gia'];
+                                    <p class="text-muted"><del><?php  $price= $key['price'];
                                     $formatted_price = number_format($price, 0, ',', '.'); 
                                     echo $formatted_price . 'đ'; ?></del> <span
                                             class="badge badge-danger">-<?php echo $key['sale'] ?>%</span></p>

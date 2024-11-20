@@ -9,11 +9,16 @@
       
         
     function allProduct() {
-            $sql = "SELECT * FROM products ORDER BY id DESC";
+            $sql = "SELECT products.*,authors.name as author 
+            FROM products
+            JOIN authors ON products.author_id = authors.id
+             ORDER BY id DESC";
             return $this->conn->query($sql)->fetchAll();
         }
         function dmshowid($id){
-            $sql="SELECT * FROM  products  WHERE category_id=$id";
+            $sql = "SELECT products.*,authors.name as author 
+            FROM products
+            JOIN authors ON products.author_id = authors.id WHERE category_id=$id";
             return $this->conn->query($sql)->fetchAll();
         }   
         
@@ -25,7 +30,10 @@
         
     
     function top8Product() {
-        $sql = "SELECT * FROM products ORDER BY id DESC LIMIT 8";
+        $sql = "SELECT products.*,authors.name as author 
+            FROM products
+            JOIN authors ON products.author_id = authors.id ORDER BY id DESC LIMIT 8";
+       
         return $this->conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
     function top6Product() {
@@ -62,6 +70,7 @@
         $user = $stmt->fetch();
         return $user ? $user : null;
     }
+
     
     function checkEmail($email)  {
         $sql = "SELECT * FROM users WHERE email = :email ";

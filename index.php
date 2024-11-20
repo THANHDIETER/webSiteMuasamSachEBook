@@ -14,7 +14,6 @@
         'logout' =>(new homeController())->logout(),
         'product' =>(new homeController())->product(),
         'register' =>(new homeController())->register(),
-        // 'store_register' =>(new homeController())->store_register(),
         'dmid'=> (new homeController())->dmshow($_GET['id']),
        
     }

@@ -62,7 +62,7 @@
             <!-- Product List -->
             <div class="col-md-9">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="font-weight-bold"><?php echo $key['name'] ?></h5>
+                    <h5 class="font-weight-bold"> SACH</h5>
                     <div>
                         <select class="form-control d-inline-block w-auto mr-2">
                             <option>Sản phẩm bán chạy</option>
@@ -80,16 +80,16 @@
                      <?php foreach($dmuc as $ke): ?>
                     <div class="col-md-3 mb-3">
                         <div class="card">
-                            <input type="hidden" name="" value="<?php echo $ke['danh_muc_id'] ?>" id="">
+                            <input type="hidden" name="" value="<?php echo $ke['category_id'] ?>" id="">
                             <img style=" height:280px;  padding: 20px; "  src="./assets/images/prod/books/<?php echo $ke['img'] ?>" class="card-img-top" alt="Về Đi Con - Bìa Cứng">
                             <div class="card-body"> 
-                                <h6 class="card-title"><?php echo $ke['ten'] ?></h6>
-                                <p class="text-success"><?php echo $ke['tac_gia'] ?></p>
+                                <h6 class="card-title"><?php echo $ke['name'] ?></h6>
+                                <p class="text-success"><?php echo $ke['author'] ?></p>
                                 <div class="d-flex justify-content-between">
-                                    <p class="text-danger font-weight-bold"><?php $price=$ke['gia']-($ke['gia']/100)*$ke['sale'];
+                                    <p class="text-danger font-weight-bold"><?php $price=$ke['price']-($ke['price']/100)*$ke['sale'];
                                     $formatted_price = number_format($price, 0, ',', '.'); 
                                     echo $formatted_price . 'đ'; ?></p>
-                                    <p class="text-muted"><del><?php  $price= $ke['gia'];
+                                    <p class="text-muted"><del><?php  $price= $ke['price'];
                                     $formatted_price = number_format($price, 0, ',', '.'); 
                                     echo $formatted_price . 'đ';
                                     ?></del> <span

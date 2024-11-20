@@ -44,11 +44,11 @@
                                    // $userName = htmlspecialchars(); 
                                    echo '
                                    <li class="nav-item">
-                                       <a class="nav-link active" aria-current="page" href="?act=profile"><i class="bi bi-person-circle"></i> </a>
+                                       <a class="nav-link active" aria-current="page" href="?act=profile"><i class="bi bi-person-circle"> </i></a>
                                    </li>
                                    <li class="nav-item">
                                        <a class="nav-link active" aria-current="page" href="?act=logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
-                                   </li>';
+                                   </li>'; 
                                } else {
                                    echo '
                                    <li class="nav-item">
