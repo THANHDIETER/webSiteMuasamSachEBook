@@ -41,6 +41,17 @@ class nhaXuatBanController
             require_once './views/NXB/addNXB.php';
         }
     }
+    function deleteNhaXuatBan($id)
+    {
+        if ($this->nhaXuatBanModel->deleteNhaXuatBan($id)) {
+            echo '<script type="text/javascript">
+            window.location.href = "?act=listNhaXuatBan";
+            alert("Bạn đã xóa thành công");
+            </script>';
+        } else {
+            echo "Lỗi";
+        }
+    }
 
 
 

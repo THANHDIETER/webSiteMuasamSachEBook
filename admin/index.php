@@ -41,5 +41,6 @@ match ($act) {
     //NXB
     'listNhaXuatBan' => (new nhaXuatBanController())->listNhaXuatBan(),
     'addNhaXuatBan' => (new nhaXuatBanController())->addNhaXuatBan(),
+    'deleteNhaXuatBan' => (new nhaXuatBanController())->deleteNhaXuatBan($_GET['id']),
 }
     ?>

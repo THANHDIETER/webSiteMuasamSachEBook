@@ -21,6 +21,12 @@ class nhaXuatBanModel
 
         return $stmt->execute();
     }
+    function deleteNhaXuatBan($id)
+    {
+        $sql = "delete from publisher where id=$id";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute();
+    }
 
 
 
