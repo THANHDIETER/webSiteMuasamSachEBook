@@ -25,9 +25,9 @@
                             <input type="text" class="form-control" placeholder="Email" name="email" required>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="password" required>
+                            <input type="password" class="form-control" placeholder="password" name="password" required>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block mb-3">Đăng nhập</button>
+                        <button type="submit" name="btn_submit" class="btn btn-primary btn-block mb-3">Đăng nhập</button>
                     </form>
                     <div class="text-center text-muted mb-3">HOẶC</div>
                     <button type="button" class="btn btn-outline-primary btn-block mb-3">

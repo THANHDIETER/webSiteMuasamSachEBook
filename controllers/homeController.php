@@ -33,6 +33,22 @@
         
         }
         function login(){
+            if(isset($_POST['btn_submit'])){;
+                $user = $this->homeModel->checkUser($_POST['email'],$_POST['password']);
+                if($user){
+                    session_start();
+                    $_SESSION['id'] = $user['id'];
+                    echo '<script type="text/javascript">
+                        window.location.href = "?act=home";
+                        alert("Bạn đã login thành công");
+                    </script>';
+                }else{
+                    echo "<script>alert('Đăng nhập thất bại');</script>";
+                }
+            }
+            require "views/login.php";
+        }
+        
          header("Location:views/login.php");
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $email = $_POST['email']  ;
@@ -66,7 +82,7 @@
            
                 //mã hóa mật khẩu 
                 $hidePassword = password_hash($password, PASSWORD_DEFAULT);
-                $success = $this->homeModel->registerUser($name,$email,$hidePassword);
+                $user = $this->homeModel->allUser();
                 if($success){
                     header("Location:index.php?action=login");
                     exit();
