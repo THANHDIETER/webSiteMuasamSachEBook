@@ -33,12 +33,13 @@
         
         }
         function login(){
+         header("Location:views/login.php");
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $email = $_POST['email']  ;
             $password = $_POST['password'] ;
             
-            $user = $this->homeModel->checkUser($email, $password);
-            if ($user) {
+            $user = $this->homeModel->checkUser();
+            if ($user =! null ) {
                 session_start();
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user'] = $user['email'];
@@ -47,10 +48,10 @@
             }
             else{
                 $err = "Email hoặc mặt khẩu không đúng ";
-                header("Location: ?act=login");
+                header("Location:views/home.php");
             }
         }
-        require 'views/login.php';
+     
     }
     ///anh
         function logout(){
