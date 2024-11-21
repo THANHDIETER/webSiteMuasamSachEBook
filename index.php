@@ -12,6 +12,7 @@
         'detail' =>(new homeController())->detail($_GET['id']),
         'home' =>(new homeController())->home(),
         'addToCart' => (new CartController())->addToCart($_GET['id']),
+        'updateQuantity' => (new CartController())->updateQuantity(),
         'cart' => (new CartController())->viewCart(),
         'removeFromCart' => (new CartController())->removeFromCart($_GET['id']),
         'login' =>(new homeController())->login(),

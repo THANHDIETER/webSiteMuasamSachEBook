@@ -15,6 +15,7 @@
     <div class="container">
     <h4>Giỏ Hàng</h4>
     <hr>
+    <form action="index.php?act=updateQuantity" method="POST">
     <?php if (!empty($cartItems)): ?>
         <?php foreach ($cartItems as $item): ?>
             <div class="row mb-3">
@@ -22,15 +23,15 @@
                     <img src="./assets/images/prod/books/<?= $item['img'] ?>" style="width: 100px; height: 150px;" alt="<?= $item['name'] ?>">
                 </div>
                 <div class="col-6">
-                    <a href="?act=detail&id=<?= $item['id'] ?>"><?= $item['name'] ?></a>
-                    <p>Số lượng: <?= $item['quantity'] ?></p>
-                    <a href="?act=removeFromCart&id=<?= $item['id'] ?>" class="btn btn-danger btn-sm">Xóa</a>
+                    <p><?= $item['name'] ?></p>
+                    <input type="number" name="quantities[<?= $item['id'] ?>]" value="<?= $item['quantity'] ?>" min="1" class="form-control w-25">
                 </div>
                 <div class="col-2">
                     <?= number_format($item['price'], 0, ',', '.') ?>đ
                 </div>
             </div>
         <?php endforeach; ?>
+        
         <div class="text-end">
             <h5>Tổng cộng: <?= number_format(array_sum(array_map(fn($item) => $item['price'] * $item['quantity'], $cartItems)), 0, ',', '.') ?>đ</h5>
             <a href="checkout.php" class="btn btn-success">Tiến Hành Đặt Hàng</a>
@@ -38,7 +39,16 @@
     <?php else: ?>
         <p>Giỏ hàng trống.</p>
     <?php endif; ?>
+</form>
+
 </div>
+<script>
+    document.querySelectorAll('input[type="number"]').forEach(input => {
+        input.addEventListener('change', () => {
+            input.form.submit();
+        });
+    });
+</script>
 
     <?php require_once './components/footer.php'; ?>
 </body>

@@ -27,7 +27,7 @@ class CartController {
                     break;
                 }
             }
-
+            
             if (!$exists) {
                 $_SESSION['cart'][] = [
                     'id' => $product['id'],
@@ -37,15 +37,37 @@ class CartController {
                     'sale' => $product['sale'],
                     'quantity' => 1
                 ];
-            }
+            }  
         }
+        
 
         header("Location: index.php?act=cart");
         exit;
     }
+    
+ 
+    public function updateQuantity() {
+     session_start();
+
+     if (isset($_SESSION['cart'], $_POST['quantities'])) {
+         foreach ($_POST['quantities'] as $productId => $quantity) {
+             foreach ($_SESSION['cart'] as &$item) {
+                 if ($item['id'] == $productId) {
+                     $item['quantity'] = max(1, (int)$quantity); // Minimum quantity is 1
+                     break;
+                 }
+             }
+         }
+     }
+
+     header("Location: index.php?act=cart");
+     exit;
+ }
+ 
+
+ 
 
     public function viewCart() {
-        session_start();
         $cartItems = $_SESSION['cart'] ?? [];
         require_once 'views/cart.php';
     }

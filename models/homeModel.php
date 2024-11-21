@@ -28,9 +28,7 @@
             return $this->conn->query($sql)->fetchAll();
         }
         
-    function cart(){
-        
-    }
+    
     function top8Product() {
         $sql = "SELECT products.*,authors.name as author 
             FROM products
