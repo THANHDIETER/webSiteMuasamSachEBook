@@ -80,7 +80,7 @@
               <i style="font-size:40px; color:burlywood;" class="bi bi-headset"> </i> 
               </a>
               <h5 style="color:burlywood;">0972150772 <br>Hot line </h5>
-              <a  class="nav-link active" href="#"><i style="font-size:40px; color:burlywood;" class="bi bi-cart-plus"></i> - Giỏ Hàng (0)</a>
+              <a  class="nav-link active" href="?act=cart"><i style="font-size:40px; color:burlywood;" class="bi bi-cart-plus"></i> - Giỏ Hàng (0)</a>
             </div>
           </div>
         </nav>  

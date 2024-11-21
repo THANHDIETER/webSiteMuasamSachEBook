@@ -30,8 +30,8 @@
             require_once 'views/dMuc_id.php';
         }
        
-        function cart(){
-        
+        function cart($id){
+            
         }
         function login(){
             if(isset($_POST['btn_submit'])){;
@@ -55,9 +55,12 @@
             
             if(isset($_POST['btn_dk'])){
                 $add_user=$this->homeModel->add_user($_POST['email'],$_POST['name'],$_POST['password']);
-               return    $message = 'đang ký thành công';
+               echo '<script type="text/javascript">
+                        window.location.href = "?act=login";
+                        alert("Bạn đã dang ky thành công");
+                    </script>';
             }else{
-                $message = 'đang ký Không thành công';
+                echo "<script>alert('Đăng nhập thất bại');</script>";
             }
             require_once 'views/register.php';
          }
