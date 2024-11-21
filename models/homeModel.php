@@ -9,30 +9,55 @@
       
         
     function allProduct() {
-            $sql = "SELECT * FROM products ORDER BY id DESC";
+            $sql = "SELECT products.*,authors.name as author 
+            FROM products
+            JOIN authors ON products.author_id = authors.id
+             ORDER BY id DESC";
             return $this->conn->query($sql)->fetchAll();
         }
         function dmshowid($id){
-            $sql="SELECT * FROM  products  WHERE danh_muc_id=$id";
+            $sql = "SELECT products.*,authors.name as author 
+            FROM products
+            JOIN authors ON products.author_id = authors.id WHERE category_id=$id";
             return $this->conn->query($sql)->fetchAll();
         }   
+        
         function alldanhmuc() {
        
             $sql = "SELECT * FROM categories ORDER BY id DESC";
             return $this->conn->query($sql)->fetchAll();
         }
         
-    
+    function cart(){
+        
+    }
     function top8Product() {
-        $sql = "SELECT * FROM products ORDER BY id DESC LIMIT 8";
+        $sql = "SELECT products.*,authors.name as author 
+            FROM products
+            JOIN authors ON products.author_id = authors.id ORDER BY id DESC LIMIT 8";
+       
         return $this->conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    function findProductById($id) {
-        $sql = "SELECT * FROM products WHERE id =$id";
-        return $this->conn->query($sql)->fetch();
+    function top6Product() {
+        $sql = "SELECT * FROM products ORDER BY id DESC LIMIT 6";
+        return $this->conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
-      function add_user($email,$name,$password){
+    function findProductById($id) {
+        // Use a prepared statement to prevent SQL injection
+        $sql = "SELECT products.*, categories.name AS category_name, publishing_houses.name AS publishing_house_name ,authors.name as author
+                FROM products
+                JOIN categories ON products.category_id = categories.id
+                JOIN publishing_houses ON products.publishing_house_id = publishing_houses.id
+                JOIN authors ON products.author_id = authors.id
+                WHERE products.id = :id";
+    
+        $stmt = $this->conn->prepare($sql); // Prepare the query
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT); // Bind the parameter
+        $stmt->execute(); // Execute the query
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch a single result as an associative array
+    }
+    
+    function add_user($email,$name,$password){
         $sql= "INSERT INTO users (email, name, password) VALUES ('$email', '$name', '$password')";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute();
@@ -47,6 +72,7 @@
         $user = $stmt->fetch();
         return $user ? $user : null;
     }
+
     
     function checkEmail($email)  {
         $sql = "SELECT * FROM users WHERE email = :email ";
@@ -54,10 +80,6 @@
         $stmt->execute(['email'=> $email]);
         return $stmt->fetch();
     }
-
-
-
-
 
 
 }

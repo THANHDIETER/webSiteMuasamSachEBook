@@ -98,7 +98,6 @@
                                 $formatted_price = number_format($price, 0, ',', '.'); 
                                 echo $formatted_price . 'đ';
                                 ?>
-                                
                             </div>
                     <?php  endforeach; ?>
                 
