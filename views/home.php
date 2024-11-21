@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -37,12 +38,10 @@
     height: 60px; 
   
 }
-a{
-    color: aqua;
-}
+
 a:hover{
-    background-color:gray;
-    color: aliceblue;
+    background-color:lightgray;
+    color: white;
 }
 .link-hover a {
     transition: color 0.3s ease; /* Thêm hiệu ứng chuyển màu mượt mà */
@@ -76,57 +75,56 @@ a:hover{
     </style>
 </head>
 <body>
-
-   
+<?php  require_once 'components/header.php'; ?>
    <div class="container">
-   <?php  require_once 'components/header.php'; ?>
-
+   
 <!-- Main Content -->
-<main class="container my-4">#
+<main class="container my-4">
     <div class="row">
         <!-- Sidebar for categories -->
         <aside class="col-md-3">
  
             <h1 class="h5 border-bottom pb-2">Danh mục</h1>
             <ul class="list-unstyled">
-            <?php foreach ($danhmuc as $value) { ?>
-                <li><a href="#" class="text-secondary text-decoration-none d-block py-1"><?php echo $value['name'] ?></a></li>
-                <?php } ?>
+            <?php foreach($danhmuc as $key): ?>
+                        <li><a href="?act=dmid&id=<?=$key['id'] ?>" class=" nav-link btn-primary"><?php echo $key['name'] ?></a> </li>
+                        <?php  endforeach; ?>
                
             </ul>
             <h1 class="h5 border-bottom pb-2">Tác giả </h1>
             <ul class="list-unstyled">
             <?php foreach($products as $value): ?>
-                <li><a href="#" class="text-secondary text-decoration-none d-block py-1"><?php echo $value['tac_gia'] ?></a></li>
+                <li><a href="#" class="text-secondary text-decoration-none d-block py-1"><?php echo $value['author'] ?></a></li>
                 <?php endforeach ?>
             </ul>
             <h1></h1>
 
-           
+            
+            </ul>        
         </aside>
 <!-- Banner and Book List -->
-<div class="col-md-9">
-            <!-- Banner -->
-<div id="carouselExampleDark" class="carousel carousel-dark slide carousel-fade" data-bs-ride="carousel">
-<div class="carousel-inner">
-    <div class="carousel-item active" data-bs-interval="2000">
-        <a href="#"><img src="https://bookbuy.vn/Res/Images/Album/4ef6e847-be96-46b0-8421-e24587989776.png?w=920&h=420&mode=crop" class="d-block w-100" alt="Slide 1"></a>
-    </div>
-    <div class="carousel-item" data-bs-interval="2000">
-        <a href="#"><img src="https://bookbuy.vn/Res/Images/Album/ffd62e0e-02fb-4e7a-96fe-42ed8966c89b.png?w=920&h=420&mode=crop" class="d-block w-100" alt="Slide 2"></a>
-    </div>
-    <div class="carousel-item" data-bs-interval="2000">
-        <a href="#"><img src="https://bookbuy.vn/Res/Images/Album/00456729-e290-44a5-bbe9-da9a261ff77b.png?w=920&h=420&mode=crop" class="d-block w-100" alt="Slide 3"></a>
-    </div>
-</div>
-<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-</button>
-<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-</button>
-</div>
-</div>
+        <div class="col-md-9">
+                    <!-- Banner -->
+        <div id="carouselExampleDark" class="carousel carousel-dark slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="2000">
+                <a href="#"><img src="https://bookbuy.vn/Res/Images/Album/4ef6e847-be96-46b0-8421-e24587989776.png?w=920&h=420&mode=crop" class="d-block w-100" alt="Slide 1"></a>
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <a href="#"><img src="https://bookbuy.vn/Res/Images/Album/ffd62e0e-02fb-4e7a-96fe-42ed8966c89b.png?w=920&h=420&mode=crop" class="d-block w-100" alt="Slide 2"></a>
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <a href="#"><img src="https://bookbuy.vn/Res/Images/Album/00456729-e290-44a5-bbe9-da9a261ff77b.png?w=920&h=420&mode=crop" class="d-block w-100" alt="Slide 3"></a>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+        </div>
+
 <!-- Sách mới -->
 
 <section class="book-list">
@@ -139,12 +137,16 @@ a:hover{
                     <div class="card">
                         <a href="?act=detail&id=<?php echo $key['id']?>"><img style=" height:280px;  padding: 20px; "  src="./assets/images/prod/books/<?php echo $key['img'] ?>" class="card-img-top" alt="Về Đi Con - Bìa Cứng"></a>
                         <div class="card-body"> 
-                            <h6 class="card-title"><?php echo $key['ten'] ?></h6>
-                            <p class="text-success"><?php echo $key['tac_gia'] ?></p>
+                            <h6 class="card-title"><?php echo $key['name'] ?></h6>
+                            <p class="text-success"><?php echo $key['author'] ?></p>
                             <div class="d-flex justify-content-between">
-                                <p class="text-danger font-weight-bold"><?php echo $key['gia'] ?></p>
-                                <p class="text-muted"><del><?php echo $price=$key['gia']-($key['gia']/100)*$key['sale'] ?></del> <span
-                                        class="badge badge-danger">-<?php echo $key['sale'] ?>%</span></p>
+                                <p class="text-danger font-weight-bold"><?php  $price=$key['price'];
+                                $formatted_price = number_format($price, 0, ',', '.'); 
+                                echo $formatted_price . 'đ'; ?></p>
+                                <p class="text-muted"><del><?php  $price=$key['price']-($key['price']/100)*$key['sale'];
+                                $formatted_price = number_format($price, 0, ',', '.'); 
+                                echo $formatted_price . 'đ'; ?></del> <span
+                                        class="badge text-danger ">-<?php echo $key['sale'] ?>%</span></p>
                             </div>
                         </div>
                     </div>
@@ -162,17 +164,12 @@ a:hover{
                     <!-- Thêm sách khác nếu cần -->
                 </div>
             </section>
-        </div> 
+        </div>
     </div>
 </main>
 
 <!-- Footer -->
- 
-<footer class="bg-dark text-white py-3">
-    <div class="container text-center">
-        <p>&copy; 2024 Bookbuy.vn. All rights reserved.</p>
-    </div>
-</footer>
+<?php  require_once 'components/footer.php'; ?>
 
    </div>
     <!-- Bootstrap JS, Popper.js, and jQuery -->
@@ -181,5 +178,3 @@ a:hover{
 
 </body>
 </html>
-
-
