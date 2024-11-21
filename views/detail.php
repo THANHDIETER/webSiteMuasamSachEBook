@@ -16,37 +16,37 @@
     <?php require_once './components/header.php' ?><hr>
     <div class="bg-light">
     <div style="display: grid; gap:40px;"  class="container  ">
-    <br><p class="wrapper">Trang chủ / sách hay / nguyên tắc lập quốc - những tư tưởng căn bản của các nhà lập quốc hoa kỳ</p>
+    <br><p class="wrapper">Trang chi tiết sản phẩm </p>
     <?php foreach($productOne as $name): ?>
     <div class="row bg-white">
     <div class="col-4">
-    <img src="./assets/images/prod/books/<?php echo $name['img'] ?>" class="top-pro-img" alt="">
+    <img style=" max-width:100%;" src="./assets/images/prod/books/<?php echo $name['img'] ?>" class="top-pro-img" alt="">
     </div>
     
     <div class="col-8">
 
             <input type="hidden" name="" value="<?php echo $name['id'] ?>" id="">
-            <h2> <br><?php echo $name['ten'] ?></h2>
-            <p><?php echo $name['tac_gia'] ?>  (Tác giả)</p><br>
-            <h3 class=""><del>Giá thị trường: <?php $price= $name['gia'];
+            <h2> <br><?php echo $name['name'] ?></h2>
+            <p><?php echo $name['author'] ?>  (Tác giả)</p><br>
+            <h3 class=""><del>Giá thị trường: <?php $price= $name['price'];
             $formatted_price = number_format($price, 0, ',', '.'); 
             echo $formatted_price . 'đ';
             ?></del></h3>
-            <h3 class="text-danger">Sale còn: <?php  $price=$name['gia']-($name['gia']/100)*$name['sale'];
+            <h3 class="text-danger">Sale còn: <?php  $price=$name['price']-($name['price']/100)*$name['sale'];
             $formatted_price = number_format($price, 0, ',', '.'); 
             echo $formatted_price . 'đ';
             ?></h3>
             
-            <p class="text-warning">Tiết kiệm: <?php  $price=($name['gia']/100)*$name['sale'] ;
+            <p class="text-warning">Tiết kiệm: <?php  $price=($name['price']/100)*$name['sale'] ;
             $formatted_price = number_format($price, 0, ',', '.'); 
             echo $formatted_price . 'đ';
             ?> (<?php echo $name['sale'] ?>%)</p>
-            <p class="TINHTRANG">Tình trạng: <?php if($name['so_luong']>0){echo 'còn '; echo $name['so_luong']; echo' sản phẩm'; }
+            <p class="TINHTRANG">Tình trạng: <?php if($name['quantity']>0){echo 'còn '; echo $name['quantity']; echo' sản phẩm'; }
             else{echo "sắp có hàng";} ?>       </p>
            
             <p class="tags"><?php echo $name['name'] ?>  </p>
            
-            <a style="width: 200px; height:40px; background-color:red; line-height:40px;" class=" nav-link btn   text-white" href="?act=cart&id=<?php echo $name['id'] ?>">Thêm vào giỏ hàng</a>
+            <a style="width: 200px; height:40px; background-color:red; line-height:40px;" class=" nav-link btn   text-white" href="?act=addToCart&id=<?= $name['id'] ?>">">Thêm vào giỏ hàng</a>
             <br>
             <p>Gọi đặt hàng: 0972.150.772 hoac: 0972.150.772</p>
             <h3>Thông tin & Khuyến mãi</h3>
@@ -73,13 +73,14 @@
         <div style="padding: 20px; min-height:600px" class="table2 bg-white">
           <br>    
             <h2>Giới thiệu sản phẩm:</h2>
-            <h2><?php echo $name['ten'] ?></h2>
-            <P><?php echo $name['mo_ta'] ?></P>
+            <h2><?php echo $name['name'] ?></h2>
+            <P><?php echo $name['description'] ?></P>
                 <p><a href="?act=/">Mua sách online tại EBOok.vn và nhận nhiều ưu đãi.</a></p>
         </div>
         </div>
         <?php  endforeach; ?>
         </div>
+        
         <div  class="col-3 bg-white;">
             
         <aside class="bg-white text-center" style=" max-width:100%; display:grid;  padding:20px; ">
@@ -87,29 +88,32 @@
         <button class="btn btn-primary w-100" id="scrollUp">▲</button>
         <div class="overflow-hidden" style="height: 540px;" id="bookList">
             <div class="d-flex p-2 border-bottom"></div>
-        <?php foreach($top8 as $key): ?>
-            <div class="text-center" >
-                <img style="max-width:100%"  src="./assets/images/prod/books/<?php echo $key['img'] ?>" alt="">
-                <p><?php echo $key['ten'] ?></p>
-                <p><?php echo $key['tac_gia'] ?></p>
-                <p><?php 
-                $price=$key['gia']-($key['gia']/100)*$key['sale'];
-                $formatted_price = number_format($price, 0, ',', '.'); 
-                echo $formatted_price . 'đ';
-                ?>
-              </p><hr>
-            </div>
-            <?php  endforeach; ?>
+                    <?php foreach($top8 as $key): ?>
+                            <div class="text-center" >
+                                <a class="bg-white nav-link" href="?act=detail&id=<?php echo $key['id'] ?>"></a>
+                                <img style="max-width:100%"  src="./assets/images/prod/books/<?php echo $key['img'] ?>" alt=""></a>
+                                <a class="bg-white nav-link" href="?act=detail&id=<?php echo $key['id'] ?>"><?php echo $key['name'] ?></a>
+                                <p style="color:red;"><?php 
+                                $price=$key['price']-($key['price']/100)*$key['sale'];
+                                $formatted_price = number_format($price, 0, ',', '.'); 
+                                echo $formatted_price . 'đ';
+                                ?>
+                                
+                            </div>
+                    <?php  endforeach; ?>
+                
             </div>
             <button class="btn btn-primary w-100" id="scrollDown">▼</button>
             </div>
-            <div class="border rounded bg-white w-100" style="max-width: 300px;">
-    </div>
+           
     </aside>
         </div>
-    <div class="container my-4">
-        <h5 class="mb-3">Sản phẩm cùng loại</h5>
+       
+        </div>
+    <div class="container my-4 bg-white ">
+        
         <div class="position-relative">
+        <h5 class="mb-3">Sản phẩm cùng loại</h5>
             <!-- Danh sách sản phẩm -->
             <div class="d-flex overflow-hidden" id="productContainer" style="scroll-behavior: smooth;">
             <?php foreach($top8 as $key): ?>
@@ -117,11 +121,11 @@
                 <div class="card me-3" style="width: 200px;">
                     <img src="./assets/images/prod/books/<?php echo $key['img'] ?>" class="card-img-top" alt="Book 1">
                     <div class="card-body text-center">
-                        <p class="card-title fw-bold mb-1"><?php echo $key['ten'] ?></p>
-                        <p class="card-text text-muted small"><?php echo $key['tac_gia'] ?></p>
+                        <p class="card-title fw-bold mb-1"><?php echo $key['name'] ?></p>
+                     
                         <p class="text-danger">
                         <?php
-                          $price=$key['gia']-($key['gia']/100)*$key['sale'];
+                          $price=$key['price']-($key['price']/100)*$key['sale'];
                           $formatted_price = number_format($price, 0, ',', '.'); 
                           echo $formatted_price . 'đ';
                           ?>
@@ -135,7 +139,28 @@
             </div>
         </div>
     </div>
-
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span>0 bình luận</span>
+                <div class="dropdown">
+                    <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="sortComments" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sắp xếp theo
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="sortComments">
+                        <li><a class="dropdown-item" href="#">Mới nhất</a></li>
+                        <li><a class="dropdown-item" href="#">Cũ nhất</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <textarea class="form-control" rows="3" placeholder="Bình luận..."></textarea>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary btn-sm">Đăng</button>
+            </div>
+        </div>
+    </div>            
         
     </div>
           
@@ -159,3 +184,4 @@
     <?php require_once './components/footer.php' ?>
 </body>
 </html>
+
