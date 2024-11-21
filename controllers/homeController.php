@@ -49,8 +49,6 @@
             require "views/login.php";
         }
         
-     
-    }
         function logout(){
             session_start();
             session_unset();
@@ -64,27 +62,9 @@
             }
             require_once 'views/register.php';
          }
-
-        function logout(){
-            
-        }
-}
+        
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 ?>
