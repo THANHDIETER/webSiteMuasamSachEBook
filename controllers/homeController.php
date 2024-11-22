@@ -36,14 +36,8 @@
         function login(){
             if(isset($_POST['btn_submit'])){;
                 $user = $this->homeModel->checkUser($_POST['email'],$_POST['password']);
-                if($user['is_admin']==1){
-                    session_start();
-                    $_SESSION['id'] = $user['id'] ;
-                    echo '<script type="text/javascript">
-                        window.location.href = "?act=insert";
-                        alert("Bạn đã login thành công");
-                    </script>';
-                }else if($user){
+                
+                if($user){
                     session_start();
                     $_SESSION['id'] = $user['id'] ;
                     echo '<script type="text/javascript">

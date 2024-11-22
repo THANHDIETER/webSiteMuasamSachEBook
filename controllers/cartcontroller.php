@@ -64,7 +64,7 @@ class CartController {
      exit;
  }
  
-
+    
  
 
     public function viewCart() {
