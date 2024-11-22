@@ -1,253 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chi tiết sản phẩm</title>
-    <link rel="stylesheet" href="styte/css/styte.css">
-     <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Document</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-
 </head>
-<body >
-    <?php require_once './components/header.php' ?><hr>
-    <div class="bg-light">
-    <div style="display: grid; gap:40px;"  class="container  ">
-    <br><p class="wrapper">Trang chi tiết sản phẩm </p>
-    <?php foreach($productOne as $name): ?>
-    <div class="row bg-white">
-    <div class="col-4">
-    <img style=" max-width:100%;" src="./assets/images/prod/books/<?php echo $name['img'] ?>" class="top-pro-img" alt="">
-    </div>
+
+<body>
+     <?php require_once './components/header.php' ?>
+    <hr>
     
-    <div class="col-8">
+    <div style="padding-top: 30px;" class="div bg-light ">
+    <div class="container mt-5 bg-white">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+          <br>
+            <ol class="breadcrumb">
+               
+                <li class="breadcrumb-item active"><a class="nav-link" href="#"> Sách - Truyện tranh</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Văn học</li>
+            </ol>
+        </nav>
 
-            <input type="hidden" name="" value="<?php echo $name['id'] ?>" id="">
-            <h2> <br><?php echo $name['name'] ?></h2>
-            <p><?php echo $name['author'] ?>  (Tác giả)</p><br>
-            <h3 class=""><del>Giá thị trường: <?php $price= $name['price'];
-            $formatted_price = number_format($price, 0, ',', '.'); 
-            echo $formatted_price . 'đ';
-            ?></del></h3>
-            <h3 class="text-danger">Sale còn: <?php  $price=$name['price']-($name['price']/100)*$name['sale'];
-            $formatted_price = number_format($price, 0, ',', '.'); 
-            echo $formatted_price . 'đ';
-            ?></h3>
-            
-            <p class="text-warning">Tiết kiệm: <?php  $price=($name['price']/100)*$name['sale'] ;
-            $formatted_price = number_format($price, 0, ',', '.'); 
-            echo $formatted_price . 'đ';
-            ?> (<?php echo $name['sale'] ?>%)</p>
-            <p class="TINHTRANG">Tình trạng: <?php if($name['quantity']>0){echo 'còn '; echo $name['quantity']; echo' sản phẩm'; }
-            else{echo "sắp có hàng";} ?>       </p>
-           
-            <p class="tags"><?php echo $name['name'] ?>  </p>
-           
-            <a style="width: 200px; height:40px; background-color:red; line-height:40px;" class=" nav-link btn   text-white" href="?act=addToCart&id=<?= $name['id'] ?>">">Thêm vào giỏ hàng</a>
-            <br>
-            <p>Gọi đặt hàng: 0972.150.772 hoac: 0972.150.772</p>
-            <h3>Thông tin & Khuyến mãi</h3>
-            <p>Đổi trả hàng trong vòng 7 ngày
-                Sử dụng mỗi 3.000 BBxu để được giảm 10.000đ. <br>
-                 Làm sao để lấy BBxu? Freeship nội thành Sài Gòn từ 150.000đ*. <br>
-                Chi tiết tại đây Freeship toàn quốc từ 250.000đ</p>
-                
-    </div>
-   
-  </div>
-    <div class="row">
-        <div class="col-9">
-        <div class="table ">
-        <table class="table table-striped-columns">
-        <th>THÔNG TIN CHI TIẾT</th><br>
-        <td>Nhà xuất bản: <?php echo $name['name'] ?></td>
-        <td>Ngày xuất bản: 16/11/2024</td>
-        <td>Nhà phát hành: Nhã Nam</td>
-        <td>Kích thước: 15.5 x 24.0 x 2.0 cm</td>
-        <td>Số trang: ... trang</td>
-        <td>Trọng lượng: 600 gram </td>
-        </table><br>
-        <div style="padding: 20px; min-height:600px" class="table2 bg-white">
-          <br>    
-            <h2>Giới thiệu sản phẩm:</h2>
-            <h2><?php echo $name['name'] ?></h2>
-            <P><?php echo $name['description'] ?></P>
-                <p><a href="?act=/">Mua sách online tại EBOok.vn và nhận nhiều ưu đãi.</a></p>
-        </div>
-        </div>
-        <?php  endforeach; ?>
-        </div>
-        
-        <div  class="col-3 bg-white;">
-            
-        <aside class="bg-white text-center" style=" max-width:100%; display:grid;  padding:20px; ">
-        <h3>sản phẩm bán chạy</h3><hr>
-        <button class="btn btn-primary w-100" id="scrollUp">▲</button>
-        <div class="overflow-hidden" style="height: 540px;" id="bookList">
-            <div class="d-flex p-2 border-bottom"></div>
-                    <?php foreach($top8 as $key): ?>
-                            <div class="text-center" >
-                                <a class="bg-white nav-link" href="?act=detail&id=<?php echo $key['id'] ?>"></a>
-                                <img style="max-width:100%"  src="./assets/images/prod/books/<?php echo $key['img'] ?>" alt=""></a>
-                                <a class="bg-white nav-link" href="?act=detail&id=<?php echo $key['id'] ?>"><?php echo $key['name'] ?></a>
-                                <p style="color:red;"><?php 
-                                $price=$key['price']-($key['price']/100)*$key['sale'];
-                                $formatted_price = number_format($price, 0, ',', '.'); 
-                                echo $formatted_price . 'đ';
-                                ?>
-                            </div>
-                    <?php  endforeach; ?>
-                
-            </div>
-            <button class="btn btn-primary w-100" id="scrollDown">▼</button>
-            </div>
-           
-    </aside>
-        </div>
-       
-        </div>
-    <div class="container my-4 bg-white ">
-        
-        <div class="position-relative">
-        <h5 class="mb-3">Sản phẩm cùng loại</h5>
-            <!-- Danh sách sản phẩm -->
-            <div class="d-flex overflow-hidden" id="productContainer" style="scroll-behavior: smooth;">
-            <?php foreach($top8 as $key): ?>
-                <a class="bg-white nav-link" href="?act=detail&id=<?php echo $key['id'] ?>">
-                <div class="card me-3" style="width: 200px;">
-                    <img src="./assets/images/prod/books/<?php echo $key['img'] ?>" class="card-img-top" alt="Book 1">
-                    <div class="card-body text-center">
-                        <p class="card-title fw-bold mb-1"><?php echo $key['name'] ?></p>
-                     
-                        <p class="text-danger">
-                        <?php
-                          $price=$key['price']-($key['price']/100)*$key['sale'];
-                          $formatted_price = number_format($price, 0, ',', '.'); 
-                          echo $formatted_price . 'đ';
-                          ?>
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3">
+                <div class="border p-3 mb-4">
+                    <h5 class="font-weight-bold text-danger">Danh mục</h5>
+                    <ul class="list-unstyled">
+                    <?php foreach($danhmucs as $key): ?>
+                        <li><a href="?act=dmid&id=<?=$key['id'] ?>" class=" nav-link btn-primary"><?php echo $key['name'] ?></a> </li>
+                        <?php  endforeach; ?>
+                    </ul>
+                </div>
 
-                          
+                <!-- <div class="border p-3">
+                    <h5 class="font-weight-bold">Tìm theo</h5>
+                    <h6 class="text-muted">Chủ đề</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Bước vào agency Quảng cáo & Truyền thông</a></li>
+                        <li><a href="#">Biên cương Việt Nam</a></li>
+                        <li><a href="#">Đam mê xê dịch</a></li>
+                        <li><a href="#">Giải thưởng Sách Hay</a></li>
+                        <li><a href="#">Hạt giống tâm hồn</a></li>
+                        <li><a href="#">Ngày của mẹ</a></li>
+                        <li><a href="#">Sách Giáng Sinh</a></li>
+
+                    </ul>
+                </div> -->
+            </div>
+
+            <!-- Product List -->
+            <div class="col-md-9">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="font-weight-bold">Tất cả</h5>
+                    <div>
+                        <select class="form-control d-inline-block w-auto mr-2">
+                            <option>Sản phẩm bán chạy</option>
+                            <option>Sản phẩm mới</option>
+                        </select>
+                        <select class="form-control d-inline-block w-auto">
+                            <option>20 sản phẩm</option>
+                            <option>30 sản phẩm</option>
+                        </select>
                     </div>
                 </div>
-                </a>
-                <?php  endforeach; ?>
-                
-            </div>
-        </div>
-    </div>
-    <div class="container mt-5">
-    <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <span id="comment-count">0 bình luận</span>
-            <div class="dropdown">
-                <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="sortComments" data-bs-toggle="dropdown" aria-expanded="false">
-                    Sắp xếp theo
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="sortComments">
-                    <li><a class="dropdown-item" href="?action=sort&order=newest">Mới nhất</a></li>
-                    <li><a class="dropdown-item" href="?action=sort&order=oldest">Cũ nhất</a></li>
-                </ul>
-            </div>
-        </div>
-      
-        <section style="background-color: #eee;">
-        
-  <div class="container my-5 py-5">
-    <div class="row d-flex justify-content-center">
-      <div class="col-md-12 col-lg-10 col-xl-8">
-        <div class="card">
-        <?php foreach ($cmt as $key) { ?>
-          <div class="card-body">
-            <div class="d-flex flex-start align-items-center">
-              <img class="rounded-circle shadow-1-strong me-3"
-                src="https://lms.languagehub.vn/store/1/default_images/default_profile.jpg" alt="avatar" width="60"
-                height="60" />
-              <div>
-                <h6 class="fw-bold text-primary mb-1"><?php ?></h6>
-                <p class="text-muted small mb-0">
-                <?php echo $key['created_at'] ?>
-                </p>
-              </div>
-            </div>
-       
-            <p class="mt-3 mb-4 pb-2">
-                <?php echo $key['content'] ?>
-            </p>
-           
-            <div class="small d-flex justify-content-start">
-              <a href="#!" class="d-flex align-items-center me-3">
-                <i class="far fa-thumbs-up me-2"></i>
-                <p class="mb-0">Like</p>
-              </a>
-              <a href="#!" class="d-flex align-items-center me-3">
-                <i class="far fa-comment-dots me-2"></i>
-                <p class="mb-0">Comment</p>
-              </a>
-              <a href="#!" class="d-flex align-items-center me-3">
-                <i class="fas fa-share me-2"></i>
-                <p class="mb-0">Share</p>
-              </a>
-            </div>
-          </div>
-          <?php } ?>
-          <!-- Phần form bình luận -->
-           <form method="post">
-           <div class="d-flex justify-content-center mt-2 pt-1">
-            <button  name="submit" class="btn btn-outline-primary">show all</button>
-            </div>
-        
-          </form>
-          <form method="post">
-            <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
-              <div class="d-flex flex-start w-100">
-                <img class="rounded-circle shadow-1-strong me-3"
-                  src="https://lms.languagehub.vn/store/1/default_images/default_profile.jpg" alt="avatar" width="40"
-                  height="40" />
-                <div class="form-outline w-100">
-                  <textarea class="form-control" name="comment" rows="4" placeholder="Bình luận..." style="background: #fff;" ></textarea>
-                  <label class="form-label" for="textAreaExample">Message</label>
+
+                <div class="row">
+                    <!-- Product Item -->
+                     <?php foreach($products as $key): ?>
+                    <div class="col-md-3 mb-3">
+                        <div class="card">
+                        <a href="?act=detail&id=<?php echo $key['id']?>">
+                            <img style=" height:280px;  padding: 20px; "  src="./assets/images/prod/books/<?php echo $key['img'] ?>" class="card-img-top" alt="Về Đi Con - Bìa Cứng"></a>
+                            <div class="card-body"> 
+                            <a class="nav-link" href="?act=detail&id=<?php echo $key['id']?>"> <h6 class="card-title "><?php echo $key['name'] ?></h6></a>
+                            <a class="nav-link" href="?act=detail&id=<?php echo $key['id']?>"> <p class="text-success"><?php echo $key['author'] ?></p></a>
+                                <div class="d-flex justify-content-between">
+                                    <p class="text-danger font-weight-bold"><?php $price=$key['price']-($key['price']/100)*$key['sale'];
+                                    $formatted_price = number_format($price, 0, ',', '.'); 
+                                    echo $formatted_price . 'đ'; ?></p>
+                                    <p class="text-muted"><del><?php  $price= $key['price'];
+                                    $formatted_price = number_format($price, 0, ',', '.'); 
+                                    echo $formatted_price . 'đ'; ?></del> <span
+                                            class="badge badge-danger">-<?php echo $key['sale'] ?>%</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php  endforeach; ?>
+                    
+
                 </div>
-              </div>
-              <div class="float-end mt-2 pt-1">
-                <button type="submit" name="btn_submit" class="btn btn-primary btn-sm">Post comment</button>
-                <button type="reset" class="btn btn-outline-primary btn-sm">Cancel</button>
-              </div>
             </div>
-          </form>
-
         </div>
-      </div>
     </div>
-  </div>
-</section>
     </div>
-</div>
-
-    </div>            
-        
-    </div>
-          
-    <br>
-    <script>
-        const scrollUpBtn = document.getElementById('scrollUp');
-        const scrollDownBtn = document.getElementById('scrollDown');
-        const bookList = document.getElementById('bookList');
-
-        scrollUpBtn.addEventListener('click', () => {
-            bookList.scrollBy({ top: -100, behavior: 'smooth' });
-        });
-
-        scrollDownBtn.addEventListener('click', () => {
-            bookList.scrollBy({ top: 100, behavior: 'smooth' });
-        });
-       
-    </script>
-    
-   
     <?php require_once './components/footer.php' ?>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
+
 </html>
