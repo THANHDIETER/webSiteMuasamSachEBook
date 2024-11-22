@@ -31,16 +31,16 @@
                 </div>
             </div>
         <?php endforeach; ?>
-        
+        <hr>
         <div class="text-end">
             <h5>Tổng cộng: <?= number_format(array_sum(array_map(fn($item) => $item['price'] * $item['quantity'], $cartItems)), 0, ',', '.') ?>đ</h5>
-            <a href="checkout.php" class="btn btn-success">Tiến Hành Đặt Hàng</a>
+           <hr> <a href="?act=checkout" class="btn btn-success">Tiến Hành Đặt Hàng</a>
         </div>
     <?php else: ?>
         <p>Giỏ hàng trống.</p>
     <?php endif; ?>
 </form>
-
+     <br>
 </div>
 <script>
     document.querySelectorAll('input[type="number"]').forEach(input => {
