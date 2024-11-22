@@ -72,10 +72,11 @@
             <div style="display: flex; gap:80px; justify-content: space-between;" class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
               <a class="" href="?act=home "><img style="width:150px;" src="./styte/img/logo.png" alt=""></a>
               <a class="nav-link active" href="?act=product">Tất Cả</a>
-               <form class="d-flex" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+              <form class="d-flex" role="search" method="GET" action="index.php">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="keySearch" required>
+    <button class="btn btn-outline-success" type="submit" name="act" value="search">Search</button>
+</form>
+
               <a  class="nav-link active" href="#">
               <i style="font-size:40px; color:burlywood;" class="bi bi-headset"> </i> 
               </a>

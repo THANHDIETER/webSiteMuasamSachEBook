@@ -11,12 +11,42 @@
             $products = $this->homeModel->allProduct();
             $top8 = $this->homeModel->top8Product();
             $danhmuc = $this->homeModel->alldanhmuc();
+            if(isset($_GET['submit'])){
+                   echo '<script type="text/javascript">
+                       window.location.href = "?act=search";
+               </script>';    
+            }
            require "views/home.php";
         }
         
         function detail($id){
             $productOne=$this->homeModel->findProductById($id);
             $top8 = $this->homeModel->top6Product();
+         
+            //làm bình luận
+             if(isset($_SESSION['id'])) {  
+                if(isset($_POST['submit'])){
+                    $cmt = $this->homeModel->allCmt();
+                }else{
+                    $cmt = $this->homeModel->Cmt();
+                }
+                if(isset($_POST['btn_submit'])){
+                    $this->homeModel->addComment($_SESSION['id'],$id,$_POST['comment']);
+                    echo '<script type="text/javascript">
+                    if (confirm("Bạn đã gửi comment. Bạn có muốn load lại trang ko ?")) {
+                        window.location.href = "?act=detail&id=' . $id . '";
+                    }
+                </script>'; 
+                }
+            }else{
+                    echo '<script type="text/javascript">
+                    if (confirm("Bạn chưa đăng nhập. Bạn có muốn chuyển sang trang đăng nhập không?")) {
+                        window.location.href = "?act=login";
+                    }
+                </script>';                
+                }
+            
+            
             require_once 'views/detail.php';
         }
         function product(){
@@ -37,7 +67,7 @@
             if(isset($_POST['btn_submit'])){;
                 $user = $this->homeModel->checkUser($_POST['email'],$_POST['password']);
                 if($user){
-                    session_start();
+            
                     $_SESSION['id'] = $user['id'] ;
                     echo '<script type="text/javascript">
                         window.location.href = "?act=home";
@@ -64,23 +94,24 @@
             }
             require_once 'views/register.php';
          }
-// $hidePassword = password_hash($password, PASSWORD_DEFAULT);
-            //     $success = $this->homeModel->registerUser($name,$email,$hidePassword);
-            //     if($success){
-            //         header("Location:index.php?action=login");
-            //         exit();
-            //     }else{
-            //         $err = "Không thể đăng ký";
-            //         require "views/register.php";
-            //     }
+
         function logout(){
+          
             session_unset();
             // unset($_SESSION['user_id'] );
             echo '<script type="text/javascript">
                         window.location.href = "?act=login";
-                        alert("Bạn đã login thành công");
+                        alert("Bạn đã đăng xuất thành công");
                     </script>';
-        }        
+        }    
+
+        function search($keySearch){
+            $allSearch = $this->homeModel->searchModel($keySearch);
+            require_once 'views/search.php';
+        }
+
+        
+        
     }
 
 

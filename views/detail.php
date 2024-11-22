@@ -11,6 +11,7 @@
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
+
 </head>
 <body >
     <?php require_once './components/header.php' ?><hr>
@@ -139,26 +140,93 @@
         </div>
     </div>
     <div class="container mt-5">
-        <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <span>0 bình luận</span>
-                <div class="dropdown">
-                    <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="sortComments" data-bs-toggle="dropdown" aria-expanded="false">
-                        Sắp xếp theo
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="sortComments">
-                        <li><a class="dropdown-item" href="#">Mới nhất</a></li>
-                        <li><a class="dropdown-item" href="#">Cũ nhất</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <textarea class="form-control" rows="3" placeholder="Bình luận..."></textarea>
-            </div>
-            <div class="card-footer">
-                <button class="btn btn-primary btn-sm">Đăng</button>
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <span id="comment-count">0 bình luận</span>
+            <div class="dropdown">
+                <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="sortComments" data-bs-toggle="dropdown" aria-expanded="false">
+                    Sắp xếp theo
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="sortComments">
+                    <li><a class="dropdown-item" href="?action=sort&order=newest">Mới nhất</a></li>
+                    <li><a class="dropdown-item" href="?action=sort&order=oldest">Cũ nhất</a></li>
+                </ul>
             </div>
         </div>
+      
+        <section style="background-color: #eee;">
+        
+  <div class="container my-5 py-5">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xl-8">
+        <div class="card">
+        <?php foreach ($cmt as $key) { ?>
+          <div class="card-body">
+            <div class="d-flex flex-start align-items-center">
+              <img class="rounded-circle shadow-1-strong me-3"
+                src="https://lms.languagehub.vn/store/1/default_images/default_profile.jpg" alt="avatar" width="60"
+                height="60" />
+              <div>
+                <h6 class="fw-bold text-primary mb-1"><?php ?></h6>
+                <p class="text-muted small mb-0">
+                <?php echo $key['created_at'] ?>
+                </p>
+              </div>
+            </div>
+       
+            <p class="mt-3 mb-4 pb-2">
+                <?php echo $key['content'] ?>
+            </p>
+           
+            <div class="small d-flex justify-content-start">
+              <a href="#!" class="d-flex align-items-center me-3">
+                <i class="far fa-thumbs-up me-2"></i>
+                <p class="mb-0">Like</p>
+              </a>
+              <a href="#!" class="d-flex align-items-center me-3">
+                <i class="far fa-comment-dots me-2"></i>
+                <p class="mb-0">Comment</p>
+              </a>
+              <a href="#!" class="d-flex align-items-center me-3">
+                <i class="fas fa-share me-2"></i>
+                <p class="mb-0">Share</p>
+              </a>
+            </div>
+          </div>
+          <?php } ?>
+          <!-- Phần form bình luận -->
+           <form method="post">
+           <div class="d-flex justify-content-center mt-2 pt-1">
+            <button  name="submit" class="btn btn-outline-primary">show all</button>
+            </div>
+        
+          </form>
+          <form method="post">
+            <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+              <div class="d-flex flex-start w-100">
+                <img class="rounded-circle shadow-1-strong me-3"
+                  src="https://lms.languagehub.vn/store/1/default_images/default_profile.jpg" alt="avatar" width="40"
+                  height="40" />
+                <div class="form-outline w-100">
+                  <textarea class="form-control" name="comment" rows="4" placeholder="Bình luận..." style="background: #fff;" ></textarea>
+                  <label class="form-label" for="textAreaExample">Message</label>
+                </div>
+              </div>
+              <div class="float-end mt-2 pt-1">
+                <button type="submit" name="btn_submit" class="btn btn-primary btn-sm">Post comment</button>
+                <button type="reset" class="btn btn-outline-primary btn-sm">Cancel</button>
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+    </div>
+</div>
+
     </div>            
         
     </div>
