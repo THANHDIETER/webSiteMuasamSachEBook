@@ -14,8 +14,9 @@
 </head>
 <body>
         
-<?php require_once 'components/header.php' ?>
+
 <div class="container"> 
+<?php require_once 'components/header.php' ?>
         
         <br><br>
     <form action="" enctype="multipart/form-data" method="post">

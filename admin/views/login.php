@@ -20,7 +20,6 @@
                 <!-- Phần đăng nhập bên trái -->
                 <div class="col-md-6 p-5">
                     <h3 class="card-title text-primary font-weight-bold text-center">Đăng nhập</h3>
-                    <p class="text-muted">Nếu bạn chưa có tài khoản hãy đăng ký</p>
                     <form action="" method="POST">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Email" name="email" required>

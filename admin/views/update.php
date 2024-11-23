@@ -13,8 +13,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
-<?php require_once 'components/header.php' ?>
+
 <div class="container"> 
+<?php require_once 'components/header.php' ?>
 
         <br><br>
     <form action="" enctype="multipart/form-data" method="post">

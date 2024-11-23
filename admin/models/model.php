@@ -64,6 +64,17 @@ class productModel
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute();
     }
+    function checkUser($email,$password) {
+        $sql = "SELECT * FROM users WHERE email = :email AND password = :password  AND is_admin = :is_admin";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([
+            'email'=>$email,
+            'password'=>$password,
+            'is_admin' => 1
+        ]);
+        $user = $stmt->fetch();
+        return $user ? $user : null;
+    }
 
 
 }

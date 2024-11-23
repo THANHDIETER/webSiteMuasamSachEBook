@@ -106,5 +106,38 @@ class productController
       }
           }
      }
+   
+     function login(){
+          if(isset($_POST['btn_submit'])){;
+              $user = $this->productModel->checkUser($_POST['email'],$_POST['password']);
+              if($user){
+                  $_SESSION['name'] = $user['name'] ;
+                  echo '<script type="text/javascript">
+                      window.location.href = "?act=home";
+                      alert("Bạn đã login thành công");
+                  </script>';
+              }else{
+                  echo "<script>alert('Đăng nhập thất bại');</script>";
+              }
+          }
+          require "views/login.php";
+      }
+      function home(){
+          require "views/home.php";
+      }
+      function logout(){
+          session_unset();
+          // if (ini_get("session.use_cookies")) {
+          //      $params = session_get_cookie_params();
+          //      setcookie(session_name(), '', time() - 42000,
+          //          $params["path"], $params["domain"],
+          //          $params["secure"], $params["httponly"]
+          //      );
+          //  }
+          echo '<script type="text/javascript">
+                     alert("Bạn đã đăng xuất");
+                    window.location.href = "?act=/"; 
+                  </script>';
+      }
 }
 ?>

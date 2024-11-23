@@ -1,3 +1,4 @@
+<?php require_once "user/checkUser.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,6 +16,7 @@
 </head>
 
 <body>
+    <?php require_once "components/header.php"; ?>
     <div class="main-content">
         
         <h1 class="bg-primary text-white py-2 rounded-top mb-3 mt-4 text-center">Quản Lý Bình Luận</h1>
