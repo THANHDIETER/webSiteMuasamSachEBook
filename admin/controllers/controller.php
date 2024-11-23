@@ -3,29 +3,44 @@ require_once 'models/model.php';
 class productController
 {
      public $productModel;
+     public $danhmucModel;
+     public $nhaXuatBanModel;
+     public $tacGiaModel;
      function __construct()
      {
           $this->productModel = new productModel();
+          $this->danhmucModel = new danhmucModel();
+          $this->nhaXuatBanModel = new nhaXuatBanModel();
+          $this->tacGiaModel = new tacGiaModel();
      }
      function listProduct()
      {
+
           $allProduct = $this->productModel->getAllProduct();
-          require_once 'views/listProduct.php';
+          require_once './views/products/listProduct.php';
      }
+
      public function insert()
      {
 
-          require_once 'views/addProduct.php';
+          $listDanhMuc = $this->danhmucModel->getAllDanhmuc();
+          $listNhaXuatBan = $this->nhaXuatBanModel->getAllNhaXuatBan();
+          $listTacGia = $this->tacGiaModel->getAllTacgia();
+
+
+          require_once './views/products/addProduct.php';
           if (isset($_POST['btn_insert'])) {
-               $ten = $_POST['ten'];
-               $tac_gia = $_POST['tac_gia'];
-               $danh_muc_id = $_POST['danh_muc_id'];
-               $nha_xuat_ban_id = $_POST['nha_xuat_ban_id'];
-               $gia = $_POST['gia'];
+               $name = $_POST['name'];
+               $category_id = $_POST['category_id'];
+               $publishing_house_id = $_POST['publishing_house_id'];
+               $author_id = $_POST['author_id'];
                $img = $_FILES['img']['name'];
                $tmp = $_FILES['img']['tmp_name'];
                move_uploaded_file($tmp, '../assets/images/prod/books/' . $img);
-               if ($this->productModel->insert($ten, $tac_gia, $danh_muc_id, $nha_xuat_ban_id, gia: $gia, img: $img)) {
+               $price = $_POST['price'];
+               $description = $_POST['description'];
+
+               if ($this->productModel->insert($name, $category_id, $publishing_house_id, $author_id, $img, $price, $description)) {
 
                     echo '<script type="text/javascript">
                     window.location.href = "?act=listproduct";
@@ -44,33 +59,35 @@ class productController
                echo "Lỗi";
           }
      }
-     function update($id)
-     {
-          $Product = $this->productModel->print($id);
-          require_once 'views/updateProduct.php';
+     // function update($id)
+     // {
+     //      $Product = $this->productModel->print($id);
+     //      require_once './views/products/updateProduct.php';
 
-          if (isset($_POST['btn_update'])) {
-               $id = $_POST['id'];
-               $ten = $_POST['ten'];
-               $tac_gia = $_POST['tac_gia'];
-               $gia = $_POST['gia'];
-               if (empty($_FILES['img']['name'])) {
-                    $img = "";
-               } else {
-                    $img = $_FILES['img']['name'];
-                    $tmp = $_FILES['img']['tmp_name'];
-                    move_uploaded_file($tmp, '../assets/images/prod/books/' . $img);
-               }
+     //      if (isset($_POST['btn_update'])) {
+     //           $id = $_POST['id'];
+     //           $name = $_POST['name'];
+     //           $author_id = $_POST['author_id'];
+     //           $category_id = $_POST['category_id'];
+     //           $publishing_house_id = $_POST['publishing_house_id'];
+     //           $price = $_POST['price'];
+     //           if (empty($_FILES['img']['name'])) {
+     //                $img = "";
+     //           } else {
+     //                $img = $_FILES['img']['name'];
+     //                $tmp = $_FILES['img']['tmp_name'];
+     //                move_uploaded_file($tmp, '../assets/images/prod/books/' . $img);
+     //           }
 
-               if ($this->productModel->update($id, $ten, $tac_gia, gia: $gia, img: $img)) {
-                    echo '<script type="text/javascript">
-               window.location.href = "?act=listproduct";
-               alert("Bạn đã cập nhật thành công");
-               </script>';
-               } else {
-                    echo "Lỗi";
-               }
-          }
-     }
+     //           if ($this->productModel->update($id, $name, $author_id, $category_id, $publishing_house_id, $price, $img)) {
+     //                echo '<script type="text/javascript">
+     //           window.location.href = "?act=listproduct";
+     //           alert("Bạn đã cập nhật thành công");
+     //           </script>';
+     //           } else {
+     //                echo "Lỗi";
+     //           }
+     //      }
+     // }
 }
 ?>

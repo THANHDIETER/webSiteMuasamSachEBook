@@ -13,6 +13,7 @@ class danhmucModel
         $sql .= " ORDER BY id desc";
         return $this->conn->query($sql);
     }
+
     public function insertDanhMuc($name)
     {
         $sql = "INSERT INTO categories (name) VALUES (:name)";

@@ -23,25 +23,60 @@
         <div class="container">
             <h1 class="fw-bold text-center mt-0">Thêm sản phẩm</h1>
             <br><br>
-            <form action="" enctype="multipart/form-data" method="post">
+            <form action="" enctype="multipart/form-data" method="POST">
                 <div class="form-group">
                     <label>Tên sách</label>
                     <input class="form-control" type="text" name="ten" required ?>
+                </div><br>
+                <div class="form-group">
+                    <label>Danh mục</label>
+                    <select multiple class="form-control" type="text" id="category_id" name="category_id">
+                        <option value="0" selected>Chọn Danh mục</option>
+                        <?php foreach ($listDanhMuc as $key): ?>
+                            <option value="<?= $key['id'] ?>">
+                                <?= $key['name'] ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+
+                </div><br>
+
+                <div class="form-group">
+                    <label>Nhà xuất bản</label>
+                    <select multiple class="form-control" type="text" id="category_id" name="category_id">
+                        <option value="0" selected>Chọn nhà xuất bản</option>
+                        <?php foreach ($listNhaXuatBan as $key): ?>
+                            <option value="<?= $key['id'] ?>">
+                                <?= $key['name'] ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div><br>
+                <div class="form-group">
+                    <label>Tác giả</label>
+                    <select multiple class="form-control" type="text" id="author_id" name="author_id">
+                        <option value="0" selected>Chọn tác giả</option>
+                        <?php foreach ($listTacGia as $key): ?>
+                            <option value="<?= $key['id'] ?>">
+                                <?= $key['name'] ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
                 </div><br>
                 <div class="form-group">
                     <label for=>Hình ảnh</label>
                     <input class="form-control" type="file" name="img" ?>
                 </div><br>
                 <div class="form-group">
-                    <label>Tác giả</label>
-                    <input class="form-control" type="text" name="tac_gia" ?>
+                    <label>Giá</label>
+                    <input class="form-control" type="number" name="author_id" ?>
                 </div><br>
                 <div class="form-group">
                     <label>Mô tả</label>
-                    <textarea class="form-control" name="mo_ta"></textarea>
+                    <textarea class="form-control" name="description"></textarea>
 
                 </div><br>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="exampleFormControlSelect2">Thể loại</label>
                     <select multiple class="form-control" value="<?= $Product['danh_muc_id'] ?>" type="text"
                         id="danh_muc_id" name="danh_muc_id">
@@ -71,11 +106,7 @@
                         <option value="24">Music</option>
                         <option value="25">Cinema</option>
                     </select>
-                </div><br>
-                <div class="form-group">
-                    <label>Giá</label>
-                    <input class="form-control" type="text" name="gia" required ?>
-                </div><br>
+                </div><br> -->
                 <input type="submit" name="btn_insert" id="" value="ADD PRODUCT" style="width: 200px; "
                     class="btn btn-primary">
             </form>

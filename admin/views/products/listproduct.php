@@ -16,20 +16,20 @@
                 <a href="index.php?act=insert" class="btn btn-success">Nhập thêm</a>
             </div>
         </div>
-        <h1 class="fw-bold text-center mb-4">Danh sách sản phẩm</h1>
+        <h1 class="bg-primary text-white py-2 rounded-top mb-3 mt-4 text-center">Danh sách sản phẩm</h1>
         <!-- Product List Table -->
         <div class="table-responsive">
             <section>
                 <table class="table table-bordered table-striped text-center">
                     <thead>
-                        <tr>
+                        <tr class="table-info text-white">
                             <th>ID</th>
                             <th>Tên sách</th>
-                            <th>Hình ảnh</th>
-                            <th>Giá</th>
-                            <th>Tên tác giả</th>
                             <th>Tên danh mục</th>
                             <th>Tên nhà xuất bản</th>
+                            <th>Tên tác giả</th>
+                            <th>Hình ảnh</th>
+                            <th>Giá</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -37,13 +37,16 @@
                         <?php foreach ($allProduct as $key): ?>
                             <tr>
                                 <td><?php echo $key['id'] ?></td>
-                                <td><?php echo $key['ten'] ?></td>
-                                <td><img src="./assets/images/prod/books/<?php echo $Product['img']; ?>" class="ms-3 mb-4"
-                                        style="width:200px; height:auto"></td>
-                                <td><?php echo number_format($key['gia'], 0, ',', '.'); ?> ₫</td>
-                                <td><?php echo $key['tac_gia']; ?></td>
-                                <td><?php echo $key['danh_muc_name']; ?></td>
-                                <td><?php echo $key['nha_san_xua_name']; ?></td>
+                                <td><?php echo $key['name'] ?></td>
+                                <td><?php echo $key['category_name']; ?></td>
+                                <td><?php echo $key['publisher_name']; ?></td>
+                                <td><?php echo $key['author_name']; ?></td>
+                                <td><img src="./assets/images/prod/books/<?php echo $key['img']; ?>" class="ms-3 mb-4"
+                                        style="width:100px; height:auto"></td>
+                                <td><?php echo number_format($key['price'], 0, ',', '.'); ?> ₫</td>
+
+
+
                                 <td>
                                     <a href="?act=update&id=<?php echo $key['id']; ?>"
                                         class="btn btn-sm btn-outline-primary">Edit</a>
@@ -51,6 +54,11 @@
                                         class="btn btn-sm btn-outline-danger" onclick="return confirmDelete()">Remove</a>
                                 </td>
                             </tr>
+                            <script>
+                                function confirmDelete() {
+                                    return confirm('Bạn xác nhận xóa sản phẩm này!');
+                                }
+                            </script>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
