@@ -4,7 +4,7 @@ session_start();
 require_once '../connect/function.php';
 // Require toàn bộ file Controllers
 
-// require_once "header.php";
+require_once "components/header.php";
 
 require_once 'controllers/controller.php';
 require_once 'controllers/controllerDanhMuc.php';
@@ -19,7 +19,7 @@ require_once 'models/modelNhaXuatBan.php';
 $act = $_GET['act'] ?? '/';
 match ($act) {
     // Trang chủ quản trị
-    // '/' => (new productController)->login(),
+    '/' => (new productController)->login(),
 
     'insert' => (new productController())->insert(),
     'listproduct' => (new productController())->listProduct(),
@@ -44,5 +44,9 @@ match ($act) {
     'addNhaXuatBan' => (new nhaXuatBanController())->addNhaXuatBan(),
     'deleteNhaXuatBan' => (new nhaXuatBanController())->deleteNhaXuatBan($_GET['id']),
     'updateNhaXuatBan' => (new nhaXuatBanController())->updateNhaXuatBan($_GET['id']),
+    // quản lỳ bình luận
+    
+    'comment' => (new productController())->comment(),
+
 }
     ?>

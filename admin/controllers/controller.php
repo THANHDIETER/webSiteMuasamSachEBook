@@ -89,5 +89,22 @@ class productController
      //           }
      //      }
      // }
+     
+     function comment()  {
+          $allCmt = $this->productModel->allCmt();
+          require_once './views/comment.php';
+          if (isset($_GET['id']))
+          {
+              
+         if ($this->productModel->deleteCmtModel($_GET['id'])) {
+          echo '<script type="text/javascript">
+          window.location.href = "?act=comment";
+          alert("Bạn đã xóa thành công");
+          </script>';
+      } else {
+          echo "Lỗi";
+      }
+          }
+     }
 }
 ?>

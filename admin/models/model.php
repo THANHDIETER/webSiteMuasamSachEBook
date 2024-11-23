@@ -54,7 +54,16 @@ class productModel
     //     $stmt = $this->conn->prepare($sql);
     //     return $stmt->execute();
     // }
-
+    function allCmt (){
+        $sql = "SELECT * FROM `comments` ";
+        return $this->conn->query($sql)->fetchAll();
+    }
+    function deleteCmtModel($id)
+    {
+        $sql = "delete from `comments` where id=$id";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute();
+    }
 
 
 }
