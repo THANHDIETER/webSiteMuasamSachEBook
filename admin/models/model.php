@@ -41,5 +41,18 @@
         $sql="select * from users where username='$user' and password='$pass'";
         return  $this->conn->query($sql)->rowCount();
    }
-}
+
+
+   function allAccount(){
+    $sql = "SELECT * FROM `users` ";
+    return $this->conn->query($sql)->fetchAll();
+   }
+
+   function deleteAccountModel($id){
+    $sql="DELETE FROM `account` WHERE id=$id";
+    $stmt=$this->conn->prepare($sql);
+    return $stmt->execute();
+    }
+
+    }
 ?>

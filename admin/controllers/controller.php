@@ -94,5 +94,25 @@
               echo "Lỗi";
           }
       }
-    }
+
+     function account(){
+               $allAccount = $this->productModel->allAccount();
+               require_once './views/account.php';
+               if (isset($_GET['id']))
+               {
+                   
+              if ($this->productModel->deleteAccountModel($_GET['id'])) {
+               echo '<script type="text/javascript">
+               window.location.href = "?act=comment";
+               alert("Bạn đã xóa thành công");
+               </script>';
+           } else {
+               echo "Lỗi";
+           }
+               }
+          }
+          // require_once 'views/account.php';
+     }
+
+
 ?>

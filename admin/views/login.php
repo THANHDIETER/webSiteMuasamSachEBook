@@ -1,156 +1,73 @@
-<?php
-session_start();
-$thongBao = "";
-
-if (isset($_POST["submitFormDangNhap"])) {
-    $username = htmlspecialchars(trim($_POST["username"])); // Xử lý ký tự đặc biệt
-    $password = htmlspecialchars($_POST["password"]);       // Bảo mật đầu vào
-
-    // Kiểm tra người dùng có nhập cả 2 thông tin
-    if (!empty($username) && !empty($password)) {
-        // Validate độ dài username và password
-        if (strlen($username) >= 4 && strlen($password) >= 5) {
-            if ($username == "admin" && $password == "12345") {
-                $_SESSION["username"] = $username;
-
-                // Hiển thị thông tin đăng nhập thành công
-                echo '<script>alert("Đăng nhập thành công")</script>';
-
-                // Điều hướng về trang danh sách
-                echo '<script>window.location="listproduct.php"</script>';
-            } else {
-                $thongBao = "Username hoặc Password không đúng";
-            }
-        } else {
-            $thongBao = "Username phải ít nhất 4 ký tự và Password phải ít nhất 5 ký tự";
-        }
-    } else {
-        $thongBao = "Vui lòng nhập đầy đủ Username và Password";
-    }
-}
-?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f3f4f6;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .login-container {
-            background-color: #ffffff;
-            padding: 20px 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            text-align: center;
-        }
-        h3 {
-            color: #333333;
-            margin-bottom: 20px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-        .form-group span {
-            display: block;
-            font-weight: bold;
-            color: #555555;
-            margin-bottom: 5px;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #dddddd;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-        .form-group input:focus {
-            border-color: #007bff;
-            outline: none;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            border: none;
-            color: white;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .message {
-            color: red;
-            margin-top: 10px;
-            font-size: 14px;
-        }
-    </style>
-    <script>
-        function validateForm() {
-            const username = document.forms["loginForm"]["username"].value.trim();
-            const password = document.forms["loginForm"]["password"].value.trim();
-
-            if (username === "" || password === "") {
-                alert("Vui lòng nhập đầy đủ Username và Password");
-                return false;
-            }
-
-            if (username.length < 4) {
-                alert("Username phải ít nhất 4 ký tự");
-                return false;
-            }
-
-            if (password.length < 5) {
-                alert("Password phải ít nhất 5 ký tự");
-                return false;
-            }
-
-            return true;
-        }
-    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="login-container">
-        <h1 style="text-align: center; color: red">Đăng nhập vào trang listproduct</h1>
-        <form name="loginForm" action="" method="POST" onsubmit="return validateForm()">
-            <div>
-                <span>Username:</span>
-                <?php
-                if (isset($_POST["submitFormDangNhap"])) {
-                    echo '<input type="text" name="username" value="' . $_POST["username"] . '">';
-                } else {
-                    echo '<input type="text" name="username">';
-                }
-                ?>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h3 class="text-center mb-4">Đăng nhập</h3>
+                        <button class="btn btn-primary w-100 mb-3">
+                            <i class="bi bi-facebook"></i> Đăng nhập bằng tài khoản Facebook
+                        </button>
+                        <div class="text-center my-2 text-muted">hoặc đăng nhập dùng email</div>
+                        <form>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Mật khẩu</label>
+                                <input type="password" class="form-control" id="password" placeholder="Mật khẩu">
+                            </div>
+                            <button type="submit" class="btn btn-orange w-100">Đăng nhập</button>
+                        </form>
+                        <div class="text-center mt-3">
+                            <span class="text-muted">Chưa có tài khoản? </span>
+                            <a href="#" class="text-primary">Đăng ký tại đây</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <br>
-            <div>
-                <span>Password:</span>
-                <input type="password" name="password">
-            </div>
-            <br>
-            <div>
-                <button type="submit" name="submitFormDangNhap">Đăng nhập</button>
-            </div>
-            <p class="message">
-                <?php echo $thongBao; ?>
-            </p>
-        </form>
+        </div>
     </div>
+
+    <style>
+        .btn-orange {
+            background-color: #ff5722;
+            color: white;
+            border: none;
+        }
+        .btn-orange:hover {
+            background-color: #e64a19;
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+<?php
+// login.php
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Capture the form input
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    // Placeholder for authentication logic (e.g., checking with a database)
+    // In a real-world scenario, you should securely hash passwords and verify them.
+
+    if ($email == "example@example.com" && $password == "123456") {
+        echo "Đăng nhập thành công!";
+    } else {
+        echo "Thông tin đăng nhập không chính xác!";
+    }
+}
+?>
