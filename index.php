@@ -26,7 +26,7 @@ try {
         'addToCart'         => (new CartController())->addToCart($id),
         'updateQuantity'    => (new CartController())->updateQuantity(),
         'cart'              => (new CartController())->viewCart(),
-
+        'remove_from_cart'  => (new CartController())->removeFromCart($id),
         // Các hành động của addressController
         'checkout'      => (new addressController())->checkout(),
         'processCheckout' => (new addressController())->processCheckout(),
