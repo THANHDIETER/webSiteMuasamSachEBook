@@ -34,7 +34,7 @@
                       <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-gift-fill"></i> - Ưu đãi & Tiện Ích</a>
                     </li>
                   <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-boxes"></i> - Kiểm Tra Đơn Hàng</a>
+                      <a class="nav-link active" aria-current="page" href="?act=order"><i class="bi bi-boxes"></i> - Kiểm Tra Đơn Hàng</a>
                     </li>
                     <?php
                   

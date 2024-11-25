@@ -3,107 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý đơn hàng</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>view orders</title>
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <style>
+        .badge-success {
+            background-color: #28a745; 
+            color: #fff; 
+        }
+        .badge-warning {
+            background-color: #ffc107;
+            color: #000; 
+        }
+    </style>
 </head>
 <body>
-    <div class="container my-5">
-        <h1 class="text-center mb-4">Quản lý đơn hàng</h1>
-
-        <!-- Table for Orders -->
-        <h3 class="mb-3">Danh sách đơn hàng</h3>
-        <table class="table table-striped table-bordered">
-            <thead class="table-dark">
+<?php  require_once 'components/header.php'; ?>
+<?php if (!empty($orders)): ?>
+    <div class="container mt-5">
+        <h3 class="text-center mb-4">Danh sách đơn hàng</h3>
+        
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
                 <tr>
-                    <th>#</th>
-                    <th>Tên khách hàng</th>
-                    <th>Số điện thoại</th>
-                    <th>Địa chỉ</th>
-                    <th>Email</th>
-                    <th>Thanh toán</th>
+                    <th>Order ID</th>
+                    <th>Ngày đặt</th>
+                    <th>Tổng tiền</th>
                     <th>Trạng thái</th>
                     <th>Chi tiết</th>
+                    <th>Hủy</th> <!-- Cột Hủy đơn hàng -->
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Nguyễn Văn A</td>
-                    <td>0123456789</td>
-                    <td>123 Đường ABC, Quận X, TP.HCM</td>
-                    <td>nguyenvana@gmail.com</td>
-                    <td>COD</td>
-                    <td>Đang xử lý</td>
-                    <td><button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#orderDetailsModal">Xem</button></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Trần Thị B</td>
-                    <td>0987654321</td>
-                    <td>456 Đường XYZ, Quận Y, Hà Nội</td>
-                    <td>tranthib@gmail.com</td>
-                    <td>Chuyển khoản</td>
-                    <td>Hoàn thành</td>
-                    <td><button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#orderDetailsModal">Xem</button></td>
-                </tr>
+                <?php foreach ($orders as $order): ?>
+                    <tr>
+                        <td><?= $order['id'] ?></td>
+                        <td><?= date('d/m/Y', strtotime($order['order_date'])) ?></td>
+                        <td><?= number_format($order['total_amount'], 0, ',', '.') ?>đ</td>
+                        <td>
+                            <span class="badge 
+                                <?= $order['status'] == 'Chờ xác nhận' ? 'badge-warning' : 
+                                ($order['status'] == 'Đã xác nhận' ? 'badge-success' : 
+                                ($order['status'] == 'Đã huỷ' ? 'badge-danger' : 'badge-secondary')) ?>">
+                                <?= $order['status'] ?>
+                            </span>
+                        </td>
+                        <td>
+                            <a href="index.php?act=orderDetail&id=<?= $order['id'] ?>" class="btn btn-primary">Xem chi tiết</a>
+                        </td>
+                        <td>
+                            <?php if ($order['status'] == 'Chờ xác nhận'): ?>
+                                <a href="index.php?act=cancelOrder&id=<?= $order['id'] ?>" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng?');">Hủy đơn</a>
+                            <?php elseif ($order['status'] == 'Đã huỷ'): ?>
+                                <span class="text-danger">Đơn hàng đã bị hủy</span>
+                            <?php elseif ($order['status'] == 'Đã xác nhận'): ?>
+                                <span class="text-success">Đơn hàng đã giao</span>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
-
-        <!-- Modal for Order Details -->
-        <div class="modal fade" id="orderDetailsModal" tabindex="-1" aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="orderDetailsModalLabel">Chi tiết đơn hàng</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- Order Details -->
-                        <h6>Thông tin khách hàng</h6>
-                        <p><strong>Tên:</strong> Nguyễn Văn A</p>
-                        <p><strong>Số điện thoại:</strong> 0123456789</p>
-                        <p><strong>Địa chỉ:</strong> 123 Đường ABC, Quận X, TP.HCM</p>
-
-                        <!-- Table for Products -->
-                        <h6 class="mt-4">Danh sách sản phẩm</h6>
-                        <table class="table table-bordered">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Tên sản phẩm</th>
-                                    <th>Số lượng</th>
-                                    <th>Giá</th>
-                                    <th>Thành tiền</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Sản phẩm 1</td>
-                                    <td>2</td>
-                                    <td>100,000 VND</td>
-                                    <td>200,000 VND</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Sản phẩm 2</td>
-                                    <td>1</td>
-                                    <td>300,000 VND</td>
-                                    <td>300,000 VND</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <h6 class="text-end">Tổng cộng: <strong>500,000 VND</strong></h6>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<?php else: ?>
+    <div class="container mt-5">
+        <p class="alert alert-info">Không có đơn hàng nào.</p>
+    </div>
+<?php endif; ?>
+<?php  require_once 'components/footer.php'; ?>
 </body>
 </html>

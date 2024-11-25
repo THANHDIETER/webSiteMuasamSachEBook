@@ -20,7 +20,7 @@
     <?php foreach($productOne as $name): ?>
     <div class="row bg-white">
     <div class="col-4">
-    <img style=" max-width:100%;" src="./assets/images/prod/books/<?php echo $name['img'] ?>" class="top-pro-img" alt="">
+    <img style=" width:100%; height: 100%;" src="./assets/images/prod/books/<?php echo $name['img'] ?>" class="top-pro-img" alt="">
     </div>
     
     <div class="col-8">
@@ -46,7 +46,7 @@
            
             <p class="tags"><?php echo $name['name'] ?>  </p>
            
-            <a style="width: 200px; height:40px; background-color:red; line-height:40px;" class=" nav-link btn   text-white" href="?act=addToCart&id=<?= $name['id'] ?>">">Thêm vào giỏ hàng</a>
+            <a style="width: 200px; height:40px; background-color:red; line-height:40px;" class=" nav-link btn   text-white" href="?act=addToCart&id=<?= $name['id'] ?>">Thêm vào giỏ hàng</a>
             <br>
             <p>Gọi đặt hàng: 0972.150.772 hoac: 0972.150.772</p>
             <h3>Thông tin & Khuyến mãi</h3>
