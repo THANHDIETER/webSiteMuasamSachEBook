@@ -81,7 +81,6 @@ class addressModel {
                 throw $e;  // Ném lại lỗi để có thể xử lý ở nơi gọi
             }
         }
-    
 
     public function insertAddress($user_id, $receiver, $delivery_address, $phone_number, $email) {
         // Kiểm tra nếu địa chỉ của user_id đã tồn tại trong bảng 'user_addresses'
@@ -151,17 +150,47 @@ class addressModel {
             error_log("Không có giao dịch để rollback.");
         }
     }
-    public function confirmOrder($order_id, $status = 'Thành công') {
-        try {
-            $sql = "UPDATE orders SET status = :status WHERE id = :order_id";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':order_id', $order_id, PDO::PARAM_INT);
-            $stmt->bindParam(':status', $status, PDO::PARAM_STR);
-            $stmt->execute();
-        } catch (Exception $e) {
-            throw new Exception("Không thể xác nhận đơn hàng: " . $e->getMessage());
-        }
+    public function getOrdersByUserId($user_id) {
+        // Truy vấn đơn hàng của người dùng
+        $sql = "SELECT id, order_date, total_amount, status FROM orders WHERE user_id = :user_id ORDER BY order_date DESC";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về danh sách đơn hàng
     }
-   
+
+    // Lấy chi tiết đơn hàng
+    public function getOrderDetail($order_id, $user_id) {
+        // Truy vấn chi tiết đơn hàng
+        $sql = "SELECT o.id, o.order_date, o.total_amount, o.status, oi.product_id, oi.quantity, oi.price, p.name, p.img
+                FROM orders o
+                JOIN order_items oi ON o.id = oi.order_id
+                JOIN products p ON oi.product_id = p.id
+                WHERE o.id = :order_id AND o.user_id = :user_id";
+        
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':order_id', $order_id, PDO::PARAM_INT);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);  // Trả về chi tiết đơn hàng
+    }
+    public function updateOrderStatus($order_id) {
+        $sql = "UPDATE orders SET status = 'Đã huỷ' WHERE id = :order_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':order_id', $order_id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+    public function getOrderByIdAndUser($order_id, $user_id) {
+        // Truy vấn lấy thông tin đơn hàng dựa trên ID đơn hàng và ID người dùng
+        $sql = "SELECT * FROM orders WHERE id = :order_id AND user_id = :user_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':order_id', $order_id, PDO::PARAM_INT);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+    
+        // Nếu tìm thấy đơn hàng, trả về thông tin đơn hàng
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
 }
 ?>

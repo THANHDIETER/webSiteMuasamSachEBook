@@ -8,9 +8,8 @@ require_once 'models/homeModel.php';
 require_once 'models/addressModel.php';
 require_once 'models/cartModel.php';
 
-// Lấy giá trị act từ URL, nếu không có sẽ mặc định là '/'
 $act = $_GET['act'] ?? '/';
-$id = $_GET['id'] ?? null; // Xử lý id khi cần thiết
+$id = $_GET['id'] ?? null; 
 
 try {
     match ($act) {
@@ -31,7 +30,12 @@ try {
         // Các hành động của addressController
         'checkout'      => (new addressController())->checkout(),
         'processCheckout' => (new addressController())->processCheckout(),
-        'address' => (new addressController())->updateAddress(),  // Đảm bảo có action này
+        'address' => (new addressController())->updateAddress(), 
+
+        'order' => (new addressController())->showOrder(),  
+        'orderDetail' => (new addressController())->viewOrderDetail($id),  
+        'cancelOrder' => (new addressController())->cancelOrder($id),
+        
 
         default => throw new Exception("Hành động không hợp lệ hoặc không tồn tại"),
     };

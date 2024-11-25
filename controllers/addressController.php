@@ -1,25 +1,16 @@
 <?php
 require_once 'models/addressModel.php';
-
-
 class addressController {
     private $addressModel;
-
     public function __construct() {
         $this->addressModel = new addressModel();
     }
-
-    // Phương thức hiển thị form thanh toán
     public function checkout() {
         $user_id = $_SESSION['id'];  // Giả sử bạn đã lưu ID người dùng trong session
         $user_address = $this->addressModel->getAddressByUserId($user_id);
         $cart_items = $this->addressModel->getCartItems($user_id);
-
-        // Truyền dữ liệu vào view checkout
         include 'views/checkout.php';
     }
-
-    // Phương thức xử lý thanh toán
     public function processCheckout() {
         try {
             $user_id = $_SESSION['id'];
@@ -84,7 +75,65 @@ class addressController {
 
         require_once 'views/address.php'; // Tải view để nhập địa chỉ
     }
+    public function showOrder() {
+        // Kiểm tra nếu người dùng đã đăng nhập
+        if (!isset($_SESSION['id'])) {
+            header("Location: index.php?act=login");
+            exit;
+        }
     
+        $user_id = $_SESSION['id']; // Lấy ID người dùng từ session
+        
+        // Lấy danh sách đơn hàng từ model
+        $orders = $this->addressModel->getOrdersByUserId($user_id);
+    
+        // Truyền danh sách đơn hàng vào view
+        require_once 'views/order.php';
+        return $orders;  // Trả về danh sách đơn hàng (nếu cần sử dụng sau này)
+    }
+    
+
+    // Phương thức để xem chi tiết đơn hàng
+    public function viewOrderDetail($order_id) {
+        if (!isset($_SESSION['id'])) {
+            header("Location: index.php?act=login");
+            exit;
+        }
+
+        $user_id = $_SESSION['id'];
+        
+        // Lấy chi tiết đơn hàng từ model
+        $orderDetail = $this->addressModel->getOrderDetail($order_id, $user_id);
+
+        if ($orderDetail) {
+            require_once 'views/orderDetail.php'; // Hiển thị chi tiết đơn hàng
+        } else {
+            echo "Không tìm thấy đơn hàng.";
+        }
+    }
+    public function cancelOrder($orderId) {
+        // Ensure the user is logged in
+        if (!isset($_SESSION['id'])) {
+            header("Location: index.php?act=login");
+            exit;
+        }
+    
+        $user_id = $_SESSION['id'];
+    
+        // Get the order by ID and user ID
+        $order = $this->addressModel->getOrderByIdAndUser($orderId, $user_id);
+    
+        // Check if the order exists and if its status is "Chờ xác nhận"
+        if ($order && $order['status'] == 'Chờ xác nhận') {
+            // Proceed to cancel the order
+            $this->addressModel->updateOrderStatus($orderId, 'Đã huỷ');
+            header("Location: index.php?act=order");
+        } else {
+            echo "<script>alert('Đơn hàng không thể hủy vì không ở trạng thái chờ xác nhận.');</script>";
+            header("Location: index.php?act=order");
+        }
+        exit;
+    }
     
 }
 
