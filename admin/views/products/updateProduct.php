@@ -29,48 +29,51 @@
                 </div><br>
                 <div class="form-group">
                     <label>Danh mục</label>
-                    <select multiple class="form-control" type="text" id="category_id" name="category_id">
-                        <option value="0" selected>Chọn Danh mục</option>
+                    <select class="form-control" id="category_id" name="category_id">
+                        <option value="0" <?= $Product['category_id'] == 0 ? 'selected' : '' ?>>Chọn danh mục</option>
                         <?php foreach ($listDanhMuc as $key): ?>
-                            <option value="<?= $key['id'] ?>">
+                            <option value="<?= $key['id'] ?>" <?= $Product['category_id'] == $key['id'] ? 'selected' : '' ?>>
                                 <?= $key['name'] ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
-
                 </div><br>
 
                 <div class="form-group">
                     <label>Nhà xuất bản</label>
-                    <select multiple class="form-control" type="text" id="category_id" name="category_id">
-                        <option value="0" selected>Chọn nhà xuất bản</option>
+                    <select class="form-control" id="publishing_house_id" name="publishing_house_id">
+                        <option value="0" <?= $Product['publishing_house_id'] == 0 ? 'selected' : '' ?>>Chọn nhà xuất bản
+                        </option>
                         <?php foreach ($listNhaXuatBan as $key): ?>
-                            <option value="<?= $key['id'] ?>">
+                            <option value="<?= $key['id'] ?>" <?= $Product['publishing_house_id'] == $key['id'] ? 'selected' : '' ?>>
                                 <?= $key['name'] ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
                 </div><br>
+
                 <div class="form-group">
                     <label>Tác giả</label>
-                    <select multiple class="form-control" type="text" id="author_id" name="author_id">
-                        <option value="0" selected>Chọn tác giả</option>
-                        <?php foreach ($listTacGia as $key) {
-                            if ($Product["author_id"] == $value["id"]) {
-                                echo '<option value="' . $value["id"] . '" selected>' . $value["name"] . '</option>';
-                            } else {
-                                echo '<option value="' . $value["id"] . '">' . $value["name"] . '</option>';
-                            }
-                        } ?>
-
-
+                    <select class="form-control" id="author_id" name="author_id">
+                        <option value="0" <?= $Product['author_id'] == 0 ? 'selected' : '' ?>>Chọn tác giả</option>
+                        <?php foreach ($listTacGia as $key): ?>
+                            <option value="<?= $key['id'] ?>" <?= $Product['author_id'] == $key['id'] ? 'selected' : '' ?>>
+                                <?= $key['name'] ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
+                </div><br>
 
-                </div><br>
                 <div class="form-group">
-                    <label for=>Hình ảnh</label>
-                    <input class="form-control" type="file" name="img" value="<?= $Product['img'] ?>" ?>
+                    <label>Hình ảnh</label>
+                    <input class="form-control" type="file" name="img">
+                    <?php if (!empty($Product['img'])): ?>
+                        <br>
+                        <img src="../assets/images/prod/books/<?= $Product['img'] ?>" alt="Current Image"
+                            style="max-width: 200px;">
+                    <?php endif; ?>
                 </div><br>
+
                 <div class="form-group">
                     <label>Giá</label>
                     <input class="form-control" type="number" name="price" value="<?= $Product['price'] ?>" ?>

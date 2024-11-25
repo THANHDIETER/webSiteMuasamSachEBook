@@ -103,34 +103,47 @@ class productController
      }
      function update($id)
      {
+          // Lấy thông tin sản phẩm theo ID
           $Product = $this->productModel->print($id);
-          require_once './views/products/updateProduct.php';
 
+          // Lấy danh sách danh mục, nhà xuất bản và tác giả
+          $listDanhMuc = $this->danhmucModel->getAllDanhmuc();
+          $listNhaXuatBan = $this->nhaXuatBanModel->getAllNhaXuatBan();
+          $listTacGia = $this->tacGiaModel->getAllTacgia();
+
+          // Kiểm tra nếu dữ liệu được gửi qua POST
           if (isset($_POST['btn_update'])) {
-               $id = $_POST['id'];
                $name = $_POST['name'];
                $category_id = $_POST['category_id'];
                $publishing_house_id = $_POST['publishing_house_id'];
                $author_id = $_POST['author_id'];
+               $price = $_POST['price'];
+
+               // Xử lý upload ảnh nếu có
                if (empty($_FILES['img']['name'])) {
-                    $img = "";
+                    $img = $Product['img']; // Sử dụng ảnh cũ nếu không có ảnh mới
                } else {
                     $img = $_FILES['img']['name'];
                     $tmp = $_FILES['img']['tmp_name'];
                     move_uploaded_file($tmp, '../assets/images/prod/books/' . $img);
                }
-               $price = $_POST['price'];
 
+               // Cập nhật sản phẩm
+               $updated = $this->productModel->update($id, $name, $category_id, $publishing_house_id, $author_id, $img, $price);
 
-               if ($this->productModel->update($id, $name, $category_id, $publishing_house_id, $author_id, $img, $price)) {
-                    echo '<script type="text/javascript">
-               window.location.href = "?act=listproduct";
-               alert("Bạn đã cập nhật thành công");
-               </script>';
+               if ($updated) {
+                    echo '<script>
+                    alert("Cập nhật sản phẩm thành công!");
+                    window.location.href = "?act=listproduct";
+                  </script>';
                } else {
-                    echo "Lỗi";
+                    echo '<script>alert("Cập nhật thất bại!");</script>';
                }
           }
+
+          // Load view và truyền dữ liệu
+          require_once './views/products/updateProduct.php';
      }
+
 }
 ?>
