@@ -50,21 +50,23 @@ class CartController {
         }
     }
     public function updateQuantity() {
-     session_start();
-
-     if (isset($_SESSION['cart'], $_POST['quantities'])) {
-         foreach ($_POST['quantities'] as $productId => $quantity) {
-             foreach ($_SESSION['cart'] as &$item) {
-                 if ($item['id'] == $productId) {
-                     $item['quantity'] = max(1, (int)$quantity); 
-                     break;
-                 }
-             }
-         }
-     }
-
-     header("Location: index.php?act=cart");
-     exit;
- }
+        if (!isset($_SESSION['id'])) {
+            header("Location: index.php?act=login");
+            exit;
+        }
+    
+        $user_id = $_SESSION['id'];
+        $cart_id = $this->cartModel->getCartIdByUserId($user_id); 
+        if (isset($_POST['quantities']) && $cart_id) {
+            foreach ($_POST['quantities'] as $productId => $quantity) {
+                $this->cartModel->updateCartItemQuantity($cart_id, $productId, max(1, (int)$quantity));
+            }
+        }
+    
+        // Sau khi cập nhật số lượng, điều hướng lại đến giỏ hàng
+        header("Location: index.php?act=cart");
+        exit;
+    }
+    
 }
 ?>

@@ -47,6 +47,8 @@ match ($act) {
     'updateNhaXuatBan' => (new nhaXuatBanController())->updateNhaXuatBan($_GET['id']),
 
     //order
-    'order' => (new orderController())->confirmOrder(),
-}
+    'order' => (new orderController())->adminOrders(),  // Xem danh sách đơn hàng
+    'confirmOrder' => (new orderController())->confirmOrder(), // Xác nhận đơn hàng
+    'orderDetail' => (new orderController())->viewOrderDetail(), 
+};
     ?>

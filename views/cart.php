@@ -20,10 +20,14 @@
         <?php foreach ($cartItems as $item): ?>
             <div class="row mb-3">
                 <div class="col-2">
+                <a class="bg-white nav-link" href="?act=detail&id=<?php echo $item['product_id'] ?>">
                     <img src="./assets/images/prod/books/<?= $item['img'] ?>" style="width: 100px; height: 150px;" alt="<?= $item['name'] ?>">
+                    </a>
                 </div>
                 <div class="col-6">
+                <a class="bg-white nav-link" href="?act=detail&id=<?php echo $item['product_id'] ?>">
                     <p><?= $item['name'] ?></p>
+                    </a>
                     <input type="number" name="quantities[<?= $item['id'] ?>]" value="<?= $item['quantity'] ?>" min="1" class="form-control w-25">
                 </div>
                 <div class="col-2">

@@ -12,29 +12,20 @@
                 return $stmt->fetch(PDO::FETCH_ASSOC);
             }
             public function getCartItem($cart_id, $product_id) {
-                $sql = "SELECT * FROM cart_items WHERE cart_id = :cart_id AND product_id = :product_id";
+                $sql = "SELECT * FROM cart_items WHERE cart_id = $cart_id AND product_id = $product_id";
                 $stmt = $this->conn->prepare($sql);
-                $stmt->bindParam(':cart_id', $cart_id, PDO::PARAM_INT);
-                $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
                 $stmt->execute();
                 return $stmt->fetch(PDO::FETCH_ASSOC);
             }
-            public function updateCartItemQuantity($cart_id, $product_id, $quantity) {
-                $sql = "UPDATE cart_items SET quantity = :quantity WHERE cart_id = :cart_id AND product_id = :product_id";
+            public function updateCartItemQuantity($cart_id, $product_id, $newQuantity) {
+                $sql = "UPDATE cart_items SET quantity = $newQuantity WHERE cart_id = $cart_id AND product_id = $product_id";
                 $stmt = $this->conn->prepare($sql);
-                $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
-                $stmt->bindParam(':cart_id', $cart_id, PDO::PARAM_INT);
-                $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
                 $stmt->execute();
             }
             public function addToCartItems($cart_id, $product_id, $quantity, $price) {
                 $sql = "INSERT INTO cart_items (cart_id, product_id, quantity, price) 
-                        VALUES (:cart_id, :product_id, :quantity, :price)";
+                        VALUES ($cart_id, $product_id, $quantity, $price)";
                 $stmt = $this->conn->prepare($sql);
-                $stmt->bindParam(':cart_id', $cart_id, PDO::PARAM_INT);
-                $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
-                $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
-                $stmt->bindParam(':price', $price, PDO::PARAM_STR);
                 $stmt->execute();
             }
             public function createCart($user_id) {
