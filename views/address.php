@@ -1,40 +1,37 @@
+<!-- address.php -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shipping Address Form</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Địa chỉ giao hàng</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
     <div class="container mt-5">
-        <form action="?act=saveAddress" method="post" class="border p-4 rounded shadow-sm">
-            <h2 class="mb-4">ĐỊA CHỈ GIAO HÀNG</h2>
-            
-            <div class="mb-3">
-                <label for="name" class="form-label">Họ tên *</label>
-                <input type="text" id="name" name="receiver" class="form-control" required>
-            </div>
+        <h2>Thông tin địa chỉ giao hàng</h2>
 
+        <form action="?act=address" method="POST">
             <div class="mb-3">
-                <label for="email" class="form-label">Email nhận đơn hàng *</label>
-                <input type="email" id="email" name="email" class="form-control" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="district" class="form-label">Địa chỉ nhận hàng</label>
-                <input type="text" id="address" name="delivery_address" class="form-control" required>
+                <label for="receiver" class="form-label">Tên người nhận</label>
+                <input type="text" class="form-control" id="receiver" name="receiver" required>
             </div>
             <div class="mb-3">
-                <label for="phone" class="form-label">Di động *</label>
-                <input type="tel" id="phone" name="phone_number" class="form-control" required pattern="[0-9]{10}">
+                <label for="delivery_address" class="form-label">Địa chỉ giao hàng</label>
+                <input type="text" class="form-control" id="delivery_address" name="delivery_address" required>
             </div>
-            <button type="submit" class="btn btn-warning w-100">Giao đến địa chỉ này</button>
+            <div class="mb-3">
+                <label for="phone_number" class="form-label">Số điện thoại</label>
+                <input type="text" class="form-control" id="phone_number" name="phone_number" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Cập nhật địa chỉ</button>
         </form>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-   
-       
-       </body>
-       </html>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -20,7 +20,7 @@
     <?php foreach($productOne as $name): ?>
     <div class="row bg-white">
     <div class="col-4">
-    <img style=" max-width:100%;" src="./assets/images/prod/books/<?php echo $name['img'] ?>" class="top-pro-img" alt="">
+    <img style=" width:100%; height: 100%;" src="./assets/images/prod/books/<?php echo $name['img'] ?>" class="top-pro-img" alt="">
     </div>
     
     <div class="col-8">

@@ -1,45 +1,51 @@
 <?php
-    class productModel {
-      public $conn;
-  
-      function __construct() {
-          $this->conn = connectDB();
-      }
-      function getAllProduct() {
-         $sql = "SELECT * FROM books JOIN genre ON books.genre_id = genre.genre_id ORDER BY book_id DESC";
-         return $this->conn->query($sql);
-     }
-     public function print($id){
-        $sql="SELECT * FROM books JOIN genre ON books.genre_id = genre.genre_id WHERE book_id=$id";
-        return $this->conn->query($sql)->fetch();
-     }
-     public function insert($title, $author, $description, $genre_id, $price, $stock_quantity, $published_date,$img){
-        $sql = "INSERT INTO books VALUE (null,'$title', '$author', '$description', $genre_id, $price, $stock_quantity, '$published_date','$img')";
+class productModel
+{
+    public $conn;
+
+    function __construct()
+    {
+        $this->conn = connectDB();
+    }
+    function getAllProduct()
+    {
+        $sql = "SELECT DISTINCT products.id, products.ten, products.img, products.gia,products.tac_gia, products.danh_muc_id,  products.mo_ta, danh_muc.name AS danh_muc_name, nha_san_xua.name AS nha_san_xua_name 
+        FROM products 
+        JOIN categories ON danh_muc.id = products.danh_muc_id 
+        JOIN nha_san_xua ON nha_san_xua.id = products.nha_san_xuat_id WHERE 1";
+        $sql .= " ORDER BY products.id DESC";
+        return $this->conn->query($sql);
+    }
+    public function insert($ten, $tac_gia, $danh_muc_id, $nha_xuat_ban_id, $gia, $img)
+    {
+        $sql = "INSERT INTO products VALUE (null,'$ten', '$tac_gia','$danh_muc_id', '$nha_xuat_ban_id', '$gia','$img')";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute();
-     }
-     function delete($id){
-        $sql="delete from books where book_id=$id";
-        $stmt=$this->conn->prepare($sql);
+    }
+    function delete($id)
+    {
+        $sql = "delete from products where id=$id";
+        $stmt = $this->conn->prepare($sql);
         return $stmt->execute();
     }
-    function update($id, $title, $author, $description, $genre_id, $price, $stock_quantity, $published_date,$img){
+    public function print($id)
+    {
+        $sql = "SELECT * FROM products WHERE id=$id";
+        return $this->conn->query($sql)->fetch();
+    }
+    function update($id, $ten, $tac_gia, $gia, $img)
+    {
         if (empty($img)) {
-            $sql = "UPDATE books SET title='$title', author='$author',description='$description', genre_id=$genre_id,price=$price, stock_quantity=$stock_quantity, published_date='$published_date' WHERE book_id=$id";
+            $sql = "UPDATE products SET ten='$ten', tac_gia='$tac_gia', gia=$gia' WHERE id=$id";
         } else {
-            $sql = "UPDATE books SET title='$title' , author='$author',description='$description', genre_id=$genre_id,price=$price,stock_quantity=$stock_quantity, published_date='$published_date' ,  image_book='$img' WHERE book_id=$id";
+            $sql = "UPDATE products SET ten='$ten' , tac_gia='$tac_gia', gia=$gia' ,  img ='$img' WHERE id=$id";
         }
-        
-        $stmt = $this->conn->prepare($sql); 
+
+        $stmt = $this->conn->prepare($sql);
         return $stmt->execute();
     }
-    function order(){
-        $sql="SELECT * FROM orders JOIN order_details ON orders.order_id = order_details.order_id JOIN books ON order_details.book_id= books.book_id DESC order_id";
-            return $this->conn->query($sql)->fetch();
-    }
-    function checkAcc($user,$pass) {
-        $sql="select * from users where username='$user' and password='$pass'";
-        return  $this->conn->query($sql)->rowCount();
-   }
+
+
+
 }
 ?>
