@@ -18,42 +18,52 @@ class productModel
         return $this->conn->query($sql);
     }
 
-    public function insert($name, $category_id, $publishing_house_id, $author_id, $img, $price, $description)
+    public function insert($name, $category_id, $publishing_house_id, $author_id, $img, $price, $description, $quantity, $count_sale = 0)
     {
-        $sql = "INSERT INTO products (name, category_id, publishing_house_id, author_id, img, price, description) VALUES (:name, :category_id, :publishing_house_id, :author_id, :img, :price, :description)";
+        $sql = "INSERT INTO `products` 
+                (`name`, `category_id`, `publishing_house_id`, `author_id`, `img`, `price`, `description`, `quantity`, `count_sale`, `created_at`) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+
+        // Chuẩn bị câu lệnh
         $stmt = $this->conn->prepare($sql);
+
+        // Thực thi với các tham số
         return $stmt->execute([
-            ':name' => $name,
-            ':category_id' => $category_id,
-            ':publishing_house_id' => $publishing_house_id,
-            ':author_id' => $author_id,
-            ':img' => $img,
-            ':price' => $price,
-            ':description' => $description,
+            $name,
+            $category_id,
+            $publishing_house_id,
+            $author_id,
+            $img,
+            $price,
+            $description,
+            $quantity,
+            $count_sale
         ]);
     }
+
+
     function delete($id)
     {
         $sql = "delete from products where id=$id";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute();
     }
-    // public function print($id)
-    // {
-    //     $sql = "SELECT * FROM products WHERE id=$id";
-    //     return $this->conn->query($sql)->fetch();
-    // }
-    // function update($id, $ten, $tac_gia, $gia, $img)
-    // {
-    //     if (empty($img)) {
-    //         $sql = "UPDATE products SET ten='$ten', tac_gia='$tac_gia', gia=$gia' WHERE id=$id";
-    //     } else {
-    //         $sql = "UPDATE products SET ten='$ten' , tac_gia='$tac_gia', gia=$gia' ,  img ='$img' WHERE id=$id";
-    //     }
+    public function print($id)
+    {
+        $sql = "SELECT * FROM products WHERE id=$id";
+        return $this->conn->query($sql)->fetch();
+    }
+    function update($id, $name, $category_id, $publishing_house_id, $author_id, $img, $price)
+    {
+        if (empty($img)) {
+            $sql = "UPDATE products SET name='$name', category_id='$category_id', publishing_house_id='$publishing_house_id', author_id='$author_id', price='$price' WHERE id=$id";
+        } else {
+            $sql = "UPDATE products SET name='$name', category_id='$category_id', publishing_house_id='$publishing_house_id', author_id='$author_id', img='$img', price='$price' WHERE id=$id";
+        }
 
-    //     $stmt = $this->conn->prepare($sql);
-    //     return $stmt->execute();
-    // }
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute();
+    }
 
 
 

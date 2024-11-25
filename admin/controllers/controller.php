@@ -22,35 +22,77 @@ class productController
 
      public function insert()
      {
-
+          // Lấy dữ liệu danh mục, nhà xuất bản, tác giả từ Model
           $listDanhMuc = $this->danhmucModel->getAllDanhmuc();
           $listNhaXuatBan = $this->nhaXuatBanModel->getAllNhaXuatBan();
           $listTacGia = $this->tacGiaModel->getAllTacgia();
 
-
+          // Hiển thị form thêm sản phẩm
           require_once './views/products/addProduct.php';
+
+          // Xử lý form khi được submit
           if (isset($_POST['btn_insert'])) {
-               $name = $_POST['name'];
-               $category_id = $_POST['category_id'];
-               $publishing_house_id = $_POST['publishing_house_id'];
-               $author_id = $_POST['author_id'];
+               // Lấy dữ liệu từ form
+               $name = trim($_POST['name']);
+               $category_id = (int) $_POST['category_id'];
+               $publishing_house_id = (int) $_POST['publishing_house_id'];
+               $author_id = (int) $_POST['author_id'];
+               $price = (float) $_POST['price'];
+               $quantity = (int) $_POST['quantity'];
+               $description = trim($_POST['description']);
+
+               // Xử lý ảnh
                $img = $_FILES['img']['name'];
                $tmp = $_FILES['img']['tmp_name'];
-               move_uploaded_file($tmp, '../assets/images/prod/books/' . $img);
-               $price = $_POST['price'];
-               $description = $_POST['description'];
 
-               if ($this->productModel->insert($name, $category_id, $publishing_house_id, $author_id, $img, $price, $description)) {
+               if (!empty($img)) {
+                    $targetDir = '../assets/images/prod/books/';
+                    $targetFile = $targetDir . basename($img);
 
-                    echo '<script type="text/javascript">
-                    window.location.href = "?act=listproduct";
-                    alert("Bạn đã thêm sản phẩm thành công");
-                    </script>';
+                    // Tạo thư mục nếu chưa tồn tại
+                    if (!file_exists($targetDir)) {
+                         mkdir($targetDir, 0777, true);
+                    }
+
+                    // Di chuyển file upload
+                    if (move_uploaded_file($tmp, $targetFile)) {
+                         // Đường dẫn ảnh hợp lệ
+                    } else {
+                         $img = null; // Trường hợp upload thất bại
+                    }
                } else {
-                    echo "ADD PRODUCT KHÔNG THÀNH CÔNG";
+                    $img = null; // Không có ảnh được upload
+               }
+
+               // Gọi Model để thêm sản phẩm
+               // Khi gọi model insert, thêm giá trị count_sale
+               $result = $this->productModel->insert(
+                    $name,
+                    $category_id,
+                    $publishing_house_id,
+                    $author_id,
+                    $img,
+                    $price,
+                    $description,
+                    $quantity,
+                    0 // Giá trị mặc định của count_sale
+               );
+
+
+               // Kiểm tra kết quả
+               if ($result) {
+                    echo '<script type="text/javascript">
+                alert("Thêm sản phẩm thành công");
+                window.location.href = "?act=listproduct";
+                </script>';
+               } else {
+                    echo '<script type="text/javascript">
+                alert("Thêm sản phẩm thất bại. Vui lòng thử lại!");
+                </script>';
                }
           }
      }
+
      function delete($id)
      {
           if ($this->productModel->delete($id)) {
@@ -59,35 +101,36 @@ class productController
                echo "Lỗi";
           }
      }
-     // function update($id)
-     // {
-     //      $Product = $this->productModel->print($id);
-     //      require_once './views/products/updateProduct.php';
+     function update($id)
+     {
+          $Product = $this->productModel->print($id);
+          require_once './views/products/updateProduct.php';
 
-     //      if (isset($_POST['btn_update'])) {
-     //           $id = $_POST['id'];
-     //           $name = $_POST['name'];
-     //           $author_id = $_POST['author_id'];
-     //           $category_id = $_POST['category_id'];
-     //           $publishing_house_id = $_POST['publishing_house_id'];
-     //           $price = $_POST['price'];
-     //           if (empty($_FILES['img']['name'])) {
-     //                $img = "";
-     //           } else {
-     //                $img = $_FILES['img']['name'];
-     //                $tmp = $_FILES['img']['tmp_name'];
-     //                move_uploaded_file($tmp, '../assets/images/prod/books/' . $img);
-     //           }
+          if (isset($_POST['btn_update'])) {
+               $id = $_POST['id'];
+               $name = $_POST['name'];
+               $category_id = $_POST['category_id'];
+               $publishing_house_id = $_POST['publishing_house_id'];
+               $author_id = $_POST['author_id'];
+               if (empty($_FILES['img']['name'])) {
+                    $img = "";
+               } else {
+                    $img = $_FILES['img']['name'];
+                    $tmp = $_FILES['img']['tmp_name'];
+                    move_uploaded_file($tmp, '../assets/images/prod/books/' . $img);
+               }
+               $price = $_POST['price'];
 
-     //           if ($this->productModel->update($id, $name, $author_id, $category_id, $publishing_house_id, $price, $img)) {
-     //                echo '<script type="text/javascript">
-     //           window.location.href = "?act=listproduct";
-     //           alert("Bạn đã cập nhật thành công");
-     //           </script>';
-     //           } else {
-     //                echo "Lỗi";
-     //           }
-     //      }
-     // }
+
+               if ($this->productModel->update($id, $name, $category_id, $publishing_house_id, $author_id, $img, $price)) {
+                    echo '<script type="text/javascript">
+               window.location.href = "?act=listproduct";
+               alert("Bạn đã cập nhật thành công");
+               </script>';
+               } else {
+                    echo "Lỗi";
+               }
+          }
+     }
 }
 ?>

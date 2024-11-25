@@ -41,7 +41,7 @@
                                 <td><?php echo $key['category_name']; ?></td>
                                 <td><?php echo $key['publisher_name']; ?></td>
                                 <td><?php echo $key['author_name']; ?></td>
-                                <td><img src="./assets/images/prod/books/<?php echo $key['img']; ?>" class="ms-3 mb-4"
+                                <td><img src="../assets/images/prod/books/<?php echo $key['img']; ?>" class="ms-3 mb-4"
                                         style="width:100px; height:auto"></td>
                                 <td><?php echo number_format($key['price'], 0, ',', '.'); ?> ₫</td>
 
