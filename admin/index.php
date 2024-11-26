@@ -22,6 +22,7 @@ $act = $_GET['act'] ?? '/';
 match ($act) {
     // Trang chủ quản trị
     // '/' => (new productController)->login(),
+
     'insert' => (new productController())->insert(),
     'listproduct' => (new productController())->listProduct(),
     'delete' => (new productController())->delete($_GET['id']),

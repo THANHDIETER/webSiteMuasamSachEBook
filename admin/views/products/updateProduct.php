@@ -25,57 +25,58 @@
                 <input type="hidden" name="id" value="<?= $Product['id'] ?>" id="">
                 <div class="form-group">
                     <label>Tên sách</label>
-                    <input class="form-control" value="<?= $Product['ten'] ?>" type="text" name="ten" ?>
+                    <input class="form-control" value="<?= $Product['name'] ?>" type="text" name="name" ?>
                 </div><br>
                 <div class="form-group">
-                    <label for=>Hình ảnh</label>
-                    <img src="../assets/images/prod/books/<?php echo $Product['img'] ?>" alt="" class="ms-3 mb-4"
-                        style="width:200px; height:auto">
-
-                    <input class="form-control" value="<?= $Product['img'] ?>" type="file" name="img" ?>
-                </div><br>
-                <div class="form-group">
-                    <label>Tác giả</label>
-                    <input class="form-control" value="<?= $Product['tac_gia'] ?>" type="text" name="tac_gia" ?>
-                </div><br>
-                <div class="form-group">
-                    <label for="exampleFormControlSelect2">Thể loại</label>
-                    <select multiple class="form-control" value="<?= $Product['danh_muc_id'] ?>" type="text"
-                        id="danh_muc_id" name="danh_muc_id">
-                        <!-- <option value="1">Novel</option>
-                    <option value="2">Short Story</option>
-                    <option value="3">Poetry</option>
-                    <option value="4">Drama</option>
-                    <option value="5">Autobiography </option>
-                    <option value="6">Biography</option>
-                    <option value="7">History</option>
-                    <option value="8">Science</option>
-                    <option value="9">Business</option>
-                    <option value="10">Psychology</option>
-                    <option value="11">Self-help</option>
-                    <option value="12">Fairy Tales</option>
-                    <option value="13">Educational Stories</option>
-                    <option value="14">Fantasy</option>
-                    <option value="15">Science Fiction</option>
-                    <option value="16">Epic Fantasy</option>
-                    <option value="17">Mystery</option>
-                    <option value="18">Romance</option>
-                    <option value="19">Family Romance</option>
-                    <option value="20">Friendship</option>
-                    <option value="21">Horror</option>
-                    <option value="22">Detective</option>
-                    <option value="23">Thriller</option>
-                    <option value="24">Music</option>
-                    <option value="25">Cinema</option> -->
+                    <label>Danh mục</label>
+                    <select class="form-control" id="category_id" name="category_id">
+                        <option value="0" <?= $Product['category_id'] == 0 ? 'selected' : '' ?>>Chọn danh mục</option>
+                        <?php foreach ($listDanhMuc as $key): ?>
+                            <option value="<?= $key['id'] ?>" <?= $Product['category_id'] == $key['id'] ? 'selected' : '' ?>>
+                                <?= $key['name'] ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                 </div><br>
+
+                <div class="form-group">
+                    <label>Nhà xuất bản</label>
+                    <select class="form-control" id="publishing_house_id" name="publishing_house_id">
+                        <option value="0" <?= $Product['publishing_house_id'] == 0 ? 'selected' : '' ?>>Chọn nhà xuất bản
+                        </option>
+                        <?php foreach ($listNhaXuatBan as $key): ?>
+                            <option value="<?= $key['id'] ?>" <?= $Product['publishing_house_id'] == $key['id'] ? 'selected' : '' ?>>
+                                <?= $key['name'] ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div><br>
+
+                <div class="form-group">
+                    <label>Tác giả</label>
+                    <select class="form-control" id="author_id" name="author_id">
+                        <option value="0" <?= $Product['author_id'] == 0 ? 'selected' : '' ?>>Chọn tác giả</option>
+                        <?php foreach ($listTacGia as $key): ?>
+                            <option value="<?= $key['id'] ?>" <?= $Product['author_id'] == $key['id'] ? 'selected' : '' ?>>
+                                <?= $key['name'] ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div><br>
+
+                <div class="form-group">
+                    <label>Hình ảnh</label>
+                    <input class="form-control" type="file" name="img">
+                    <?php if (!empty($Product['img'])): ?>
+                        <br>
+                        <img src="../assets/images/prod/books/<?= $Product['img'] ?>" alt="Current Image"
+                            style="max-width: 200px;">
+                    <?php endif; ?>
+                </div><br>
+
                 <div class="form-group">
                     <label>Giá</label>
-                    <input class="form-control"
-                        placeholder=" <?php echo $formattedPrice = number_format($Product['gia'], 0, ',', '.'); ?>"
-                        value=" <?php
-                        $Product['gia']
-                            ?>" type="number" name="gia" ?>
+                    <input class="form-control" type="number" name="price" value="<?= $Product['price'] ?>" ?>
                 </div><br>
 
                 <input type="submit" name="btn_update" id="" value="UPDATE PRODUCT" style="width: 200px; "

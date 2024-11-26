@@ -9,19 +9,39 @@ class productModel
     }
     function getAllProduct()
     {
-        $sql = "SELECT DISTINCT products.id, products.ten, products.img, products.gia,products.tac_gia, products.danh_muc_id,  products.mo_ta, danh_muc.name AS danh_muc_name, nha_san_xua.name AS nha_san_xua_name 
+        $sql = "SELECT DISTINCT products.id, products.name, products.category_id , products.publishing_house_id,products.author_id, products.img,  products.price, categories.name AS category_name, publisher.name AS publisher_name, authors.name AS author_name 
         FROM products 
-        JOIN categories ON danh_muc.id = products.danh_muc_id 
-        JOIN nha_san_xua ON nha_san_xua.id = products.nha_san_xuat_id WHERE 1";
+        JOIN categories ON categories.id = products.category_id 
+        JOIN authors ON authors.id = products.author_id
+        JOIN publisher_houses ON publisher_houses.id = products.publishing_house_id WHERE 1";
         $sql .= " ORDER BY products.id DESC";
         return $this->conn->query($sql);
     }
-    public function insert($ten, $tac_gia, $danh_muc_id, $nha_xuat_ban_id, $gia, $img)
+
+    public function insert($name, $category_id, $publishing_house_id, $author_id, $img, $price, $description, $quantity, $count_sale = 0)
     {
-        $sql = "INSERT INTO products VALUE (null,'$ten', '$tac_gia','$danh_muc_id', '$nha_xuat_ban_id', '$gia','$img')";
+        $sql = "INSERT INTO `products` 
+                (`name`, `category_id`, `publishing_house_id`, `author_id`, `img`, `price`, `description`, `quantity`, `count_sale`, `created_at`) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+
+        // Chuẩn bị câu lệnh
         $stmt = $this->conn->prepare($sql);
-        return $stmt->execute();
+
+        // Thực thi với các tham số
+        return $stmt->execute([
+            $name,
+            $category_id,
+            $publishing_house_id,
+            $author_id,
+            $img,
+            $price,
+            $description,
+            $quantity,
+            $count_sale
+        ]);
     }
+
+
     function delete($id)
     {
         $sql = "delete from products where id=$id";
@@ -33,12 +53,12 @@ class productModel
         $sql = "SELECT * FROM products WHERE id=$id";
         return $this->conn->query($sql)->fetch();
     }
-    function update($id, $ten, $tac_gia, $gia, $img)
+    function update($id, $name, $category_id, $publishing_house_id, $author_id, $img, $price)
     {
         if (empty($img)) {
-            $sql = "UPDATE products SET ten='$ten', tac_gia='$tac_gia', gia=$gia' WHERE id=$id";
+            $sql = "UPDATE products SET name='$name', category_id='$category_id', publishing_house_id='$publishing_house_id', author_id='$author_id', price='$price' WHERE id=$id";
         } else {
-            $sql = "UPDATE products SET ten='$ten' , tac_gia='$tac_gia', gia=$gia' ,  img ='$img' WHERE id=$id";
+            $sql = "UPDATE products SET name='$name', category_id='$category_id', publishing_house_id='$publishing_house_id', author_id='$author_id', img='$img', price='$price' WHERE id=$id";
         }
 
         $stmt = $this->conn->prepare($sql);
