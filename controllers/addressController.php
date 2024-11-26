@@ -21,21 +21,29 @@ class addressController {
             foreach ($cart_items as $item) {
                 $total_price += $item['price'] * $item['quantity'];
             }
-
-            // Bắt đầu giao dịch
             $this->addressModel->beginTransaction();
-
-            // Lưu đơn hàng
             $this->addressModel->saveOrder($user_id, $cart_items, $user_address, $total_price);
-
-            // Xóa giỏ hàng
             $this->addressModel->clearCart($user_id);
-
-            // Commit giao dịch
             $this->addressModel->commit();
+            echo "
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        title: 'Cảm ơn bạn đã mua hàng!',
+                        text: 'Sản phẩm sẽ được giao đến bạn trong thời gian gần nhất.',
+                        icon: 'success',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#3085d6'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = 'index.php?act=home';
+                        }
+                    });
+                });
+            </script>";
+        
 
-            // Redirect hoặc thông báo thành công
-            header('Location: index.php?act=home');  // Chuyển đến trang home sau khi hoàn tất
         } catch (Exception $e) {
             // Nếu có lỗi, rollback giao dịch
             $this->addressModel->rollback();

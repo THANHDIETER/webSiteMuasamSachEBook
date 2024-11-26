@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh sách Đơn hàng</title>
-
+    
     <!-- Liên kết tới Bootstrap 4 CDN -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
@@ -13,11 +13,11 @@
     <style>
         body {
             background-color: #f4f4f9;
+            
         }
-
         .container {
             margin-top: 30px;
-            margin-left: 400px;
+            float: right;
         }
 
         .order-table {
@@ -63,9 +63,11 @@
     </style>
 </head>
 <body>
-    <div class="container mt-2">
+<?php require_once "components/header.php"; ?>
+<div class="main-content">
+    
         <header class="text-center">
-            <h1>Danh sách Đơn hàng</h1>
+        <h1 class="bg-primary text-white py-2 rounded-top mb-3 mt-4 text-center">Danh sách Đơn hàng</h1>
         </header>
 
         <table class="table table-bordered table-striped order-table">
@@ -104,8 +106,8 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-    </div>
 
+    </div>
     <!-- Liên kết tới Bootstrap JS và jQuery (dành cho các thành phần Bootstrap sử dụng JavaScript) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>

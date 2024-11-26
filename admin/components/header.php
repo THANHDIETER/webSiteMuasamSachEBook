@@ -60,10 +60,9 @@
     <div class="sidebar">
         <div class="p-3 border-bottom border-secondary">
             <a href="index.php" class="d-flex align-items-center text-light text-decoration-none">
-                <img src="<?php echo isset($_SESSION['user'])
-                    ? 'https://tse4.mm.bing.net/th?id=OIP.yZVwgbmWs-5ZtRGQgiryyAHaHa&pid=Api&P=0&h=180' . $_SESSION['user']['avatar']
-                    : 'https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg'; ?>" alt="Avatar"
-                    class="rounded-circle me-2" style="width: 40px; height: 40px;">
+            <img class="rounded-circle shadow-1-strong me-3"
+                  src="https://lms.languagehub.vn/store/1/default_images/default_profile.jpg" alt="avatar" width="40"
+                  height="40" />
                 <span class="fw-bold">
                     <?php echo isset($_SESSION['user']) ? $_SESSION['user']['name'] : 'Admin'; ?>
                 </span>
@@ -100,22 +99,23 @@
             </nav>
             <div class="ms-auto d-flex align-items-center">
                 <span class="me-3">Xin chào,
-                    <?php echo isset($_SESSION['user']) ? $_SESSION['user']['name'] : 'Admin'; ?></span>
+                    <?php echo $_SESSION['name'] ?></span>
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                        <img src="<?php echo isset($_SESSION['user'])
-                            ? 'https://tse4.mm.bing.net/th?id=OIP.yZVwgbmWs-5ZtRGQgiryyAHaHa&pid=Api&P=0&h=180' . $_SESSION['user']['avatar']
-                            : 'https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg'; ?>"
-                            alt="Avatar" class="rounded-circle" style="width: 35px; height: 35px;">
+                    <img class="rounded-circle shadow-1-strong me-3"
+                         src="https://lms.languagehub.vn/store/1/default_images/default_profile.jpg" alt="avatar" width="40"height="40" />
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="../">Vào Website</a></li>
-                        <li><a class="dropdown-item" href="index.php?act=logout">Đăng xuất</a></li>
+                        <?php
+                            echo '
+                            <li><a class="dropdown-item" href="../"><i class="bi bi-file-earmark-person"></i> vào website</a></li>
+                            <li><a class="dropdown-item" href="?act=profile"><i class="bi bi-person-circle"></i> Hồ sơ</a></li>
+                            <li><a class="dropdown-item" href="?act=logout"><i class="bi bi-box-arrow-right"></i> Đăng xuất</a></li>';
+                         ?>
                     </ul>
                 </div>
             </div>
         </header>
-
         <main class="p-4">
             <!-- Content Goes Here -->
         </main>

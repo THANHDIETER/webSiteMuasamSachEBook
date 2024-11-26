@@ -1,7 +1,7 @@
 <?php
     function connectDB(){
         $host = 'localhost';
-        $dbname = 'book';
+        $dbname = 'book_store';
         $username = 'root';
         $password = '';
         

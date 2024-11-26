@@ -1,3 +1,4 @@
+
 +
 .<!DOCTYPE html>
 <html lang="en">
@@ -81,9 +82,9 @@
                     <div class="col-md-3 mb-3">
                         <div class="card">
                             <input type="hidden" name="" value="<?php echo $ke['category_id'] ?>" id="">
-                            <img style=" height:280px;  padding: 20px; "  src="./assets/images/prod/books/<?php echo $ke['img'] ?>" class="card-img-top" alt="Về Đi Con - Bìa Cứng">
+                           <a href="?act=detail&id=<?php echo $ke['id'] ?>"> <img style=" height:280px;  padding: 20px; "  src="./assets/images/prod/books/<?php echo $ke['img'] ?>" class="card-img-top" alt="Về Đi Con - Bìa Cứng"></a>
                             <div class="card-body"> 
-                                <h6 class="card-title"><?php echo $ke['name'] ?></h6>
+                                <a class="nav-link" href="?act=detail&id=<?php echo $ke['id'] ?>"><h6 class="card-title"><?php echo $ke['name'] ?></h6></a>
                                 <p class="text-success"><?php echo $ke['author'] ?></p>
                                 <div class="d-flex justify-content-between">
                                     <p class="text-danger font-weight-bold"><?php $price=$ke['price']-($ke['price']/100)*$ke['sale'];

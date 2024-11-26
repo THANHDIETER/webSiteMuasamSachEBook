@@ -4,85 +4,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>them san pham</title>
+    <title>Thêm Sản Phẩm</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../assets/stytes/footer.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <!-- link font roboto -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .main-content {
+            margin-top: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        form input,
+        form select,
+        form textarea {
+            margin-bottom: 15px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
+    <?php require_once "components/header.php"; ?>
 
     <div class="main-content">
         <div class="container">
-            <h1 class="fw-bold text-center mt-0">Thêm sản phẩm</h1>
-            <br><br>
-            <form action="" enctype="multipart/form-data" method="post">
+            <h1 class="fw-bold text-center">Thêm sản phẩm</h1>
+            <form action="" enctype="multipart/form-data" method="POST">
                 <div class="form-group">
-                    <label>Tên sách</label>
-                    <input class="form-control" type="text" name="ten" required ?>
-                </div><br>
+                    <label for="name">Tên sách</label>
+                    <input class="form-control" type="text" id="name" name="name" required>
+                </div>
                 <div class="form-group">
-                    <label for=>Hình ảnh</label>
-                    <input class="form-control" type="file" name="img" ?>
-                </div><br>
-                <div class="form-group">
-                    <label>Tác giả</label>
-                    <input class="form-control" type="text" name="tac_gia" ?>
-                </div><br>
-                <div class="form-group">
-                    <label>Mô tả</label>
-                    <textarea class="form-control" name="mo_ta"></textarea>
-
-                </div><br>
-                <div class="form-group">
-                    <label for="exampleFormControlSelect2">Thể loại</label>
-                    <select multiple class="form-control" value="<?= $Product['danh_muc_id'] ?>" type="text"
-                        id="danh_muc_id" name="danh_muc_id">
-                        <option value="1">Novel</option>
-                        <option value="2">Short Story</option>S
-                        <option value="3">Poetry</option>
-                        <option value="4">Drama</option>
-                        <option value="5">Autobiography </option>
-                        <option value="6">Biography</option>
-                        <option value="7">History</option>
-                        <option value="8">Science</option>
-                        <option value="9">Business</option>
-                        <option value="10">Psychology</option>
-                        <option value="11">Self-help</option>
-                        <option value="12">Fairy Tales</option>
-                        <option value="13">Educational Stories</option>
-                        <option value="14">Fantasy</option>
-                        <option value="15">Science Fiction</option>
-                        <option value="16">Epic Fantasy</option>
-                        <option value="17">Mystery</option>
-                        <option value="18">Romance</option>
-                        <option value="19">Family Romance</option>
-                        <option value="20">Friendship</option>
-                        <option value="21">Horror</option>
-                        <option value="22">Detective</option>
-                        <option value="23">Thriller</option>
-                        <option value="24">Music</option>
-                        <option value="25">Cinema</option>
+                    <label for="category_id">Danh mục</label>
+                    <select class="form-control" id="category_id" name="category_id" required>
+                        <option value="">Chọn danh mục</option>
+                        <?php foreach ($listDanhMuc as $key): ?>
+                            <option value="<?= $key['id'] ?>"><?= $key['name'] ?></option>
+                        <?php endforeach; ?>
                     </select>
-                </div><br>
+                </div>
                 <div class="form-group">
-                    <label>Giá</label>
-                    <input class="form-control" type="text" name="gia" required ?>
-                </div><br>
-                <input type="submit" name="btn_insert" id="" value="ADD PRODUCT" style="width: 200px; "
-                    class="btn btn-primary">
+                    <label for="publishing_house_id">Nhà xuất bản</label>
+                    <select class="form-control" id="publishing_house_id" name="publishing_house_id" required>
+                        <option value="">Chọn nhà xuất bản</option>
+                        <?php foreach ($listNhaXuatBan as $key): ?>
+                            <option value="<?= $key['id'] ?>"><?= $key['name'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="author_id">Tác giả</label>
+                    <select class="form-control" id="author_id" name="author_id" required>
+                        <option value="">Chọn tác giả</option>
+                        <?php foreach ($listTacGia as $key): ?>
+                            <option value="<?= $key['id'] ?>"><?= $key['name'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="img">Hình ảnh</label>
+                    <input class="form-control" type="file" id="img" name="img" required>
+                </div>
+                <div class="form-group">
+                    <label for="price">Giá</label>
+                    <input class="form-control" type="number" id="price" name="price" required>
+                </div>
+                <div class="form-group">
+                    <label for="sale">Sale (%)</label>
+                    <input class="form-control" type="number" id="sale" name="sale" required>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Số lượng</label>
+                    <input class="form-control" type="number" id="quantity" name="quantity" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Mô tả</label>
+                    <textarea class="form-control" id="description" name="description" rows="4"></textarea>
+                </div>
+                <button type="submit" name="btn_insert" class="btn btn-primary">Thêm sản phẩm</button>
             </form>
-
         </div>
     </div>
-
 </body>
-
 </html>

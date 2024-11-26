@@ -18,6 +18,8 @@
 </head>
 
 <body>
+<?php require_once "components/header.php"; ?>
+
     <div class="main-content">
         <div class="container">
             <h1 class="fw-bold text-center">Cập nhật nhà xuất bản</h1>

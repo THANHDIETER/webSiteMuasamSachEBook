@@ -15,6 +15,7 @@
 </head>
 
 <body>
+<?php require_once 'components/header.php' ?>
     <div class="main-content">
         <div class="container ms-auto ">
             <div class=""><a href="index.php?act=addDanhMuc" class="btn btn-success">Thêm danh mục</a></div>

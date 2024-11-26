@@ -20,7 +20,7 @@
     <?php foreach($productOne as $name): ?>
     <div class="row bg-white">
     <div class="col-4">
-    <img style=" width:100%; height: 100%;" src="./assets/images/prod/books/<?php echo $name['img'] ?>" class="top-pro-img" alt="">
+    <img style=" max-width:100%;" src="./assets/images/prod/books/<?php echo $name['img'] ?>" class="top-pro-img" alt="">
     </div>
     
     <div class="col-8">
@@ -46,7 +46,7 @@
            
             <p class="tags"><?php echo $name['name'] ?>  </p>
            
-            <a style="width: 200px; height:40px; background-color:red; line-height:40px;" class=" nav-link btn   text-white" href="?act=addToCart&id=<?= $name['id'] ?>">Thêm vào giỏ hàng</a>
+            <a style="width: 200px; height:40px; background-color:red; line-height:40px;" class=" nav-link btn   text-white" href="?act=addToCart&id=<?= $name['id'] ?>">">Thêm vào giỏ hàng</a>
             <br>
             <p>Gọi đặt hàng: 0972.150.772 hoac: 0972.150.772</p>
             <h3>Thông tin & Khuyến mãi</h3>
@@ -122,15 +122,12 @@
                     <img src="./assets/images/prod/books/<?php echo $key['img'] ?>" class="card-img-top" alt="Book 1">
                     <div class="card-body text-center">
                         <p class="card-title fw-bold mb-1"><?php echo $key['name'] ?></p>
-                     
                         <p class="text-danger">
                         <?php
                           $price=$key['price']-($key['price']/100)*$key['sale'];
                           $formatted_price = number_format($price, 0, ',', '.'); 
                           echo $formatted_price . 'đ';
                           ?>
-
-                          
                     </div>
                 </div>
                 </a>
@@ -140,29 +137,89 @@
         </div>
     </div>
     <div class="container mt-5">
-        <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <span>0 bình luận</span>
-                <div class="dropdown">
-                    <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="sortComments" data-bs-toggle="dropdown" aria-expanded="false">
-                        Sắp xếp theo
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="sortComments">
-                        <li><a class="dropdown-item" href="#">Mới nhất</a></li>
-                        <li><a class="dropdown-item" href="#">Cũ nhất</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body">
-                <textarea class="form-control" rows="3" placeholder="Bình luận..."></textarea>
-            </div>
-            <div class="card-footer">
-                <button class="btn btn-primary btn-sm">Đăng</button>
+         <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <span id="comment-count">0 bình luận</span>
+            <div class="dropdown">
+                <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="sortComments" data-bs-toggle="dropdown" aria-expanded="false">
+                    Sắp xếp theo
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="sortComments">
+                    <li><a class="dropdown-item" href="?action=sort&order=newest">Mới nhất</a></li>
+                    <li><a class="dropdown-item" href="?action=sort&order=oldest">Cũ nhất</a></li>
+                </ul>
             </div>
         </div>
+<section style="background-color: #eee;">
+  <div class="container my-5 py-5">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xl-8">
+        <div class="card">
     </div>            
-        
     </div>
+    <?php foreach ($cmt as $key) { ?>
+          <div class="card-body">
+            <div class="d-flex flex-start align-items-center">
+              <img class="rounded-circle shadow-1-strong me-3"
+                src="https://lms.languagehub.vn/store/1/default_images/default_profile.jpg" alt="avatar" width="60"
+                height="60" />
+              <div>
+                <h6 class="fw-bold text-primary mb-1"><?php ?></h6>
+                <p class="text-muted small mb-0">
+                <?php echo $key['created_at'] ?>
+                </p>
+              </div>
+            </div>
+            <p class="mt-3 mb-4 pb-2">
+                <?php echo $key['content'] ?>
+            </p>
+           
+            <div class="small d-flex justify-content-start">
+              <a href="#!" class="d-flex align-items-center me-3">
+                <i class="far fa-thumbs-up me-2"></i>
+                <p class="mb-0">Like</p>
+              </a>
+              <a href="#!" class="d-flex align-items-center me-3">
+                <i class="far fa-comment-dots me-2"></i>
+                <p class="mb-0">Comment</p>
+              </a>
+              <a href="#!" class="d-flex align-items-center me-3">
+                <i class="fas fa-share me-2"></i>
+                <p class="mb-0">Share</p>
+              </a>
+              </div>
+              </div>
+          <?php } ?>
+          <!-- Phần form bình luận -->
+           <form method="post">
+           <div class="d-flex justify-content-center mt-2 pt-1">
+            <button  name="submit" class="btn btn-outline-primary">show all</button>
+            </div>
+          </form>
+          <form method="post">
+            <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+              <div class="d-flex flex-start w-100">
+                <img class="rounded-circle shadow-1-strong me-3"
+                  src="https://lms.languagehub.vn/store/1/default_images/default_profile.jpg" alt="avatar" width="40"
+                  height="40" />
+                <div class="form-outline w-100">
+                  <textarea class="form-control" name="comment" rows="4" placeholder="Bình luận..." style="background: #fff;" ></textarea>
+                  <label class="form-label" for="textAreaExample">Message</label>
+                </div>
+              </div>
+              <div class="float-end mt-2 pt-1">
+                <button type="submit" name="btn_submit" class="btn btn-primary btn-sm">Post comment</button>
+                <button type="reset" class="btn btn-outline-primary btn-sm">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+    </div>
+</div>
           
     <br>
     <script>

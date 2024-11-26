@@ -21,12 +21,13 @@ try {
         'logout'    => (new homeController())->logout(),
         'product'   => (new homeController())->product(),
         'register'  => (new homeController())->register(),
+        'dmid'=> (new homeController())->dmshow($_GET['id']),
 
         // Các hành động của cartController
         'addToCart'         => (new CartController())->addToCart($id),
         'updateQuantity'    => (new CartController())->updateQuantity(),
         'cart'              => (new CartController())->viewCart(),
-
+        'remove_from_cart'  => (new CartController())->removeFromCart($id),
         // Các hành động của addressController
         'checkout'      => (new addressController())->checkout(),
         'processCheckout' => (new addressController())->processCheckout(),
@@ -36,6 +37,8 @@ try {
         'orderDetail' => (new addressController())->viewOrderDetail($id),  
         'cancelOrder' => (new addressController())->cancelOrder($id),
         
+        'search' =>(new homeController())->search($_GET['keySearch']),
+
 
         default => throw new Exception("Hành động không hợp lệ hoặc không tồn tại"),
     };
