@@ -31,13 +31,21 @@
     function cart(){
         
     }
-    function top8Product() {
+    function top4Product() {
         $sql = "SELECT products.*,authors.name as author 
             FROM products
-            JOIN authors ON products.author_id = authors.id ORDER BY id DESC LIMIT 8";
+            JOIN authors ON products.author_id = authors.id ORDER BY id DESC LIMIT 4";
        
         return $this->conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
+    function to3Product(){
+        $sql = "SELECT products.*,authors.name as author 
+            FROM products
+            JOIN authors ON products.author_id = authors.id ORDER BY id DESC LIMIT 3";
+           return $this->conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
     function top6Product() {
         $sql = "SELECT * FROM products ORDER BY id DESC LIMIT 6";
         return $this->conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
@@ -87,14 +95,20 @@
         $comment = "";
     }
     function allCmt() {
-        $sql = "SELECT * FROM `comments`";
-        return $this->conn->query($sql)->fetchAll();
+        $sql = "SELECT 
+                comments.id AS comment_id, 
+                comments.user_id, 
+                comments.product_id, 
+                comments.content, 
+                comments.created_at, 
+                users.name, 
+                users.avatar 
+            FROM comments JOIN  users ON comments.user_id = users.id ORDER BY comments.created_at DESC";
+     return $this->conn->query($sql)->fetchAll();
     }
     function Cmt(){
-        $sql = "SELECT * FROM `comments` ORDER BY `created_at` DESC LIMIT 2";
-        return $this->conn->query($sql)->fetchAll();
-
-   
+            $sql = "SELECT comments.id AS comment_id, comments.user_id, comments.product_id, comments.content, comments.created_at, users.name, users.avatar FROM comments JOIN users ON comments.user_id = users.id ORDER BY comments.created_at DESC LIMIT 2";
+            return $this->conn->query($sql)->fetchAll();
     }
     public function searchModel($key) {
         $sql = "SELECT * FROM `products` WHERE `name` LIKE :keyword";

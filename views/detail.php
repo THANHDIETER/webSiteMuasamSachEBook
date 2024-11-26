@@ -158,38 +158,36 @@
     </div>            
     </div>
     <?php foreach ($cmt as $key) { ?>
-          <div class="card-body">
-            <div class="d-flex flex-start align-items-center">
-              <img class="rounded-circle shadow-1-strong me-3"
-                src="https://lms.languagehub.vn/store/1/default_images/default_profile.jpg" alt="avatar" width="60"
-                height="60" />
-              <div>
-                <h6 class="fw-bold text-primary mb-1"><?php ?></h6>
-                <p class="text-muted small mb-0">
-                <?php echo $key['created_at'] ?>
-                </p>
-              </div>
+    <div class="card-body">
+        <div class="d-flex flex-start align-items-center">
+            <img class="rounded-circle shadow-1-strong me-3" 
+                src="https://lms.languagehub.vn/store/1/default_images/default_profile.jpg" 
+                alt="avatar" width="60" height="60" />
+            <div class="d-flex flex-column">
+                <h6 class="fw-bold text-primary mb-1"><?php echo htmlspecialchars($key['name']); ?></h6>
+                <p class="text-muted small mb-0"><?php echo htmlspecialchars($key['created_at']); ?></p>
             </div>
-            <p class="mt-3 mb-4 pb-2">
-                <?php echo $key['content'] ?>
-            </p>
-           
-            <div class="small d-flex justify-content-start">
-              <a href="#!" class="d-flex align-items-center me-3">
+        </div>
+        <p class="mt-3 mb-4 pb-2">
+            <?php echo htmlspecialchars($key['content']); ?>
+        </p>
+        <div class="small d-flex justify-content-start">
+            <a href="#!" class="d-flex align-items-center me-3">
                 <i class="far fa-thumbs-up me-2"></i>
                 <p class="mb-0">Like</p>
-              </a>
-              <a href="#!" class="d-flex align-items-center me-3">
+            </a>
+            <a href="#!" class="d-flex align-items-center me-3">
                 <i class="far fa-comment-dots me-2"></i>
                 <p class="mb-0">Comment</p>
-              </a>
-              <a href="#!" class="d-flex align-items-center me-3">
+            </a>
+            <a href="#!" class="d-flex align-items-center me-3">
                 <i class="fas fa-share me-2"></i>
                 <p class="mb-0">Share</p>
-              </a>
-              </div>
-              </div>
-          <?php } ?>
+            </a>
+        </div>
+    </div>
+<?php } ?>
+
           <!-- Phần form bình luận -->
            <form method="post">
            <div class="d-flex justify-content-center mt-2 pt-1">

@@ -38,22 +38,7 @@ class productModel
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute();
     }
-    // public function print($id)
-    // {
-    //     $sql = "SELECT * FROM products WHERE id=$id";
-    //     return $this->conn->query($sql)->fetch();
-    // }
-    // function update($id, $ten, $tac_gia, $gia, $img)
-    // {
-    //     if (empty($img)) {
-    //         $sql = "UPDATE products SET ten='$ten', tac_gia='$tac_gia', gia=$gia' WHERE id=$id";
-    //     } else {
-    //         $sql = "UPDATE products SET ten='$ten' , tac_gia='$tac_gia', gia=$gia' ,  img ='$img' WHERE id=$id";
-    //     }
-
-    //     $stmt = $this->conn->prepare($sql);
-    //     return $stmt->execute();
-    // }
+    
     function allCmt (){
         $sql = "SELECT * FROM `comments` ";
         return $this->conn->query($sql)->fetchAll();

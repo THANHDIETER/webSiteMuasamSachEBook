@@ -44,8 +44,8 @@ match ($act) {
     'addNhaXuatBan' => (new nhaXuatBanController())->addNhaXuatBan(),
     'deleteNhaXuatBan' => (new nhaXuatBanController())->deleteNhaXuatBan($_GET['id']),
     'updateNhaXuatBan' => (new nhaXuatBanController())->updateNhaXuatBan($_GET['id']),
-    // quản lỳ bình luận
     
+    // quản lỳ bình luận
     'comment' => (new productController())->comment(),
     'logout' => (new productController())->logout(),
 

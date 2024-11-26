@@ -70,25 +70,7 @@ class productController
      //           $author_id = $_POST['author_id'];
      //           $category_id = $_POST['category_id'];
      //           $publishing_house_id = $_POST['publishing_house_id'];
-     //           $price = $_POST['price'];
-     //           if (empty($_FILES['img']['name'])) {
-     //                $img = "";
-     //           } else {
-     //                $img = $_FILES['img']['name'];
-     //                $tmp = $_FILES['img']['tmp_name'];
-     //                move_uploaded_file($tmp, '../assets/images/prod/books/' . $img);
-     //           }
 
-     //           if ($this->productModel->update($id, $name, $author_id, $category_id, $publishing_house_id, $price, $img)) {
-     //                echo '<script type="text/javascript">
-     //           window.location.href = "?act=listproduct";
-     //           alert("Bạn đã cập nhật thành công");
-     //           </script>';
-     //           } else {
-     //                echo "Lỗi";
-     //           }
-     //      }
-     // }
      
      function comment()  {
           $allCmt = $this->productModel->allCmt();
@@ -127,13 +109,6 @@ class productController
       }
       function logout(){
           session_unset();
-          // if (ini_get("session.use_cookies")) {
-          //      $params = session_get_cookie_params();
-          //      setcookie(session_name(), '', time() - 42000,
-          //          $params["path"], $params["domain"],
-          //          $params["secure"], $params["httponly"]
-          //      );
-          //  }
           echo '<script type="text/javascript">
                      alert("Bạn đã đăng xuất");
                     window.location.href = "?act=/"; 

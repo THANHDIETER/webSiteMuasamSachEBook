@@ -9,7 +9,8 @@
         }
         function home(){
             $products = $this->homeModel->allProduct();
-            $top8 = $this->homeModel->top8Product();
+            $top4 = $this->homeModel->top4Product();
+            $top3 = $this->homeModel->to3Product();
             $danhmuc = $this->homeModel->alldanhmuc();
             if(isset($_GET['submit'])){
                    echo '<script type="text/javascript">
@@ -32,8 +33,8 @@
                 }
                 if(isset($_POST['btn_submit'])){
                     $this->homeModel->addComment($_SESSION['id'],$id,$_POST['comment']);
-                    echo '<script type="text/javascript">
-                    if (confirm("Bạn đã gửi comment. Bạn có muốn load lại trang ko ?")) {
+                    echo '<script type="text/javasc if (confirm("Bạn đã gửi comment. Bạn có muốn load lại trang ko ?")) {ript">
+                   
                         window.location.href = "?act=detail&id=' . $id . '";
                     }
                 </script>'; 

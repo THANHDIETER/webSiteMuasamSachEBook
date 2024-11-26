@@ -1,0 +1,138 @@
+
+/* Thay đổi màu nền của nút */
+.carousel-control-prev,
+.carousel-control-next {
+    background-color: transparent;
+    margin-top: 20%;
+    /* Đẩy các nút xuống dưới */
+    border: none;
+}
+
+/* Thay đổi kích thước của các nút */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 40px;
+    height: 40px;
+    background-color: darkgrey;
+}
+
+/* Tùy chỉnh kích thước của nút điều khiển */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 60px;
+    height: 60px;
+
+}
+
+a:hover {
+    background-color: lightgray;
+    color: white;
+}
+
+.link-hover a {
+    transition: color 0.3s ease;
+    /* Thêm hiệu ứng chuyển màu mượt mà */
+}
+
+.link-hover a:hover {
+    color: white !important;
+    transition: ease 1s;
+}
+
+/* css sản phẩm */
+.card-img-top {
+    object-fit: cover;
+    height: 200px;
+    width: 100%;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 1rem;
+    color: #333;
+}
+
+.card-text {
+    font-size: 0.875rem;
+    color: #ff8c00;
+}
+.currently-serving {
+display: flex;
+justify-content: space-between; /* Căn đều các sản phẩm */
+gap: 20px; /* Khoảng cách giữa các sản phẩm */
+margin-top: 20px;
+}
+
+.product {
+flex: 1;
+text-align: center;
+border: 1px solid #ddd;
+padding: 15px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+border-radius: 10px; /* Góc bo tròn cho sản phẩm */
+background-color: #fff; /* Màu nền trắng cho sản phẩm */
+}
+
+.product img {
+width: 100%; /* Đảm bảo ảnh chiếm hết chiều rộng của phần tử */
+height: auto; /* Giữ tỉ lệ ảnh */
+max-height: 200px; /* Đảm bảo chiều cao ảnh không quá 200px */
+object-fit: cover; /* Đảm bảo ảnh không bị méo */
+border-radius: 10px; /* Góc bo tròn cho ảnh */
+}
+
+.product h3 {
+margin-top: 15px;
+font-size: 1.2rem;
+font-weight: bold;
+color: #333;
+}
+
+.product button {
+margin-top: 10px;
+padding: 10px 20px;
+background-color: #8B4F41; /* Màu nền của nút */
+color: white;
+border: none;
+border-radius: 25px; /* Bo tròn góc của nút */
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+.product button:hover {
+background-color: #7c3f2d; /* Màu nền khi hover */
+}
+
+
+.rounded-box {
+width: 1000px;
+height: 200px;
+background-color: #580721;
+border-radius: 30px;
+display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
+font-size: 18px;
+color: white;
+border: 2px solid #ddd;
+font-weight: bold;
+text-transform: uppercase;
+letter-spacing: 1px;
+padding: 10px;
+margin-top: 50px;
+opacity: 0;  
+transform: translateX(100%);  /* Đặt ô vuông ra ngoài màn hình */
+transition: all 3s ease;  /* Hiệu ứng chuyển động */
+}
+
+.rounded-box.visible {
+opacity: 1;  /* Hiển thị */
+transform: translateX(0);  /* Di chuyển ô vuông về vị trí ban đầu */
+}
+
+
+
