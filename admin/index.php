@@ -1,10 +1,10 @@
 <?php
 session_start();
+
 // Require toàn bộ file Commons
 require_once '../connect/function.php';
 // Require toàn bộ file Controllers
 
-require_once "components/header.php";
 
 require_once 'controllers/controller.php';
 require_once 'controllers/controllerDanhMuc.php';
@@ -21,8 +21,8 @@ require_once 'models/orderModel.php';
 $act = $_GET['act'] ?? '/';
 match ($act) {
     // Trang chủ quản trị
-    // '/' => (new productController)->login(),
-
+    '/' => (new productController)->login(),
+    'home' => (new productController)->home(),
     'insert' => (new productController())->insert(),
     'listproduct' => (new productController())->listProduct(),
     'delete' => (new productController())->delete($_GET['id']),
@@ -51,5 +51,11 @@ match ($act) {
     'order' => (new orderController())->adminOrders(),  // Xem danh sách đơn hàng
     'confirmOrder' => (new orderController())->confirmOrder(), // Xác nhận đơn hàng
     'orderDetail' => (new orderController())->viewOrderDetail(), 
+
+    // quản lỳ bình luận
+    
+    'comment' => (new productController())->comment(),
+    'logout' => (new productController())->logout(),
+
 };
     ?>

@@ -24,11 +24,13 @@
         
         function alldanhmuc() {
        
-            $sql = "SELECT * FROM categories ORDER BY id DESC";
+            $sql = "SELECT * FROM categories ORDER BY id ";
             return $this->conn->query($sql)->fetchAll();
         }
         
-    
+    function cart(){
+        
+    }
     function top8Product() {
         $sql = "SELECT products.*,authors.name as author 
             FROM products
@@ -78,6 +80,30 @@
         $stmt->execute(['email'=> $email]);
         return $stmt->fetch();
     }
+    function addComment($user_id,$product_id,$comment){
+        $sql = "INSERT INTO `comments` (`user_id`, `product_id`, `content`, `created_at`) 
+        VALUES ('$user_id', '$product_id', '$comment', NOW())";
+         $this->conn->exec($sql);
+        $comment = "";
+    }
+    function allCmt() {
+        $sql = "SELECT * FROM `comments`";
+        return $this->conn->query($sql)->fetchAll();
+    }
+    function Cmt(){
+        $sql = "SELECT * FROM `comments` ORDER BY `created_at` DESC LIMIT 2";
+        return $this->conn->query($sql)->fetchAll();
+
+   
+    }
+    public function searchModel($key) {
+        $sql = "SELECT * FROM `products` WHERE `name` LIKE :keyword";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':keyword', '%' . $key . '%', PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 
 
 }

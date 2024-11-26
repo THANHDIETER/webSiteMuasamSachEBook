@@ -73,6 +73,7 @@
     </style>
 </head>
 <body>
+<?php require_once "components/header.php"; ?>
     <div class=" container mt-5">
         <h2>Chi Tiết Đơn Hàng #<?php echo $order_details['id']; ?></h2>
         <p><strong>Trạng thái:</strong> <?php echo $order_details['status']; ?></p>

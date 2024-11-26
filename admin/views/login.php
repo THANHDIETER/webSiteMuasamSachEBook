@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,24 +13,21 @@
 </head>
 
 
-<body>
-    <?php if (isset($err)) : ?>
-    <div class="alert alert-danger"><?php echo htmlspecialchars($err); ?></div>
-<?php endif; ?>
 
+
+<body>
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <div class="card border-0 shadow-lg" style="max-width: 900px; border-radius: 12px;">
             <div class="row no-gutters d-flex align-items-stretch">
                 <!-- Phần đăng nhập bên trái -->
                 <div class="col-md-6 p-5">
                     <h3 class="card-title text-primary font-weight-bold text-center">Đăng nhập</h3>
-                    <p class="text-muted">Nếu bạn chưa có tài khoản hãy đăng ký</p>
-                    <form action="?act=login" method="POST">
+                    <form action="" method="POST">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Email" name="email" required>
                         </div>
                         <div class="form-group">
-                            <input type="password" name="password" class="form-control" placeholder="password" required>
+                            <input type="password" class="form-control" placeholder="password" name="password" required>
                         </div>
                         <button type="submit" name="btn_submit" class="btn btn-primary btn-block mb-3">Đăng nhập</button>
                     </form>
@@ -39,16 +37,13 @@
                             class="mr-2">
                         Login with Google
                     </button>
-                    <?php if (isset($err)) : ?>
-    <div class="alert alert-danger"><?php echo htmlspecialchars($err); ?></div>
-<?php endif; ?>
-
                     <div class="text-center">
                         <a href="#" class="text-primary">Quên mật khẩu</a>
                     </div>
                     <hr>
                     <p class="text-center">Bạn chưa có tài khoản? <a href="?act=register" class="text-primary">Đăng ký ngay</a></p>
                 </div>
+
 
                 <!-- Phần hình ảnh bên phải -->
                 <div class="col-md-6 h-100">
@@ -59,9 +54,11 @@
         </div>
     </div>
 
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 
 </html>

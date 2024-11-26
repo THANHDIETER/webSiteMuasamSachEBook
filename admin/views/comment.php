@@ -1,3 +1,4 @@
+<?php require_once "user/checkUser.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List Danh muc</title>
+    <title>Quản Lý Bình Luận</title>
     <link rel="stylesheet" href="../assets/stytes/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -15,12 +16,10 @@
 </head>
 
 <body>
-<?php require_once 'components/header.php' ?>
+    <?php require_once "components/header.php"; ?>
     <div class="main-content">
-        <div class="container ms-auto ">
-            <div class=""><a href="index.php?act=addDanhMuc" class="btn btn-success">Thêm danh mục</a></div>
-        </div>
-        <h1 class="bg-primary text-white py-2 rounded-top mb-3 mt-4 text-center">Danh sách danh mục</h1>
+        
+        <h1 class="bg-primary text-white py-2 rounded-top mb-3 mt-4 text-center">Quản Lý Bình Luận</h1>
         <!-- Danh muc Table -->
         <div class="table-responsive">
             <section>
@@ -28,21 +27,18 @@
                     <thead>
                         <tr class="table-info text-white">
                             <th>ID</th>
-                            <th>Tên danh mục</th>
-                            <th>Action</th>
-                        </tr>
+                            <th>Bình Luận </th>
+                            <th>Thời gian</th>
+                            <th>Thao Tác</th>
                     </thead>
 
-                    <?php foreach ($listDanhMuc as $key): ?>
+                    <?php foreach ($allCmt as $key): ?>
                         <tr>
                             <td><?php echo $key['id'] ?></td>
-                            <td><?php echo $key['name'] ?></td>
+                            <td><?php echo $key['content'] ?></td>
+                            <td><?php echo $key['created_at'] ?></td>
                             <td>
-                                <a href="?act=updateDmuc&id=<?php echo $key['id']; ?>"
-                                    class="btn btn-sm btn-outline-primary">
-                                    Edit
-                                </a>
-                                <a href="?act=deleteDmuc&id=<?php echo urlencode($key['id']); ?>"
+                                <a href="?act=comment&id=<?php echo urlencode($key['id']); ?>"
                                     class="btn btn-sm btn-outline-danger" onclick="return confirmDelete()">Remove
                                 </a>
                                 <!-- <a href="#" class="btn btn-sm btn-outline-secondary">Thêm bìa</a> -->
