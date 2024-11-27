@@ -77,22 +77,24 @@
             </table>
 
             <h4 class="text-end">Tổng tiền: <span class="text-danger"><?php echo number_format($total_price, 0, ',', '.'); ?> VND</span></h4>
-
-            <!-- Form thanh toán bằng VNPAY -->
             <div class="text-end mt-4">
-                <form action="vnpay_payment.php" method="POST">
-                    <input type="hidden" name="total_price" class="" value="<?php echo $total_price; ?>">
-                    <button type="submit" class="btn btn-primary">Thanh toán qua VNPAY</button>
-                </form>
-            </div>
+    <!-- Thanh toán qua COD -->
+    <form action="?act=processCheckout" method="POST">
+        <input type="hidden" name="payment_method" value="COD">
+        <button type="submit" class="btn btn-primary">Thanh toán khi nhận hàng (COD)</button>
+    </form>
 
-            <!-- Form thanh toán COD -->
-            <div class="text-end mt-4">
-                <form action="?act=processCheckout" method="POST">
-                    <input type="hidden" name="payment_method " value="COD">
-                    <button type="submit" class="btn btn-primary">Thanh toán COD (Khi nhận hàng)</button>
-                </form>
-            </div>
+        <!-- Thanh toán qua VNPAY -->
+    <form action="vnpay_payment.php" method="POST">
+        <input type="hidden" name="total_price" value="<?php echo $total_price; ?>">
+        <input type="hidden" name="order_id" value="<?php echo $order_id; ?>">
+        <input type="hidden" name="payment_method" value="VNPAY">
+        <button type="submit" class="btn btn-primary">Thanh toán qua VNPAY</button>
+    </form>
+
+    </div>
+
+
         <?php endif; ?>
     </div>
 

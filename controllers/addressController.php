@@ -29,11 +29,9 @@ class addressController {
             // Kiểm tra phương thức thanh toán và gọi phương thức tương ứng
             if (isset($_POST['payment_method']) && $_POST['payment_method'] === 'COD') {
                 $this->processCOD($user_id, $cart_items, $user_address, $total_price);
-            } else if (isset($_POST['payment_method']) && $_POST['payment_method'] === 'VNPAY') {
-                $this->processVNPAY($user_id, $cart_items, $user_address, $total_price);
             } else {
-                throw new Exception("Không có phương thức thanh toán hợp lệ.");
-            }
+                $this->processVNPAY($user_id, $cart_items, $user_address, $total_price);
+            } 
         } catch (Exception $e) {
             $this->addressModel->rollback();
             echo "
@@ -109,58 +107,73 @@ class addressController {
     
     public function processVNPAY($user_id, $cart_items, $user_address, $total_price) {
         try {
-            // Kiểm tra trạng thái thanh toán từ VNPAY
-            $vnpay_status = $_POST['vnpay_data']['status']; // Giả sử VNPAY gửi status về
-            if ($vnpay_status == 'success') {
-                // Thanh toán qua VNPAY: Lưu đơn hàng và gán trạng thái là "Đã thanh toán"
-                $this->addressModel->saveOrder($user_id, $cart_items, $user_address, $total_price, 'VNPAY', 'Đã thanh toán', 'Chờ xác nhận');
-                $this->addressModel->clearCart($user_id);
+            $vnp_ResponseCode = $_GET['vnp_ResponseCode'];
+            $vnp_SecureHash = $_GET['vnp_SecureHash'];
+            $vnp_HashSecret = "Q110FKS53OSQ688Z7TJ3O0GTKPVHDQDA"; // Đảm bảo secret key chính xác
     
-                // Commit giao dịch
-                $this->addressModel->commit();
-    
-                // Hiển thị thông báo thành công
-                echo "
-                <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
-                <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        Swal.fire({
-                            title: 'Thanh toán qua VNPAY thành công!',
-                            text: 'Sản phẩm sẽ được giao đến bạn trong thời gian gần nhất.',
-                            icon: 'success',
-                            confirmButtonText: 'OK',
-                            confirmButtonColor: '#3085d6'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = 'index.php?act=home';
-                            }
-                        });
-                    });
-                </script>";
-            } else {
-                throw new Exception("Thanh toán qua VNPAY không thành công.");
+            // Lấy tất cả tham số từ $_GET trừ vnp_SecureHash
+            $inputData = array();
+            foreach ($_GET as $key => $value) {
+                if ($key != 'vnp_SecureHash' && substr($key, 0, 4) === "vnp_") {
+                    $inputData[$key] = $value;
+                }
             }
+    
+            ksort($inputData); // Sắp xếp tham số theo thứ tự ABC
+            $hashData = urldecode(http_build_query($inputData)); // Tạo chuỗi hash đúng chuẩn
+    
+            // Tính mã bảo mật
+            $calculatedHash = hash_hmac('sha512', $hashData, $vnp_HashSecret);
+           
+
+            
+                
+                if ($vnp_ResponseCode === '00') {
+                    
+                    $this->addressModel->saveOrder($user_id, $cart_items, $user_address, $total_price, 'VNPAY', 'Đã thanh toán', 'Chờ xác nhận');
+                    $this->addressModel->clearCart($user_id);
+                    $this->addressModel->commit();
+                  
+                    echo "
+                        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                Swal.fire({
+                                    title: 'Thanh toán thành công!',
+                                    text: 'Đơn hàng của bạn đã được thanh toán qua VNPAY.',
+                                    icon: 'success',
+                                    confirmButtonText: 'OK',
+                                    confirmButtonColor: '#3085d6'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        window.location.href = 'index.php?act=home';
+                                    }
+                                });
+                            });
+                        </script>";
+                    
+                } else {
+                    throw new Exception("Thanh toán thất bại. Mã lỗi: $vnp_ResponseCode");
+                }
+           
         } catch (Exception $e) {
             $this->addressModel->rollback();
             echo "
             <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
             <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    Swal.fire({
-                        title: 'Lỗi!',
-                        text: '" . $e->getMessage() . "',
-                        icon: 'error',
-                        confirmButtonText: 'OK',
-                        confirmButtonColor: '#d33'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = 'index.php?act=checkout';
-                        }
-                    });
+                Swal.fire({
+                    title: 'Lỗi!',
+                    text: '" . $e->getMessage() . "',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    window.location.href = 'index.php?act=checkout';
                 });
             </script>";
         }
     }
+    
+    
     
     
     
