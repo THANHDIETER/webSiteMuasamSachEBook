@@ -17,20 +17,63 @@ class addressController {
             $user_address = $this->addressModel->getAddressByUserId($user_id);
             $cart_items = $this->addressModel->getCartItems($user_id);
             $total_price = 0;
-
+    
+            // Tính tổng tiền giỏ hàng
             foreach ($cart_items as $item) {
                 $total_price += $item['price'] * $item['quantity'];
             }
+    
+            // Bắt đầu giao dịch
             $this->addressModel->beginTransaction();
-            $this->addressModel->saveOrder($user_id, $cart_items, $user_address, $total_price);
-            $this->addressModel->clearCart($user_id);
-            $this->addressModel->commit();
+            
+            // Kiểm tra phương thức thanh toán và gọi phương thức tương ứng
+            if (isset($_POST['payment_method']) && $_POST['payment_method'] === 'COD') {
+                $this->processCOD($user_id, $cart_items, $user_address, $total_price);
+            } else if (isset($_POST['payment_method']) && $_POST['payment_method'] === 'VNPAY') {
+                $this->processVNPAY($user_id, $cart_items, $user_address, $total_price);
+            } else {
+                throw new Exception("Không có phương thức thanh toán hợp lệ.");
+            }
+        } catch (Exception $e) {
+            $this->addressModel->rollback();
             echo "
             <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
                     Swal.fire({
-                        title: 'Cảm ơn bạn đã mua hàng!',
+                        title: 'Lỗi!',
+                        text: '" . $e->getMessage() . "',
+                        icon: 'error',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#d33'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = 'index.php?act=checkout';
+                        }
+                    });
+                });
+            </script>";
+        }
+    }
+    
+    public function processCOD($user_id, $cart_items, $user_address, $total_price) {
+        try {
+           
+    
+            // Thanh toán COD: Lưu đơn hàng và gán trạng thái là "Chưa thanh toán"
+            $this->addressModel->saveOrder($user_id, $cart_items, $user_address, $total_price, 'COD', 'Chưa thanh toán', 'Chờ xác nhận');
+            $this->addressModel->clearCart($user_id);
+    
+            // Commit giao dịch
+            $this->addressModel->commit();
+    
+            // Hiển thị thông báo thành công
+            echo "
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        title: 'Thanh toán COD thành công!',
                         text: 'Sản phẩm sẽ được giao đến bạn trong thời gian gần nhất.',
                         icon: 'success',
                         confirmButtonText: 'OK',
@@ -42,14 +85,86 @@ class addressController {
                     });
                 });
             </script>";
-        
-
         } catch (Exception $e) {
-            // Nếu có lỗi, rollback giao dịch
             $this->addressModel->rollback();
-            echo "Lỗi trong quá trình thanh toán: " . $e->getMessage();
+            echo "
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        title: 'Lỗi!',
+                        text: '" . $e->getMessage() . "',
+                        icon: 'error',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#d33'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = 'index.php?act=checkout';
+                        }
+                    });
+                });
+            </script>";
         }
     }
+    
+    public function processVNPAY($user_id, $cart_items, $user_address, $total_price) {
+        try {
+            // Kiểm tra trạng thái thanh toán từ VNPAY
+            $vnpay_status = $_POST['vnpay_data']['status']; // Giả sử VNPAY gửi status về
+            if ($vnpay_status == 'success') {
+                // Thanh toán qua VNPAY: Lưu đơn hàng và gán trạng thái là "Đã thanh toán"
+                $this->addressModel->saveOrder($user_id, $cart_items, $user_address, $total_price, 'VNPAY', 'Đã thanh toán', 'Chờ xác nhận');
+                $this->addressModel->clearCart($user_id);
+    
+                // Commit giao dịch
+                $this->addressModel->commit();
+    
+                // Hiển thị thông báo thành công
+                echo "
+                <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        Swal.fire({
+                            title: 'Thanh toán qua VNPAY thành công!',
+                            text: 'Sản phẩm sẽ được giao đến bạn trong thời gian gần nhất.',
+                            icon: 'success',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#3085d6'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'index.php?act=home';
+                            }
+                        });
+                    });
+                </script>";
+            } else {
+                throw new Exception("Thanh toán qua VNPAY không thành công.");
+            }
+        } catch (Exception $e) {
+            $this->addressModel->rollback();
+            echo "
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        title: 'Lỗi!',
+                        text: '" . $e->getMessage() . "',
+                        icon: 'error',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#d33'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = 'index.php?act=checkout';
+                        }
+                    });
+                });
+            </script>";
+        }
+    }
+    
+    
+    
+    
 
     // Phương thức hiển thị form cập nhật địa chỉ
     public function updateAddress() {

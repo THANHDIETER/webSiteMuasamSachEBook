@@ -50,36 +50,50 @@
         </div>
 
         <h3 class="mb-3">Sản phẩm trong giỏ hàng:</h3>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Sản phẩm</th>
-                    <th>Số lượng</th>
-                    <th>Giá</th>
-                    <th>Tổng</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php $total_price = 0; ?>
-                <?php foreach ($cart_items as $item): ?>
+        <?php if (empty($cart_items)): ?>
+            <p>Giỏ hàng của bạn hiện tại đang trống. Vui lòng thêm sản phẩm vào giỏ hàng trước khi thanh toán.</p>
+        <?php else: ?>
+            <table class="table table-bordered">
+                <thead>
                     <tr>
-                        <td><?php echo htmlspecialchars($item['product_name']); ?></td>
-                        <td><?php echo $item['quantity']; ?></td>
-                        <td><?php echo number_format($item['price'], 0, ',', '.'); ?> VND</td>
-                        <td><?php echo number_format($item['quantity'] * $item['price'], 0, ',', '.'); ?> VND</td>
+                        <th>Sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
+                        <th>Tổng</th>
                     </tr>
-                    <?php $total_price += $item['quantity'] * $item['price']; ?>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php $total_price = 0; ?>
+                    <?php foreach ($cart_items as $item): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($item['product_name']); ?></td>
+                            <td><?php echo $item['quantity']; ?></td>
+                            <td><?php echo number_format($item['sale'], 0, ',', '.'); ?> VND</td>
+                            <td><?php echo number_format($item['quantity'] * $item['price'], 0, ',', '.'); ?> VND</td>
+                        </tr>
+                        <?php $total_price += $item['quantity'] * $item['price']; ?>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
 
-        <h4 class="text-end">Tổng tiền: <span class="text-danger"><?php echo number_format($total_price, 0, ',', '.'); ?> VND</span></h4>
+            <h4 class="text-end">Tổng tiền: <span class="text-danger"><?php echo number_format($total_price, 0, ',', '.'); ?> VND</span></h4>
 
-        <div class="text-end mt-4">
-            <form action="?act=processCheckout" method="POST">
-                <button type="submit" class="btn btn-primary">Tiến hành đặt hàng</button>
-            </form>
-        </div>
+            <!-- Form thanh toán bằng VNPAY -->
+            <div class="text-end mt-4">
+                <form action="vnpay_payment.php" method="POST">
+                    <input type="hidden" name="total_price" class="" value="<?php echo $total_price; ?>">
+                    <button type="submit" class="btn btn-primary">Thanh toán qua VNPAY</button>
+                </form>
+            </div>
+
+            <!-- Form thanh toán COD -->
+            <div class="text-end mt-4">
+                <form action="?act=processCheckout" method="POST">
+                    <input type="hidden" name="payment_method " value="COD">
+                    <button type="submit" class="btn btn-primary">Thanh toán COD (Khi nhận hàng)</button>
+                </form>
+            </div>
+        <?php endif; ?>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

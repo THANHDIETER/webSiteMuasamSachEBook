@@ -50,14 +50,14 @@ class CartModel {
     
 
     // Thêm sản phẩm vào giỏ hàng
-    public function addToCartItems($cart_id, $product_id, $quantity, $price) {
+    public function addToCartItems($cart_id, $product_id, $quantity, $sale) {
         $sql = "INSERT INTO cart_items (cart_id, product_id, quantity, price) 
                 VALUES (:cart_id, :product_id, :quantity, :price)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':cart_id', $cart_id, PDO::PARAM_INT);
         $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
         $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
-        $stmt->bindParam(':price', $price, PDO::PARAM_INT);
+        $stmt->bindParam(':price', $sale, PDO::PARAM_INT);
         $stmt->execute();
     }
 

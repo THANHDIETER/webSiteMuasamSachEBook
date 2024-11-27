@@ -9,7 +9,7 @@ class addressModel {
 
     // Lấy sản phẩm trong giỏ hàng
     public function getCartItems($user_id) {
-        $sql = "SELECT cart_items.*, products.name AS product_name, products.price 
+        $sql = "SELECT cart_items.*, products.name AS product_name, products.sale 
                 FROM cart_items
                 JOIN carts ON cart_items.cart_id = carts.id
                 JOIN products ON cart_items.product_id = products.id
@@ -29,58 +29,74 @@ class addressModel {
     }
 
     // Lưu đơn hàng
-        public function saveOrder($user_id, $cart_items, $user_address, $total_price) {
-            try {
-                // Kiểm tra nếu name hoặc các trường quan trọng khác là null
-                if (empty($user_address['receiver']) || empty($user_address['phone_number']) || empty($user_address['delivery_address']) || empty($user_address['email'])) {
-                    throw new Exception("Thông tin địa chỉ không đầy đủ.");
-                }
-        
-                // Bắt đầu giao dịch
-                $this->beginTransaction();
-        
-                // Lưu đơn hàng vào bảng 'orders'
-                $sql = "INSERT INTO orders (user_id, name, phone, address, email, total_amount, order_date, status, payment) 
-                 VALUES (:user_id, :name, :phone, :address, :email, :total_amount, NOW(), 'Chờ xác nhận', :payment)";
-                $stmt = $this->conn->prepare($sql);
-                $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-                $stmt->bindParam(':name', $user_address['receiver'], PDO::PARAM_STR);
-                $stmt->bindParam(':phone', $user_address['phone_number'], PDO::PARAM_STR);
-                $stmt->bindParam(':address', $user_address['delivery_address'], PDO::PARAM_STR);
-                $stmt->bindParam(':email', $user_address['email'], PDO::PARAM_STR);
-                $stmt->bindParam(':total_amount', $total_price, PDO::PARAM_STR);
-
-                // Thêm giá trị cho payment
-                $payment = 'Chưa thanh toán'; // Bạn có thể thay đổi giá trị mặc định nếu cần
-                $stmt->bindParam(':payment', $payment, PDO::PARAM_STR);
-
-                $stmt->execute();
-
-        
-                // Sau khi lưu đơn hàng, lấy ID của đơn hàng vừa tạo
-                $order_id = $this->conn->lastInsertId();
-        
-                // Lưu chi tiết đơn hàng vào bảng 'order_items'
-                foreach ($cart_items as $item) {
-                    $sql = "INSERT INTO order_items (order_id, product_id, quantity, total_price, price) 
-                            VALUES (:order_id, :product_id, :quantity, :total_price, :price)";
-                    $stmt = $this->conn->prepare($sql);
-                    $stmt->bindParam(':order_id', $order_id, PDO::PARAM_INT);
-                    $stmt->bindParam(':product_id', $item['product_id'], PDO::PARAM_INT);
-                    $stmt->bindParam(':quantity', $item['quantity'], PDO::PARAM_INT);$total_item_price = $item['quantity'] * $item['price']; // Tạo biến trung gian
-                    $stmt->bindParam(':total_price', $total_item_price, PDO::PARAM_STR); 
-                    $stmt->bindParam(':price', $item['price'], PDO::PARAM_STR);
-                    $stmt->execute();
-                }
-        
-                // Nếu mọi thao tác thành công, commit giao dịch
-                $this->commit();
-            } catch (Exception $e) {
-                // Nếu có lỗi, rollback giao dịch
-                $this->rollback();
-                throw $e;  // Ném lại lỗi để có thể xử lý ở nơi gọi
+    public function saveOrder($user_id, $cart_items, $user_address, $total_price, $payment_method,$payment_type, $order_status = 'Chờ xác nhận') {
+        try {
+            // Kiểm tra nếu các trường thông tin địa chỉ quan trọng là null hoặc rỗng
+            if (empty($user_address['receiver']) || empty($user_address['phone_number']) || empty($user_address['delivery_address']) || empty($user_address['email'])) {
+                throw new Exception("Thông tin địa chỉ không đầy đủ.");
             }
+    
+            // Bắt đầu giao dịch
+            $this->beginTransaction();
+    
+            // Xác định trạng thái thanh toán và phương thức thanh toán
+            if ($payment_method === 'COD') {
+                $payment_status = 'Chưa thanh toán'; // Thanh toán COD chưa thanh toán
+                $payment_type = 'COD'; // Phương thức thanh toán là COD
+            } elseif ($payment_method === 'VNPAY') {
+                $payment_status = 'Đã thanh toán'; // Thanh toán VNPAY đã thanh toán
+                $payment_type = 'VNPAY'; // Phương thức thanh toán là VNPAY
+            } else {
+                throw new Exception("Phương thức thanh toán không hợp lệ.");
+            }
+    
+            // Lưu đơn hàng vào bảng 'orders'
+            $sql = "INSERT INTO orders (user_id, name, phone, address, email, total_amount, order_date, status, payment_type, payment) 
+                    VALUES (:user_id, :name, :phone, :address, :email, :total_amount, NOW(), :order_status, :payment_type, :payment)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->bindParam(':name', $user_address['receiver'], PDO::PARAM_STR);
+            $stmt->bindParam(':phone', $user_address['phone_number'], PDO::PARAM_STR);
+            $stmt->bindParam(':address', $user_address['delivery_address'], PDO::PARAM_STR);
+            $stmt->bindParam(':email', $user_address['email'], PDO::PARAM_STR);
+            $stmt->bindParam(':total_amount', $total_price, PDO::PARAM_STR);
+            $stmt->bindParam(':payment', $payment_status, PDO::PARAM_STR); // Trạng thái thanh toán (COD/VNPAY)
+            $stmt->bindParam(':order_status', $order_status, PDO::PARAM_STR); // Trạng thái đơn hàng (Chờ xác nhận, Đang giao, v.v.)
+            $stmt->bindParam(':payment_type', $payment_type, PDO::PARAM_STR); // Phương thức thanh toán (COD/VNPAY)
+    
+            $stmt->execute();
+    
+            // Sau khi lưu đơn hàng, lấy ID của đơn hàng vừa tạo
+            $order_id = $this->conn->lastInsertId();
+    
+            // Lưu chi tiết đơn hàng vào bảng 'order_items'
+            foreach ($cart_items as $item) {
+                $sql = "INSERT INTO order_items (order_id, product_id, quantity, total_price, price) 
+                        VALUES (:order_id, :product_id, :quantity, :total_price, :price)";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindParam(':order_id', $order_id, PDO::PARAM_INT);
+                $stmt->bindParam(':product_id', $item['product_id'], PDO::PARAM_INT);
+                $stmt->bindParam(':quantity', $item['quantity'], PDO::PARAM_INT);
+    
+                // Tính toán tổng giá trị sản phẩm
+                $total_item_price = $item['quantity'] * $item['price']; 
+                $stmt->bindParam(':total_price', $total_item_price, PDO::PARAM_STR); 
+                $stmt->bindParam(':price', $item['price'], PDO::PARAM_STR);
+    
+                $stmt->execute();
+            }
+    
+            // Nếu mọi thao tác thành công, commit giao dịch
+            $this->commit();
+        } catch (Exception $e) {
+            // Nếu có lỗi, rollback giao dịch
+            $this->rollback();
+            throw $e;  // Ném lại lỗi để có thể xử lý ở nơi gọi
         }
+    }
+    
+    
+    
 
     public function insertAddress($user_id, $receiver, $delivery_address, $phone_number, $email) {
         // Kiểm tra nếu địa chỉ của user_id đã tồn tại trong bảng 'user_addresses'
