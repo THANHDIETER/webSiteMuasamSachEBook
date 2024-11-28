@@ -56,8 +56,6 @@ class addressController {
     
     public function processCOD($user_id, $cart_items, $user_address, $total_price) {
         try {
-           
-    
             // Thanh toán COD: Lưu đơn hàng và gán trạng thái là "Chưa thanh toán"
             $this->addressModel->saveOrder($user_id, $cart_items, $user_address, $total_price, 'COD', 'Chưa thanh toán', 'Chờ xác nhận');
             $this->addressModel->clearCart($user_id);
@@ -173,12 +171,6 @@ class addressController {
         }
     }
     
-    
-    
-    
-    
-    
-
     // Phương thức hiển thị form cập nhật địa chỉ
     public function updateAddress() {
         if (!isset($_SESSION['id'])) {

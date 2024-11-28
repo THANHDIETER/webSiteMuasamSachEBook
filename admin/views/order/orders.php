@@ -13,15 +13,9 @@
     <style>
         body {
             background-color: #f4f4f9;
-            
         }
         .container {
             margin-top: 30px;
-            float: right;
-        }
-
-        .order-table {
-            margin-top: 20px;
         }
 
         .order-table th {
@@ -30,14 +24,9 @@
             font-weight: bold;
         }
 
-        .order-table td {
-            font-size: 14px;
-        }
-
         .btn.confirm-btn {
             background-color: #28a745;
             color: white;
-            font-weight: bold;
             padding: 6px 12px;
             border-radius: 4px;
         }
@@ -46,14 +35,32 @@
             background-color: #218838;
         }
 
-        .btn.disabled {
-            background-color: #6c757d;
-            cursor: not-allowed;
+        .btn.ship-btn {
+            background-color: #17a2b8;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+        }
+
+        .btn.ship-btn:hover {
+            background-color: #138496;
         }
 
         .status-text {
-            color: #6c757d;
-            font-style: italic;
+            font-weight: bold;
+            color:#17a2b8;
+        }
+
+        .paid-status {
+            color: #28a745;
+        }
+
+        .unpaid-status {
+            color: #dc3545;
+        }
+
+        .badge {
+            font-weight: bold;
         }
 
         header h1 {
@@ -64,12 +71,13 @@
 </head>
 <body>
 <?php require_once "components/header.php"; ?>
-<div class="main-content">
-    
-        <header class="text-center">
-        <h1 class="bg-primary text-white py-2 rounded-top mb-3 mt-4 text-center">Danh sách Đơn hàng</h1>
-        </header>
 
+<div class="main-content">
+    <header class="text-center">
+        <h1 class="bg-primary text-white py-2 rounded-top mb-3 mt-4">Danh sách Đơn hàng</h1>
+    </header>
+
+    <div class="container">
         <table class="table table-bordered table-striped order-table">
             <thead>
                 <tr>
@@ -79,38 +87,63 @@
                     <th>Số điện thoại</th>
                     <th>Email</th>
                     <th>Tổng tiền</th>
-                    <th>Trạng thái</th>
+                    <th>Ngày đặt</th>
+                    <th>Thanh toán</th>
+                    <th>Trạng thái vận chuyển</th>
                     <th>Hành động</th>
+                    <th>Chi tiết</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($orders as $order): ?>
+            <?php foreach ($orders as $order): ?>
                 <tr>
                     <td><?= $order['id'] ?></td>
-                    <td><?= $order['name'] ?></td>
-                    <td><?= $order['address'] ?></td>
-                    <td><?= $order['phone'] ?></td>
-                    <td><?= $order['email'] ?></td>
-                    <td><?= number_format($order['total_amount']) ?> VND</td>
+                    <td><?= htmlspecialchars($order['name']) ?></td>
+                    <td><?= htmlspecialchars($order['address']) ?></td>
+                    <td><?= htmlspecialchars($order['phone']) ?></td>
+                    <td><?= htmlspecialchars($order['email']) ?></td>
+                    <td><?= number_format($order['total_amount'], 0, ',', '.') ?> VND</td>
+                    <td><?= date('d/m/Y H:i', strtotime($order['order_date'])) ?></td>
+                    <td>
+                        <span class="status-text <?= $order['payment_type'] == 'Đã thanh toán' ? 'paid-status' : 'unpaid-status' ?>">
+                            <?= htmlspecialchars($order['payment_type']) ?>
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge <?= 
+                            $order['status'] == 'đang giao hàng' ? 'badge-primary' : 
+                            ($order['status'] == 'Đã xác nhận' ? 'badge-warning' : 
+                            ($order['status'] == 'Đã hủy' ? 'badge-danger' : 
+                            ($order['status'] == 'Giao hàng thành công' ? 'badge-success' : 'badge-secondary'))) ?>">
+                            <?= htmlspecialchars($order['status']) ?>
+                        </span>
+                    </td>
                     <td>
                         <?php if ($order['status'] == 'Chờ xác nhận'): ?>
-                            <a href="?act=confirmOrder&order_id=<?= $order['id'] ?>" class="btn confirm-btn">Xác nhận</a>
+                            <a href="?act=confirmOrder&order_id=<?= $order['id'] ?>" class="btn confirm-btn">Giao hàng</a>
+                            <a href="?act=cancelOrder&order_id=<?= $order['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?');">Hủy</a>
+                        <?php elseif ($order['status'] == 'đang giao hàng'): ?>
+                            <a href="?act=shipOrder&order_id=<?= $order['id'] ?>" class="btn btn-warning btn-sm">Xác nhận</a>
+                        <?php elseif ($order['status'] == 'Đã hủy'): ?>
+                            <span class="badge badge-danger">Đã hủy</span>
                         <?php else: ?>
-                            <span class="status-text">Đã xác nhận</span>
+                            <span class="badge badge-success">Giao hàng thành công</span>
                         <?php endif; ?>
                     </td>
                     <td>
-                            <a href="?act=orderDetail&order_id=<?php echo $order['id']; ?>" class="btn btn-info">Xem Chi Tiết</a>
-                        </td>
+                        <a href="?act=orderDetail&order_id=<?= $order['id'] ?>" class="btn btn-info btn-sm">Xem Chi Tiết</a>
+                    </td>
                 </tr>
                 <?php endforeach; ?>
+
             </tbody>
         </table>
-
     </div>
-    <!-- Liên kết tới Bootstrap JS và jQuery (dành cho các thành phần Bootstrap sử dụng JavaScript) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</div>
+
+<!-- Liên kết tới Bootstrap JS và jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
