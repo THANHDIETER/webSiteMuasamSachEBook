@@ -49,7 +49,8 @@ public function addToCart($productId) {
             $newQuantity = $cartItem['quantity'] + 1;
             $this->cartModel->updateCartItemQuantity($cart_id, $productId, $newQuantity);
         } else {
-            $this->cartModel->addToCartItems($cart_id, $productId, 1, $product['price']);
+            $sale = $product['price'] - ($product['price']/100)*$product['sale'];
+            $this->cartModel->addToCartItems($cart_id, $productId, 1, $sale);
         }
         
         // Debug: Xem lại giỏ hàng sau khi cập nhật

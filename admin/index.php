@@ -48,10 +48,11 @@ match ($act) {
     'updateNhaXuatBan' => (new nhaXuatBanController())->updateNhaXuatBan($_GET['id']),
 
     //order
-    'order' => (new orderController())->adminOrders(),  // Xem danh sách đơn hàng
-    'confirmOrder' => (new orderController())->confirmOrder(), // Xác nhận đơn hàng
-    'orderDetail' => (new orderController())->viewOrderDetail(), 
-
+    'order' => (new orderController())->adminOrders(),
+    'confirmOrder' => (new orderController())->confirmOrder(),
+    'orderDetail' => (new orderController())->viewOrderDetail(),
+    'shipOrder' => (new orderController())->shipOrder(),  // Giao hàng
+    'cancelOrder' => (new orderController())->cancelOrder(),
     // quản lỳ bình luận
     
     'comment' => (new productController())->comment(),

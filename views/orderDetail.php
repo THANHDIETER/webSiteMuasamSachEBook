@@ -81,6 +81,10 @@
                         <td class="d-flex align-items-center">
                             <img src="./assets/images/prod/books/<?= $item['img'] ?>" alt="<?= $item['name'] ?>" style="width: 50px; margin-right: 10px;">
                             <?= $item['name'] ?>
+                            <!-- Đường dẫn đến trang đánh giá sản phẩm -->
+                            <a href="?act=detail&id=<?= $item['product_id'] ?>" class="btn btn-outline-primary btn-sm ms-3">
+                                <i class="bi bi-star"></i> Đánh giá
+                            </a>
                         </td>
                         <td class="text-end"><?= number_format($item['price'], 0, ',', '.') ?>đ</td>
                         <td class="text-center"><?= $item['quantity'] ?></td>
@@ -88,6 +92,7 @@
                     </tr>
                 <?php endforeach; ?>
             </tbody>
+
         </table>
         <h5>Tổng tiền: <?= number_format($orderDetail[0]['total_amount'], 0, ',', '.') ?>đ</h5>
         
