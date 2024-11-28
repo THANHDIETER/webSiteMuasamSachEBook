@@ -74,7 +74,8 @@
 </head>
 <body>
 <?php require_once "components/header.php"; ?>
-    <div class=" container mt-5">
+        <div class="main-content">
+    <div class="  container mt-5">
         <h2>Chi Tiết Đơn Hàng #<?php echo $order_details['id']; ?></h2>
         <p><strong>Trạng thái:</strong> <?php echo $order_details['status']; ?></p>
         <p><strong>Ngày đặt hàng:</strong> <?php echo $order_details['order_date']; ?></p>
@@ -118,7 +119,7 @@
             <span><a href="?act=order">Quay lại</a></span>
         </div>
     </div>
-
+    </div>
     <!-- Bootstrap JS (optional, for interactivity like modals, tooltips, etc.) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

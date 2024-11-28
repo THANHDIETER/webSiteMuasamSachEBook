@@ -167,13 +167,19 @@ class addressModel {
         }
     }
     public function getOrdersByUserId($user_id) {
-        // Truy vấn đơn hàng của người dùng
-        $sql = "SELECT id, order_date, total_amount, status FROM orders WHERE user_id = :user_id ORDER BY order_date DESC";
+        // Truy vấn đơn hàng của người dùng, bao gồm loại thanh toán
+        $sql = "SELECT id, order_date, total_amount, status, payment_type 
+                FROM orders 
+                WHERE user_id = :user_id 
+                ORDER BY order_date DESC";
+                
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về danh sách đơn hàng
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về danh sách đơn hàng cùng loại thanh toán
     }
+    
 
     // Lấy chi tiết đơn hàng
     public function getOrderDetail($order_id, $user_id) {

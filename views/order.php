@@ -3,36 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>view orders</title>
-    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <title>View Orders</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-        .badge-success {
-            background-color: #28a745; 
-            color: #fff; 
+        body {
+            background-color: #e9ecef;
+            font-family: 'Arial', sans-serif;
         }
-        .badge-warning {
-            background-color: #ffc107;
-            color: #000; 
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+        h3 {
+            color: #343a40;
+            font-weight: bold;
+        }
+        .table {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .table-bordered {
+            border: 1px solid #dee2e6;
+        }
+        .table thead {
+            background-color: #212529;
+            color: white;
+        }
+        .badge {
+            padding: 0.5em 1em;
+            font-size: 90%;
+        }
+        .btn {
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+        .text-danger, .text-success, .text-primary {
+            font-weight: bold;
+        }
+        .alert-info {
+            text-align: center;
+            font-size: 1.2em;
         }
     </style>
 </head>
 <body>
-<?php  require_once 'components/header.php'; ?>
-<?php if (!empty($orders)): ?>
-    <div class="container mt-5">
-        <h3 class="text-center mb-4">Danh sách đơn hàng</h3>
-        
+<?php require_once 'components/header.php'; ?>
+
+<div class="container">
+    <h3 class="text-center mb-4">Danh sách đơn hàng</h3>
+    <?php if (!empty($orders)): ?>
         <table class="table table-bordered table-striped">
-            <thead class="thead-dark">
+            <thead>
                 <tr>
                     <th>Order ID</th>
                     <th>Ngày đặt</th>
                     <th>Tổng tiền</th>
                     <th>Trạng thái</th>
+                    <th>Loại thanh toán</th>
                     <th>Chi tiết</th>
-                    <th>Hủy</th> <!-- Cột Hủy đơn hàng -->
+                    <th>Hủy</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,37 +81,44 @@
                     <tr>
                         <td><?= $order['id'] ?></td>
                         <td><?= date('d/m/Y', strtotime($order['order_date'])) ?></td>
-                        <td><?= number_format($order['total_amount'], 0, ',', '.') ?>đ</td>
+                        <td class="text-end"><?= number_format($order['total_amount'], 0, ',', '.') ?>đ</td>
                         <td>
                             <span class="badge 
-                                <?= $order['status'] == 'Chờ xác nhận' ? 'badge-warning' : 
-                                ($order['status'] == 'Đã xác nhận' ? 'badge-success' : 
-                                ($order['status'] == 'Đã huỷ' ? 'badge-danger' : 'badge-secondary')) ?>">
+                                <?= $order['status'] == 'Chờ xác nhận' ? 'bg-warning text-dark' : 
+                                ($order['status'] == 'Đã xác nhận' ? 'bg-success' : 
+                                ($order['status'] == 'Đã hủy' ? 'bg-danger' : 
+                                ($order['status'] == 'đang giao hàng' ? 'bg-primary' : 'bg-secondary'))) ?>">
                                 <?= $order['status'] ?>
                             </span>
                         </td>
+                        <td><?= $order['payment_type'] ?></td>
                         <td>
-                            <a href="index.php?act=orderDetail&id=<?= $order['id'] ?>" class="btn btn-primary">Xem chi tiết</a>
+                            <a href="index.php?act=orderDetail&id=<?= $order['id'] ?>" class="btn btn-primary btn-sm">
+                                <i class="fas fa-info-circle"></i> Xem chi tiết
+                            </a>
                         </td>
                         <td>
                             <?php if ($order['status'] == 'Chờ xác nhận'): ?>
-                                <a href="index.php?act=cancelOrder&id=<?= $order['id'] ?>" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng?');">Hủy đơn</a>
-                            <?php elseif ($order['status'] == 'Đã huỷ'): ?>
+                                <a href="index.php?act=cancelOrder&id=<?= $order['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng?');">
+                                    <i class="fas fa-times-circle"></i> Hủy đơn
+                                </a>
+                            <?php elseif ($order['status'] == 'Đã hủy'): ?>
                                 <span class="text-danger">Đơn hàng đã bị hủy</span>
                             <?php elseif ($order['status'] == 'Đã xác nhận'): ?>
                                 <span class="text-success">Đơn hàng đã giao</span>
+                            <?php elseif ($order['status'] == 'đang giao hàng'): ?>
+                                <span class="text-primary">Đang giao hàng</span>
                             <?php endif; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
-    </div>
-<?php else: ?>
-    <div class="container mt-5">
-        <p class="alert alert-info">Không có đơn hàng nào.</p>
-    </div>
-<?php endif; ?>
-<?php  require_once 'components/footer.php'; ?>
+    <?php else: ?>
+        <div class="alert alert-info">Không có đơn hàng nào.</div>
+    <?php endif; ?>
+</div>
+
+<?php require_once 'components/footer.php'; ?>
 </body>
 </html>
