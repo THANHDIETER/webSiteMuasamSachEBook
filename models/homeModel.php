@@ -104,7 +104,13 @@
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
+    public function getVariantsByProductId($productId) {
+        $sql = "SELECT * FROM book_variants WHERE book_id = :productId";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':productId', $productId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 }
 ?>

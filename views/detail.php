@@ -18,45 +18,78 @@
     <div style="display: grid; gap:40px;"  class="container  ">
     <br><p class="wrapper">Trang chi tiết sản phẩm </p>
     <?php foreach($productOne as $name): ?>
+      <form action="?act=addToCart" method="POST">
     <div class="row bg-white">
     <div class="col-4">
-    <img style=" max-width:100%;" src="./assets/images/prod/books/<?php echo $name['img'] ?>" class="top-pro-img" alt="">
+    <img style=" max-width:100%;" class="mt-5" src="./assets/images/prod/books/<?php echo $name['img'] ?>" class="top-pro-img" alt="">
     </div>
     
     <div class="col-8">
+   
+    <input type="hidden" name="id" value="<?php echo $name['id']; ?>">
+    <h2><?php echo $name['name']; ?></h2>
+    <p><?php echo $name['author']; ?> (Tác giả)</p><br>
+    
+    <h3><del>Giá thị trường: 
+        <?php 
+        $price = $name['price'];
+        $formatted_price = number_format($price, 0, ',', '.'); 
+        echo $formatted_price . 'đ';
+        ?>
+    </del></h3>
 
-            <input type="hidden" name="" value="<?php echo $name['id'] ?>" id="">
-            <h2> <br><?php echo $name['name'] ?></h2>
-            <p><?php echo $name['author'] ?>  (Tác giả)</p><br>
-            <h3 class=""><del>Giá thị trường: <?php $price= $name['price'];
-            $formatted_price = number_format($price, 0, ',', '.'); 
-            echo $formatted_price . 'đ';
-            ?></del></h3>
-            <h3 class="text-danger">Sale còn: <?php  $price=$name['price']-($name['price']/100)*$name['sale'];
-            $formatted_price = number_format($price, 0, ',', '.'); 
-            echo $formatted_price . 'đ';
-            ?></h3>
-            
-            <p class="text-warning">Tiết kiệm: <?php  $price=($name['price']/100)*$name['sale'] ;
-            $formatted_price = number_format($price, 0, ',', '.'); 
-            echo $formatted_price . 'đ';
-            ?> (<?php echo $name['sale'] ?>%)</p>
-            <p class="TINHTRANG">Tình trạng: <?php if($name['quantity']>0){echo 'còn '; echo $name['quantity']; echo' sản phẩm'; }
-            else{echo "sắp có hàng";} ?>       </p>
-           
-            <p class="tags"><?php echo $name['name'] ?>  </p>
-           
-            <a style="width: 200px; height:40px; background-color:red; line-height:40px;" class=" nav-link btn   text-white" href="?act=addToCart&id=<?= $name['id'] ?>">Thêm vào giỏ hàng</a>
-            <br>
-            <p>Gọi đặt hàng: 0972.150.772 hoac: 0972.150.772</p>
-            <h3>Thông tin & Khuyến mãi</h3>
-            <p>Đổi trả hàng trong vòng 7 ngày
-                Sử dụng mỗi 3.000 BBxu để được giảm 10.000đ. <br>
-                 Làm sao để lấy BBxu? Freeship nội thành Sài Gòn từ 150.000đ*. <br>
-                Chi tiết tại đây Freeship toàn quốc từ 250.000đ</p>
+    <h3 class="text-danger">Sale còn: 
+        <?php  
+        $price = $name['price'] - ($name['price']/100) * $name['sale'];
+        $formatted_price = number_format($price, 0, ',', '.'); 
+        echo $formatted_price . 'đ';
+        ?>
+    </h3>
+
+    <p class="text-warning">Tiết kiệm: 
+        <?php  
+        $price = ($name['price']/100) * $name['sale'];
+        $formatted_price = number_format($price, 0, ',', '.'); 
+        echo $formatted_price . 'đ';
+        ?> 
+        (<?php echo $name['sale']; ?>%)
+    </p>
+
+    <p class="TINHTRANG">
+        Tình trạng: 
+        <?php 
+        if($name['quantity'] > 0) {
+            echo 'còn ' . $name['quantity'] . ' sản phẩm';
+        } else {
+            echo "sắp có hàng";
+        } 
+        ?>
+    </p>
+
+    <p class="tags"><?php echo $name['name']; ?></p>
+
+    <label for="variant-select"><strong>Chọn biến thể:</strong></label>
+    <select name="variant_id" id="variant-select" class="form-control" required>
+        <?php foreach($variants as $variant): ?>
+            <option value="<?php echo $variant['id']; ?>">
+                Định dạng: <?php echo $variant['format']; ?> | Ngôn ngữ: <?php echo $variant['language']; ?> | Phiên bản: <?php echo $variant['edition']; ?> | Giá: <?php echo number_format($variant['price'], 0, ',', '.'); ?>đ
+            </option>
+        <?php endforeach; ?>
+    </select><br>
+
+    <button type="submit" class="btn btn-danger" style="width: 200px; height:40px; background-color:red; line-height:40px;">
+        Thêm vào giỏ hàng
+    </button>
+</form>
+
+
                 
     </div>
-   
+   <div class="box">
+            <h3>Thông tin & Khuyến mãi </h3>   <p>Gọi đặt hàng: 0972.150.772 hoặc: 0972.150.772</p>
+            <p>Đổi trả hàng trong vòng 7 ngày
+                Sử dụng mỗi 3.000 BBxu để được giảm 10.000đ. Freeship nội thành Sài Gòn từ 150.000đ*.  Chi tiết tại đây Freeship toàn quốc từ 250.000đ</p>
+   </div>
   </div>
     <div class="row">
         <div class="col-9">
@@ -98,7 +131,6 @@
                                 $formatted_price = number_format($price, 0, ',', '.'); 
                                 echo $formatted_price . 'đ';
                                 ?>
-                                
                             </div>
                     <?php  endforeach; ?>
                 

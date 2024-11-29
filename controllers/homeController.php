@@ -17,34 +17,38 @@
            require "views/home.php";
         }
        
-        function detail($id){
-            $productOne=$this->homeModel->findProductById($id);
+        function detail($id) {
+            // Lấy thông tin sản phẩm
+            $productOne = $this->homeModel->findProductById($id);
             $top8 = $this->homeModel->top6Product();
-         
-            //làm bình luận
-             if(isset($_SESSION['id'])) {  
+            
+            // Lấy danh sách biến thể cho sản phẩm
+            $variants = $this->homeModel->getVariantsByProductId($id);
+            
+            // Xử lý bình luận
+            if(isset($_SESSION['id'])) {  
                 if(isset($_POST['submit'])){
                     $cmt = $this->homeModel->allCmt();
-                }else{
+                } else {
                     $cmt = $this->homeModel->Cmt();
                 }
                 if(isset($_POST['btn_submit'])){
-                    $this->homeModel->addComment($_SESSION['id'],$id,$_POST['comment']);
-                    echo '<script type="text/javasc if (confirm("Bạn đã gửi comment. Bạn có muốn load lại trang ko ?")) {ript">
-                   
-                        window.location.href = "?act=detail&id=' . $id . '";
-                    }
-                </script>';
-                }
-            }else{
+                    $this->homeModel->addComment($_SESSION['id'], $id, $_POST['comment']);
                     echo '<script type="text/javascript">
-                    if (confirm("Bạn chưa đăng nhập. Bạn có muốn chuyển sang trang đăng nhập không?")) {
-                        window.location.href = "?act=login";
-                    }
-                </script>';                
+                            if (confirm("Bạn đã gửi comment. Bạn có muốn load lại trang không?")) {
+                                window.location.href = "?act=detail&id=' . $id . '";
+                            }
+                          </script>';
                 }
-           
-           
+            } else {
+                echo '<script type="text/javascript">
+                        if (confirm("Bạn chưa đăng nhập. Bạn có muốn chuyển sang trang đăng nhập không?")) {
+                            window.location.href = "?act=login";
+                        }
+                      </script>';
+            }
+            
+            // Gọi view và truyền dữ liệu sản phẩm cùng biến thể vào
             require_once 'views/detail.php';
         }
         function product(){

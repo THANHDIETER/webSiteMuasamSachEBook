@@ -10,15 +10,10 @@ class orderController {
          $this->orderModel = new orderModel();
      }
  
-     // Hiển thị danh sách đơn hàng trong admin
-     // Hiển thị danh sách đơn hàng trong admin
     public function adminOrders() {
-        // Lấy tất cả đơn hàng với các thông tin trạng thái vận chuyển và thanh toán
         $orders = $this->orderModel->getAllOrdersWithStatus(); 
         include './views/order/orders.php'; // Hiển thị danh sách đơn hàng
     }
-
-    
      // orderController.php
      public function viewOrderDetail() {
         if (!isset($_GET['order_id'])) {
@@ -30,11 +25,27 @@ class orderController {
         $order_details = $this->orderModel->getOrderDetailById($order_id); // Lấy thông tin chi tiết đơn hàng
     
         if ($order_details) {
+            // Lấy thông tin sản phẩm và tính toán giá
+            $processedItems = []; // Mảng xử lý sản phẩm để tránh lặp
+            foreach ($order_details['items'] as $item) {
+                // Tính giá sau khi giảm giá
+                $discounted_price = $item['product_price'] - ($item['product_price'] * $item['sale'] / 100);
+                $item['unit_price'] = $discounted_price + $item['variant_price'];
+                // Loại bỏ lặp dựa vào product_id và variant_order_id
+                $key = $item['product_id'] . '-' . $item['variant_order_id'];
+                if (!isset($processedItems[$key])) {
+                    $processedItems[$key] = $item;
+                }
+            }
+            $order_details['items'] = array_values($processedItems); // Chuyển lại thành mảng chỉ số tuần tự
+            
             include 'views/order/orderDetail.php'; // Hiển thị chi tiết đơn hàng
         } else {
             echo "Không tìm thấy thông tin đơn hàng.";
         }
     }
+    
+    
     public function shipOrder() {
         if (!isset($_GET['order_id'])) {
             echo "Không tìm thấy ID đơn hàng.";

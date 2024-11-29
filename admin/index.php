@@ -27,7 +27,7 @@ match ($act) {
     'listproduct' => (new productController())->listProduct(),
     'delete' => (new productController())->delete($_GET['id']),
     'update' => (new productController())->update($_GET['id']),
-    // 'cart' => (new productController())->cart(),
+    'dashboard' => (new productController())->dashboard(),
 
     // Danhmuc
     'listdanhmuc' => (new danhmucController())->listDanhMuc(),
