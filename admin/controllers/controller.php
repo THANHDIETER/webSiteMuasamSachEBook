@@ -1,7 +1,6 @@
 <?php
 require_once 'models/model.php';
-class productController
-{
+class productController{
 public $productModel;
 public $danhmucModel;
 public $nhaXuatBanModel;

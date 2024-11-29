@@ -4,7 +4,7 @@ session_start();
 // Require toàn bộ file Commons
 require_once '../connect/function.php';
 // Require toàn bộ file Controllers
-
+require_once "./views/user/checkUser.php";
 
 require_once 'controllers/controller.php';
 require_once 'controllers/controllerDanhMuc.php';
@@ -22,12 +22,12 @@ $act = $_GET['act'] ?? '/';
 match ($act) {
     // Trang chủ quản trị
     '/' => (new productController)->login(),
-    'home' => (new productController)->home(),
+    'dashboard' => (new productController())->dashboard(),
     'insert' => (new productController())->insert(),
     'listproduct' => (new productController())->listProduct(),
     'delete' => (new productController())->delete($_GET['id']),
     'update' => (new productController())->update($_GET['id']),
-    'dashboard' => (new productController())->dashboard(),
+    
 
     // Danhmuc
     'listdanhmuc' => (new danhmucController())->listDanhMuc(),

@@ -66,16 +66,17 @@
            
         }
         function login(){
-            if(isset($_POST['btn_submit'])){;
-                $user = $this->homeModel->checkUser($_POST['email'],$_POST['password']);
-                if($user){
-           
-                    $_SESSION['id'] = $user['id'] ;
+            if (isset($_POST['btn_submit'])) {
+                $user = $this->homeModel->checkUser($_POST['email'], $_POST['password']);
+                if ($user) {
+                    $_SESSION['id'] = $user['id'];
+                    $_SESSION['name'] = $user['name'];
+                    $_SESSION['is_admin'] = $user['is_admin'];
                     echo '<script type="text/javascript">
-                        window.location.href = "?act=home";
-                        alert("Bạn đã login thành công");
-                    </script>';
-                }else{
+                            window.location.href = "?act=home";
+                            alert("Bạn đã login thành công");
+                        </script>';
+                } else {
                     echo "<script>alert('Đăng nhập thất bại');</script>";
                 }
             }
@@ -85,17 +86,43 @@
        
         function register(){
            
-            if(isset($_POST['btn_dk'])){
-                $add_user=$this->homeModel->add_user($_POST['email'],$_POST['name'],$_POST['password']);
-               echo '<script type="text/javascript">
-                        window.location.href = "?act=login";
-                        alert("Bạn đã dang ky thành công");
-                    </script>';
-            }else{
-                echo "<script>alert('Đăng nhập thất bại');</script>";
-            }
+            if (isset($_POST['btn_dk'])) {
+                $email = $this->homeModel->getUserEmail($_POST['email']);
+                if ($email) {
+                    $_SESSION['message'] = 'Email đã tồn tại';
+                    header("Location: index.php?act=register");
+                    exit;
+                }
+                $data = [
+                    'name' => $_POST['name'] ?? null,
+                    'email' => $_POST['email'] ?? null,
+                    'password' => $_POST['password'] ?? null,
+                ];
+                if ($data) {
+                    $check = true;
+                    if (!$data['name']) {
+                        $_SESSION['errorsName'] = 'Tên không hợp lệ';
+                        $check = false;
+                    }
+                    if (!$data['email']) {
+                        $_SESSION['errorsEmail'] = 'email không hợp lệ';
+                        $check = false;
+                    }
+                    if (!$data['password']) {
+                        $_SESSION['errorsPassword'] = 'password không hợp lệ';
+                    }
+                    if ($check) {
+                    $add_user = $this->homeModel->add_user($_POST['email'], $_POST['name'], $_POST['password']);
+                    $_SESSION['message'] = 'Đăng ký thành công';
+                    header("Location: index.php?act=login");
+                    exit;
+                    }
+                        header("Location: index.php?act=register");
+                        exit;
+                    }
             require_once 'views/register.php';
-         }
+        }
+    }
 
 
         function logout(){
