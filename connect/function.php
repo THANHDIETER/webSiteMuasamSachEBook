@@ -15,5 +15,11 @@
             exit;
         }
     }
+    define('BASE_URL', 'hhttp://localhost/webSiteMuasamSachEBook-DuAn1');
+    function dd($data){
+        echo '<pre>';
+        print_r($data);
+        die;
+    }
     
 ?>

@@ -22,6 +22,9 @@
             <div class="row no-gutters d-flex align-items-stretch">
                 <!-- Phần đăng nhập bên trái -->
                 <div class="col-md-6 p-5">
+                    <?php if (isset($_SESSION['message'])): ?>
+                            <div class="alert alert-success"><?php echo htmlspecialchars($_SESSION['message']); unset($_SESSION['message']) ?></div>
+                    <?php endif; ?>
                     <h3 class="card-title text-primary font-weight-bold text-center">Đăng nhập</h3>
                     <p class="text-muted">Nếu bạn chưa có tài khoản hãy đăng ký</p>
                     <form action="" method="POST">
@@ -40,8 +43,8 @@
                         Login with Google
                     </button>
                     <?php if (isset($err)) : ?>
-    <div class="alert alert-danger"><?php echo htmlspecialchars($err); ?></div>
-<?php endif; ?>
+                 <div class="alert alert-danger"><?php echo htmlspecialchars($err); ?></div>
+                <?php endif; ?>
 
                     <div class="text-center">
                         <a href="#" class="text-primary">Quên mật khẩu</a>

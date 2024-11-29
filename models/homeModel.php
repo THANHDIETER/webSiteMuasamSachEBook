@@ -28,9 +28,16 @@
             return $this->conn->query($sql)->fetchAll();
         }
         
-    function cart(){
-        
-    }
+        function getUserEmail($email)
+        {
+            $sql = "SELECT email FROM users WHERE email = :email";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                'email' => $email,
+            ]);
+            $user = $stmt->fetch();
+            return $user ? $user : null;
+        }
     function top8Product() {
         $sql = "SELECT products.*,authors.name as author 
             FROM products
