@@ -43,31 +43,48 @@ class orderModel {
     
      // orderModel.php
      public function getOrderDetailById($order_id) {
-          try {
-          $sql = "SELECT * FROM orders WHERE id = :order_id";
-          $stmt = $this->conn->prepare($sql);
-          $stmt->bindParam(':order_id', $order_id, PDO::PARAM_INT);
-          $stmt->execute();
-          $order = $stmt->fetch(PDO::FETCH_ASSOC);
-          if (!$order) {
-               return false;
-          }
-     
-          // Lấy chi tiết các sản phẩm trong đơn hàng
-          $sql_items = "SELECT * FROM order_items WHERE order_id = :order_id";
-          $stmt = $this->conn->prepare($sql_items);
-          $stmt->bindParam(':order_id', $order_id, PDO::PARAM_INT);
-          $stmt->execute();
-          $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
-     
-          // Kết hợp thông tin đơn hàng và chi tiết sản phẩm
-          $order['items'] = $items;
-     
-          return $order;
-          } catch (Exception $e) {
-          throw new Exception("Lỗi khi lấy chi tiết đơn hàng: " . $e->getMessage());
-          }
-     }
+        try {
+            // Lấy thông tin đơn hàng
+            $sql = "SELECT * FROM orders WHERE id = :order_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':order_id', $order_id, PDO::PARAM_INT);
+            $stmt->execute();
+            $order = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            if (!$order) {
+                return false;
+            }
+    
+            // Lấy chi tiết các sản phẩm trong đơn hàng và thông tin biến thể
+            $sql_items = "
+            SELECT oi.*,p.price AS product_price, p.sale, p.name AS product_name, bv.format, bv.language, bv.edition, bv.price AS variant_price
+            FROM order_items oi
+            JOIN products p ON oi.product_id = p.id
+            LEFT JOIN book_variants bv ON oi.variant_order_id = bv.id
+            WHERE oi.order_id = :order_id
+        ";
+        
+            $stmt = $this->conn->prepare($sql_items);
+            $stmt->bindParam(':order_id', $order_id, PDO::PARAM_INT);
+            $stmt->execute();
+            $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+            // Kiểm tra nếu không có sản phẩm trong đơn hàng
+            if (empty($items)) {
+                throw new Exception("Không có sản phẩm trong đơn hàng này.");
+            }
+    
+            // Kết hợp thông tin đơn hàng và chi tiết sản phẩm (bao gồm cả biến thể)
+            $order['items'] = $items;
+    
+            return $order;
+        } catch (Exception $e) {
+            throw new Exception("Lỗi khi lấy chi tiết đơn hàng: " . $e->getMessage());
+        }
+    }
+    
+    
+    
  
      public function confirmOrder($order_id) {
           try {

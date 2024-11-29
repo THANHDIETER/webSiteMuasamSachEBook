@@ -187,21 +187,48 @@ class productModel
         $user = $stmt->fetch();
         return $user ? $user : null;
     }
-    public function getOrderCount() {
-        $sql = "SELECT COUNT(*) FROM orders";
-        return $this->conn->query($sql)->fetchColumn();
-    }
     
-    public function getProductCount() {
-        $sql = "SELECT COUNT(*) FROM products";
-        return $this->conn->query($sql)->fetchColumn();
-    }
     
-    public function getUserCount() {
-        $sql = "SELECT COUNT(*) FROM users";
-        return $this->conn->query($sql)->fetchColumn();
-    }
     
+     // Đếm số lượng đơn hàng mới
+     public function getOrderCount() {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) FROM orders WHERE status = 'Chờ xác nhận'");
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+    public function getOrderCountNow() {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) FROM orders WHERE status = 'đang giao hàng'");
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+    public function getOrderCountDelete() {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) FROM orders WHERE status = 'Đã hủy'");
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
 
+    // Đếm số lượng sản phẩm
+    public function getProductCount() {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) FROM products");
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+
+    // Đếm số lượng người dùng
+    public function getUserCount() {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) FROM users");
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+
+    // Tính tổng doanh thu
+    public function getTotalRevenue() {
+        $stmt = $this->conn->prepare("SELECT SUM(total_amount) FROM orders WHERE status = 'Đã xác nhận'");
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
 }
+
+
+
 ?>

@@ -22,10 +22,12 @@ function listProduct()
 }
 
 public function dashboard(){
-   
     $orderCount = $this->productModel->getOrderCount();
+    $orderCountNow = $this->productModel->getOrderCountNow();
+    $orderCountDelete = $this->productModel->getOrderCountDelete();
     $productCount = $this->productModel->getProductCount();
     $userCount = $this->productModel->getUserCount();
+    $revenue = $this->productModel->getTotalRevenue();
     require_once './views/dashboard.php';
 }
 public function insert()
