@@ -43,7 +43,7 @@ class addressModel {
     
             // Bắt đầu giao dịch
             $this->beginTransaction();
-    
+           
             // Xác định trạng thái thanh toán và phương thức thanh toán
             if ($payment_method === 'COD') {
                 $payment_status = 'Chưa thanh toán'; // Thanh toán COD chưa thanh toán
@@ -70,26 +70,28 @@ class addressModel {
             $stmt->bindParam(':payment_type', $payment_type, PDO::PARAM_STR); // Phương thức thanh toán (COD/VNPAY)
     
             $stmt->execute();
-    
+            
             // Sau khi lưu đơn hàng, lấy ID của đơn hàng vừa tạo
             $order_id = $this->conn->lastInsertId();
-    
             // Lưu chi tiết đơn hàng vào bảng 'order_items'
             foreach ($cart_items as $item) {
-                $sql = "INSERT INTO order_items (order_id, product_id, quantity, total_price, price) 
-                        VALUES (:order_id, :product_id, :quantity, :total_price, :price)";
+                $variant_order_id = $item['variant_id'] ?? null;
+            
+                $sql = "INSERT INTO order_items (order_id, product_id, variant_order_id, quantity, total_price, price) 
+                        VALUES (:order_id, :product_id, :variant_order_id, :quantity, :total_price, :price)";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->bindParam(':order_id', $order_id, PDO::PARAM_INT);
                 $stmt->bindParam(':product_id', $item['product_id'], PDO::PARAM_INT);
+                $stmt->bindParam(':variant_order_id', $variant_order_id, PDO::PARAM_INT);
                 $stmt->bindParam(':quantity', $item['quantity'], PDO::PARAM_INT);
-    
-                // Tính toán tổng giá trị sản phẩm
+            
                 $total_item_price = $item['quantity'] * $item['price']; 
                 $stmt->bindParam(':total_price', $total_item_price, PDO::PARAM_STR); 
                 $stmt->bindParam(':price', $item['price'], PDO::PARAM_STR);
-    
+            
                 $stmt->execute();
             }
+            
     
             // Nếu mọi thao tác thành công, commit giao dịch
             $this->commit();
@@ -220,7 +222,7 @@ class addressModel {
     }
     public function getOrderDetailWithVariants($order_id, $user_id) {
         $sql = "
-            SELECT o.id, p.name, p.img, v.format, v.language, v.edition, od.quantity, 
+            SELECT o.id, p.name, od.product_id, p.img, v.format, v.language, v.edition, od.quantity, 
                    (od.price - (od.price * p.sale / 100)) AS price, od.quantity * (od.price - (od.price * p.sale / 100)) AS total_price, o.total_amount
             FROM order_items od
             INNER JOIN orders o ON o.id = od.order_id

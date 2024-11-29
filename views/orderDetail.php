@@ -78,14 +78,15 @@
             <tbody>
     <?php foreach ($orderDetail as $item): ?>
         <tr>
-            <td class="d-flex align-items-center">
+            <td class="d-flex align-items-center gap-2">
                 <img src="./assets/images/prod/books/<?= $item['img'] ?>" alt="<?= $item['name'] ?>" style="width: 50px; margin-right: 10px;">
-                <?= $item['name'] ?> 
-                <br>
-                <!-- Hiển thị thông tin biến thể -->
+                <div class="div ">
+                <?= $item['name'] ?> <br>
+                <!-- Hiển thị thông tin biến thể --> 
                 <small>
-                    <strong>Biến thể:</strong> <?= $item['format'] ?> - <?= $item['language'] ?> - <?= $item['edition'] ?>
+                    <strong> Biến thể:</strong> <?= $item['format'] ?> - <?= $item['language'] ?> - <?= $item['edition'] ?>
                 </small>
+                </div>
                 
                 <!-- Đường dẫn đến trang đánh giá sản phẩm -->
                 <a href="?act=detail&id=<?= $item['product_id'] ?>" class="btn btn-outline-primary btn-sm ms-3">

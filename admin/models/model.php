@@ -187,7 +187,21 @@ class productModel
         $user = $stmt->fetch();
         return $user ? $user : null;
     }
-
+    public function getOrderCount() {
+        $sql = "SELECT COUNT(*) FROM orders";
+        return $this->conn->query($sql)->fetchColumn();
+    }
+    
+    public function getProductCount() {
+        $sql = "SELECT COUNT(*) FROM products";
+        return $this->conn->query($sql)->fetchColumn();
+    }
+    
+    public function getUserCount() {
+        $sql = "SELECT COUNT(*) FROM users";
+        return $this->conn->query($sql)->fetchColumn();
+    }
+    
 
 }
 ?>

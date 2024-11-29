@@ -21,7 +21,13 @@ function listProduct()
      require_once './views/products/listProduct.php';
 }
 
-
+public function dashboard(){
+   
+    $orderCount = $this->productModel->getOrderCount();
+    $productCount = $this->productModel->getProductCount();
+    $userCount = $this->productModel->getUserCount();
+    require_once './views/dashboard.php';
+}
 public function insert()
 {
     $listDanhMuc = $this->danhmucModel->getAllDanhmuc();

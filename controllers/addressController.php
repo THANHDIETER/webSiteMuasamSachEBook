@@ -28,6 +28,7 @@ class addressController {
             
             // Kiểm tra phương thức thanh toán và gọi phương thức tương ứng
             if (isset($_POST['payment_method']) && $_POST['payment_method'] === 'COD') {
+               
                 $this->processCOD($user_id, $cart_items, $user_address, $total_price);
             } else {
                 $this->processVNPAY($user_id, $cart_items, $user_address, $total_price);
@@ -59,7 +60,6 @@ class addressController {
             // Thanh toán COD: Lưu đơn hàng và gán trạng thái là "Chưa thanh toán"
             $this->addressModel->saveOrder($user_id, $cart_items, $user_address, $total_price, 'COD', 'Chưa thanh toán', 'Chờ xác nhận');
             $this->addressModel->clearCart($user_id);
-    
             // Commit giao dịch
             $this->addressModel->commit();
             

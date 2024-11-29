@@ -99,23 +99,23 @@
                 <tbody>
                     <?php $total_price = 0; ?>
                     <?php foreach ($cart_items as $item): ?>
-    <tr>
-        <td>
-            <?php echo htmlspecialchars($item['product_name']); ?>
-            <br>
-            <small>
-                <strong>Biến thể:</strong> 
-                <?php echo htmlspecialchars($item['format']); ?> - 
-                <?php echo htmlspecialchars($item['language']); ?> - 
-                <?php echo htmlspecialchars($item['edition']); ?>
-            </small>
-        </td>
-        <td><?php echo $item['quantity']; ?></td>
-        <td><?php echo number_format($item['price'], 0, ',', '.'); ?> VND</td>
-        <td><?php echo number_format($item['quantity'] * $item['price'], 0, ',', '.'); ?> VND</td>
-    </tr>
-    <?php $total_price += $item['quantity'] * $item['price']; ?>
-<?php endforeach; ?>
+                    <tr>
+                        <td>
+                            <?php echo htmlspecialchars($item['product_name']); ?>
+                            <br>
+                            <small>
+                                <strong>Biến thể:</strong> 
+                                <?php echo htmlspecialchars($item['format']); ?> - 
+                                <?php echo htmlspecialchars($item['language']); ?> - 
+                                <?php echo htmlspecialchars($item['edition']); ?>
+                            </small>
+                        </td>
+                        <td><?php echo $item['quantity']; ?></td>
+                        <td><?php echo number_format($item['price'], 0, ',', '.'); ?> VND</td>
+                        <td><?php echo number_format($item['quantity'] * $item['price'], 0, ',', '.'); ?> VND</td>
+                    </tr>
+                    <?php $total_price += $item['quantity'] * $item['price']; ?>
+                <?php endforeach; ?>
 
                 </tbody>
             </table>

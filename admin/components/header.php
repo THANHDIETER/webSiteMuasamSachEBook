@@ -69,7 +69,7 @@
             </a>
         </div>
         <nav class="nav flex-column mt-3">
-            <a href="index.php" class="nav-link text-light px-3"><i class="fa-solid fa-house me-2"></i>Trang chủ</a>
+            <a href="index.php?act=dashboard" class="nav-link text-light px-3"><i class="fa-solid fa-house me-2"></i>Trang chủ</a>
             <a href="index.php?act=listproduct" class="nav-link text-light px-3"><i
                     class="fa-solid fa-book me-2"></i>Sách</a>
             <a href="index.php?act=listdanhmuc" class="nav-link text-light px-3"><i
