@@ -16,94 +16,129 @@ class CartController {
         }
         $user_id = $_SESSION['id'];
         $cart_id = $this->cartModel->getCartIdByUserId($user_id);
+    
         if ($cart_id) {
+            // Lấy tất cả các sản phẩm trong giỏ hàng (không cần productId và variantId)
             $cartItems = $this->cartModel->getCartItems($cart_id);
         } else {
             $cartItems = [];
         }
+    
         require_once 'views/cart.php';
     }
+    
 
     // Thêm sản phẩm vào giỏ hàng
     // Giả sử bạn đang thêm vào giỏ hàng
-public function addToCart($productId) {
+    public function addToCart() {
+        if (!isset($_SESSION['id'])) {
+            header("Location: index.php?act=login");
+            exit;
+        }
+    
+        $user_id = $_SESSION['id'];
+        $cart_id = $this->cartModel->getCartIdByUserId($user_id);
+    
+        if (!$cart_id) {
+            // Tạo mới giỏ hàng nếu chưa có
+            $cart_id = $this->cartModel->createCart($user_id);
+        }
+    
+        // Lấy thông tin sản phẩm và biến thể từ POST
+        $productId = $_POST['id'];
+        $variantId = $_POST['variant_id'];
+        $quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 1; // Default quantity is 1
+    
+        // Lấy thông tin sản phẩm và biến thể
+        $product = $this->cartModel->getProductById($productId);
+        $variant = $this->cartModel->getVariantById($variantId);
+    
+        if ($product && $variant) {
+            // Kiểm tra xem sản phẩm với biến thể đã có trong giỏ hàng chưa
+            $cartItem = $this->cartModel->getCartItem($cart_id, $productId, $variantId);
+            
+            if ($cartItem) {
+                // Cập nhật số lượng nếu đã có sản phẩm với biến thể trong giỏ
+                $newQuantity = $cartItem['quantity'] + $quantity;
+                $this->cartModel->updateCartItemQuantity($cart_id, $productId, $variantId, $newQuantity);
+            } else {
+                // Tính giá sau giảm giá
+                $sale = $product['price'] - ($product['price'] / 100) * $product['sale']+$variant['price'];
+                // Thêm sản phẩm vào giỏ hàng nếu chưa có
+                $this->cartModel->addToCartItems($cart_id, $productId, $variantId, $quantity, $sale);
+            }
+    
+            // Thông báo và điều hướng lại giỏ hàng
+            echo "<script>alert('Sản phẩm đã được thêm vào giỏ hàng.');</script>";
+            header("Location: index.php?act=cart");
+            exit;
+        } else {
+            echo "<script>alert('Không tìm thấy sản phẩm hoặc biến thể.');</script>";
+            header("Location: index.php");
+            exit;
+        }
+    }
+    
+    
+    
+    
+
+
+    // Cập nhật số lượng sản phẩm trong giỏ hàng
+    // Cập nhật số lượng sản phẩm trong giỏ hàng
+public function updateQuantity() {
     if (!isset($_SESSION['id'])) {
         header("Location: index.php?act=login");
         exit;
     }
-    
-    $user_id = $_SESSION['id'];
-    $cart_id = $this->cartModel->getCartIdByUserId($user_id); 
-    if (!$cart_id) {
-        $cart_id = $this->cartModel->createCart($user_id);
-    }
-    
-    $product = $this->cartModel->getProductById($productId);
-    if ($product) {
-        // Debug: kiểm tra giá trị trước khi thêm vào giỏ hàng
-        error_log("Product ID: " . $productId);
-        error_log("Cart ID: " . $cart_id);
 
-        $cartItem = $this->cartModel->getCartItem($cart_id, $productId);
-        if ($cartItem) {
-            $newQuantity = $cartItem['quantity'] + 1;
-            $this->cartModel->updateCartItemQuantity($cart_id, $productId, $newQuantity);
-        } else {
-            $sale = $product['price'] - ($product['price']/100)*$product['sale'];
-            $this->cartModel->addToCartItems($cart_id, $productId, 1, $sale);
+    $user_id = $_SESSION['id'];
+    $cart_id = $this->cartModel->getCartIdByUserId($user_id);
+
+    if (isset($_POST['quantities']) && $cart_id) {
+        foreach ($_POST['quantities'] as $cartItemId => $quantity) {
+            // Kiểm tra và đảm bảo số lượng không dưới 1
+            $quantity = max(1, (int)$quantity);
+            $this->cartModel->updateCartItemQuantityById($cart_id, $cartItemId, $quantity);
         }
         
-        // Debug: Xem lại giỏ hàng sau khi cập nhật
-        error_log("Cart Updated: " . print_r($this->cartModel->getCartItems($cart_id), true));
-
-        echo "<script>alert('Sản phẩm đã được thêm vào giỏ hàng.');</script>";
-        header("Location: index.php?act=cart");
+        // Trả về kết quả cập nhật dạng JSON
+        echo json_encode(['success' => true]);
         exit;
     } else {
-        echo "<script>alert('Không tìm thấy sản phẩm.');</script>";
-        header("Location: index.php");
+        echo json_encode(['error' => 'Giỏ hàng không tìm thấy.']);
         exit;
     }
 }
 
-
-    // Cập nhật số lượng sản phẩm trong giỏ hàng
-    public function updateQuantity() {
-        if (!isset($_SESSION['id'])) {
-            header("Location: index.php?act=login");
-            exit;
-        }
-        
-        $user_id = $_SESSION['id'];
-        $cart_id = $this->cartModel->getCartIdByUserId($user_id);
     
-        if (isset($_POST['quantities']) && $cart_id) {
-            foreach ($_POST['quantities'] as $productId => $quantity) {
-                // Cập nhật số lượng trong giỏ hàng
-                $this->cartModel->updateCartItemQuantity($cart_id, $productId, max(1, (int)$quantity));  
-            }
-        }
-    
-        header("Location: index.php?act=cart");
-        exit;
-    }
     
 
     // Xóa sản phẩm khỏi giỏ hàng
-    public function removeFromCart($productId) {
+    public function removeFromCart() {
         if (!isset($_SESSION['id'])) {
             header("Location: index.php?act=login");
             exit;
         }
+    
         $user_id = $_SESSION['id'];
         $cart_id = $this->cartModel->getCartIdByUserId($user_id);
-        if ($cart_id) {
-            // Gọi phương thức removeFromCart để xóa sản phẩm
-            $this->cartModel->removeFromCart($cart_id, $productId);
+    
+        if (isset($_GET['product_id']) && isset($_GET['variant_id']) && $cart_id) {
+            $product_id = $_GET['product_id'];
+            $variant_id = $_GET['variant_id'];
+            
+            // Xóa sản phẩm khỏi giỏ hàng dựa vào product_id và variant_id
+            $this->cartModel->removeFromCart($cart_id, $product_id, $variant_id);
+            echo "<script>alert('Đã xóa sản phẩm khỏi giỏ hàng');</script>";
+            header("location: ?act=cart");
+        } else {
+            // Trường hợp không hợp lệ
+            echo json_encode(['error' => 'Không thể xóa sản phẩm.']);
+            exit;
         }
-        // Điều hướng lại giỏ hàng sau khi xóa sản phẩm
-        header("Location: index.php?act=cart");
-        exit;
     }
+    
+    
 }
 ?>

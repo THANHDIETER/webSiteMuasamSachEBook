@@ -10,25 +10,18 @@ class orderController {
          $this->orderModel = new orderModel();
      }
  
-     // Hiển thị danh sách đơn hàng trong admin
-     // Hiển thị danh sách đơn hàng trong admin
     public function adminOrders() {
-        // Lấy tất cả đơn hàng với các thông tin trạng thái vận chuyển và thanh toán
         $orders = $this->orderModel->getAllOrdersWithStatus(); 
         include './views/order/orders.php'; // Hiển thị danh sách đơn hàng
     }
-
-    
      // orderController.php
      public function viewOrderDetail() {
         if (!isset($_GET['order_id'])) {
             echo "Không tìm thấy ID đơn hàng.";
             return;
         }
-    
         $order_id = $_GET['order_id']; // Lấy ID đơn hàng từ query string
         $order_details = $this->orderModel->getOrderDetailById($order_id); // Lấy thông tin chi tiết đơn hàng
-    
         if ($order_details) {
             include 'views/order/orderDetail.php'; // Hiển thị chi tiết đơn hàng
         } else {

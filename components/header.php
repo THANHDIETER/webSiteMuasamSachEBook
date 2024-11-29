@@ -10,7 +10,60 @@
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</head>
+     <style>
+        body {
+            background-color: #e9ecef;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+        h3 {
+            color: #343a40;
+            font-weight: bold;
+        }
+        .table {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .table-bordered {
+            border: 1px solid #dee2e6;
+        }
+        .table thead {
+            background-color: #212529;
+            color: white;
+        }
+        .badge {
+            padding: 0.5em 1em;
+            font-size: 90%;
+        }
+        .btn {
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+        .text-danger, .text-success, .text-primary {
+            font-weight: bold;
+        }
+        .alert-info {
+            text-align: center;
+            font-size: 1.2em;
+        }
+        header{
+          margin-bottom: -20px;  
+        }
+    </style>
+    </head>
 <body>
   
     <header>

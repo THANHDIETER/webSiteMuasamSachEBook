@@ -44,14 +44,11 @@ class orderModel {
      // orderModel.php
      public function getOrderDetailById($order_id) {
           try {
-          // Lấy thông tin đơn hàng chính
           $sql = "SELECT * FROM orders WHERE id = :order_id";
           $stmt = $this->conn->prepare($sql);
           $stmt->bindParam(':order_id', $order_id, PDO::PARAM_INT);
           $stmt->execute();
           $order = $stmt->fetch(PDO::FETCH_ASSOC);
-     
-          // Nếu không có đơn hàng, trả về false
           if (!$order) {
                return false;
           }
