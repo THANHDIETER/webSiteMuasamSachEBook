@@ -15,6 +15,7 @@
 </head>
 
 <body>
+<?php require_once "components/header.php"; ?>
     <div class="main-content">
         <div class="container ms-auto ">
             <div class=""><a href="index.php?act=addNhaXuatBan" class="btn btn-success">Thêm nhà xuất bản</a></div>

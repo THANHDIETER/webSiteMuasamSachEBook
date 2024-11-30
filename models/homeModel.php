@@ -24,7 +24,7 @@
         
         function alldanhmuc() {
        
-            $sql = "SELECT * FROM categories ORDER BY id DESC";
+            $sql = "SELECT * FROM categories ORDER BY id ";
             return $this->conn->query($sql)->fetchAll();
         }
         
@@ -34,16 +34,22 @@
     function top4Product() {
         $sql = "SELECT products.*,authors.name as author 
             FROM products
-            JOIN authors ON products.author_id = authors.id ORDER BY id DESC LIMIT 4";
+            JOIN authors ON products.author_id = authors.id ORDER BY id DESC LIMIT 8";
+       
+        return $this->conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function top5Product() {
+        $sql = "SELECT products.*,authors.name as author 
+            FROM products
+            JOIN authors ON products.author_id = authors.id ORDER BY id ASC LIMIT 5";
        
         return $this->conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
     function to3Product(){
-        $sql = "SELECT products.*,authors.name as author 
-            FROM products
-            JOIN authors ON products.author_id = authors.id ORDER BY id DESC LIMIT 3";
-           return $this->conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-
+        $sql = "SELECT * FROM products ORDER BY click_count DESC LIMIT 3"; // Lọc sản phẩm theo click_count giảm dần và giới hạn kết quả là 3
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); 
     }
 
     function top6Product() {
@@ -116,6 +122,13 @@
         $stmt->bindValue(':keyword', '%' . $key . '%', PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function updateId($id) {
+        // SQL để tăng số lượt click
+        $sql = "UPDATE products SET click_count = click_count + 1 WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);  // Liên kết ID sản phẩm
+        $stmt->execute();
     }
 
 

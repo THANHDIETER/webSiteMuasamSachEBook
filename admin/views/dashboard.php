@@ -28,7 +28,7 @@
 </head>
 
 <body>
-
+        
     <form action="" enctype="multipart/form-data" method="post">
     <h2>Đăng nhập vào tài khoản</h2>
          <input type="text" name="user" placeholder="Tên đăng nhập"><br> <br>

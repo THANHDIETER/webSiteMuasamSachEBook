@@ -11,7 +11,10 @@
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
-<body>
+<style>
+  
+</style>
+<body >
   
     <header>
       <!-- nav 1 -->
@@ -34,7 +37,7 @@
                       <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-gift-fill"></i> - Ưu đãi & Tiện Ích</a>
                     </li>
                   <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-boxes"></i> - Kiểm Tra Đơn Hàng</a>
+                      <a class="nav-link active" aria-current="page" href="?act=order"><i class="bi bi-boxes"></i> - Kiểm Tra Đơn Hàng</a>
                     </li>
                     <?php
                   
@@ -73,9 +76,9 @@
               <a class="" href="?act=home "><img style="width:150px;" src="./styte/img/logo.png" alt=""></a>
               <a class="nav-link active" href="?act=product">Tất Cả</a>
               <form class="d-flex" role="search" method="GET" action="index.php">
-    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="keySearch" required>
-    <button class="btn btn-outline-success" type="submit" name="act" value="search">Search</button>
-</form>
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="keySearch" required>
+                  <button class="btn btn-outline-success" type="submit" name="act" value="search">Search</button>
+              </form>
 
               <a  class="nav-link active" href="#">
               <i style="font-size:40px; color:burlywood;" class="bi bi-headset"> </i> 
@@ -86,7 +89,7 @@
           </div>
         </nav>  
         <!-- nav 3 -->
-        <nav  class="navbar navbar-expand-lg  bg-body-white ">
+        <nav  class="navbar navbar-expand-lg  bg-body-white bg-white ">
           <div class="container-fluid .bg-light p-2  ">
             <div style="display: flex; gap:160px; justify-content: space-between;" class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
               <li class="nav-link"  >

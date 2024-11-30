@@ -1,5 +1,3 @@
-
-
 <?php
     require_once 'models/homeModel.php';
     class homeController{
@@ -9,6 +7,8 @@
         }
         function home(){
             $products = $this->homeModel->allProduct();
+           
+            $top5 = $this->homeModel->top5Product();
             $top4 = $this->homeModel->top4Product();
             $top3 = $this->homeModel->to3Product();
             $danhmuc = $this->homeModel->alldanhmuc();
@@ -19,9 +19,10 @@
             }
            require "views/home.php";
         }
-        
+       
         function detail($id){
             $productOne=$this->homeModel->findProductById($id);
+            $updateId = $this->homeModel->updateId($id);
             $top8 = $this->homeModel->top6Product();
          
             //làm bình luận
@@ -37,7 +38,7 @@
                    
                         window.location.href = "?act=detail&id=' . $id . '";
                     }
-                </script>'; 
+                </script>';
                 }
             }else{
                     echo '<script type="text/javascript">
@@ -46,13 +47,13 @@
                     }
                 </script>';                
                 }
-            
-            
+           
+           
             require_once 'views/detail.php';
         }
         function product(){
             $products=$this->homeModel->allProduct();
-            $danhmucs=$this->homeModel->alldanhmuc(); 
+            $danhmucs=$this->homeModel->alldanhmuc();
             require_once 'views/product.php';
         }
         function dmshow($id){
@@ -62,13 +63,13 @@
         }
        
         function cart($id){
-            
+           
         }
         function login(){
             if(isset($_POST['btn_submit'])){;
                 $user = $this->homeModel->checkUser($_POST['email'],$_POST['password']);
                 if($user){
-            
+           
                     $_SESSION['id'] = $user['id'] ;
                     echo '<script type="text/javascript">
                         window.location.href = "?act=home";
@@ -80,10 +81,10 @@
             }
             require "views/login.php";
         }
-        
+       
        
         function register(){
-            
+           
             if(isset($_POST['btn_dk'])){
                 $add_user=$this->homeModel->add_user($_POST['email'],$_POST['name'],$_POST['password']);
                echo '<script type="text/javascript">
@@ -96,8 +97,9 @@
             require_once 'views/register.php';
          }
 
+
         function logout(){
-          
+         
             session_unset();
             // unset($_SESSION['user_id'] );
             echo '<script type="text/javascript">
@@ -106,29 +108,16 @@
                     </script>';
         }    
 
+
         function search($keySearch){
             $allSearch = $this->homeModel->searchModel($keySearch);
             require_once 'views/search.php';
         }
 
-        
-        
+
+       
+       
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

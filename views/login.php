@@ -13,6 +13,10 @@
 
 
 <body>
+    <?php if (isset($err)) : ?>
+    <div class="alert alert-danger"><?php echo htmlspecialchars($err); ?></div>
+<?php endif; ?>
+
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <div class="card border-0 shadow-lg" style="max-width: 900px; border-radius: 12px;">
             <div class="row no-gutters d-flex align-items-stretch">
@@ -35,6 +39,10 @@
                             class="mr-2">
                         Login with Google
                     </button>
+                    <?php if (isset($err)) : ?>
+    <div class="alert alert-danger"><?php echo htmlspecialchars($err); ?></div>
+<?php endif; ?>
+
                     <div class="text-center">
                         <a href="#" class="text-primary">Quên mật khẩu</a>
                     </div>
