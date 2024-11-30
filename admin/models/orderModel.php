@@ -99,6 +99,32 @@ class orderModel {
               throw new Exception("Lỗi khi xác nhận đơn hàng: " . $e->getMessage());
           }
       }
+      public function getReportData() {
+        try {
+            // Tổng số đơn hàng
+            $orderCountQuery = "SELECT COUNT(*) as total_orders FROM orders";
+            $stmt = $this->conn->query($orderCountQuery);
+            $totalOrders = $stmt->fetch(PDO::FETCH_ASSOC)['total_orders'];
+
+            // Tổng doanh thu
+            $revenueQuery = "SELECT SUM(total_amount) as total_revenue FROM orders WHERE status = 'Đã xác nhận'";
+            $stmt = $this->conn->query($revenueQuery);
+            $totalRevenue = $stmt->fetch(PDO::FETCH_ASSOC)['total_revenue'];
+
+            // Tổng số sản phẩm đã bán
+            $productSoldQuery = "SELECT SUM(quantity) as total_products_sold FROM order_items";
+            $stmt = $this->conn->query($productSoldQuery);
+            $totalProductsSold = $stmt->fetch(PDO::FETCH_ASSOC)['total_products_sold'];
+
+            return [
+                'total_orders' => $totalOrders,
+                'total_revenue' => $totalRevenue,
+                'total_products_sold' => $totalProductsSold
+            ];
+        } catch (Exception $e) {
+            throw new Exception("Lỗi khi truy xuất dữ liệu báo cáo: " . $e->getMessage());
+        }
+    }
       
  }
  

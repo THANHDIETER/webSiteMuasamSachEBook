@@ -239,7 +239,7 @@ public function insert()
               if($user){
                   $_SESSION['name'] = $user['name'] ;
                   echo '<script type="text/javascript">
-                      window.location.href = "?act=home";
+                      window.location.href = "?act=dashboard";
                       alert("Bạn đã login thành công");
                   </script>';
               }else{

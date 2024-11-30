@@ -45,6 +45,11 @@ class orderController {
         }
     }
     
+    public function viewReport() {
+        // Lấy các dữ liệu cần thiết từ model
+        $report_data = $this->orderModel->getReportData();
+        include 'views/order/reportPage.php';
+    }
     
     public function shipOrder() {
         if (!isset($_GET['order_id'])) {

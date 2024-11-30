@@ -54,7 +54,9 @@ match ($act) {
     'shipOrder' => (new orderController())->shipOrder(),  // Giao hàng
     'cancelOrder' => (new orderController())->cancelOrder(),
     // quản lỳ bình luận
-    
+        
+
+    'report' => (new orderController())->viewReport(),
     'comment' => (new productController())->comment(),
     'logout' => (new productController())->logout(),
 
