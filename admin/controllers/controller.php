@@ -14,8 +14,6 @@ function __construct()
 }
 function listProduct()
 {
-
-
      $allProduct = $this->productModel->getAllProduct();
      require_once './views/products/listProduct.php';
 }
@@ -109,7 +107,6 @@ public function insert()
     }
 }
 
-
      function delete($id)
      {
           if ($this->productModel->delete($id)) {
@@ -118,8 +115,7 @@ public function insert()
                echo "Lỗi";
           }
      }
-     public function update()
-{
+     public function update(){
     // Lấy danh sách danh mục, nhà xuất bản, và tác giả (dùng cho form)
     $listDanhMuc = $this->danhmucModel->getAllDanhmuc();
     $listNhaXuatBan = $this->nhaXuatBanModel->getAllNhaXuatBan();
@@ -214,10 +210,6 @@ public function insert()
     }
 }
 
-
-
-
-     
      function comment()  {
           $allCmt = $this->productModel->allCmt();
           require_once './views/comment.php';
@@ -233,32 +225,42 @@ public function insert()
           }
      }
    
-     function login(){
-          if(isset($_POST['btn_submit'])){;
-              $user = $this->productModel->checkUser($_POST['email'],$_POST['password']);
-              if($user){
-                  $_SESSION['name'] = $user['name'] ;
-                  echo '<script type="text/javascript">
-                      window.location.href = "?act=home";
-                      alert("Bạn đã login thành công");
-                  </script>';
-              }else{
-                  echo "<script>alert('Đăng nhập thất bại');</script>";
-              }
-          }
-          require "views/login.php";
-      }
-      function home(){
-          require "views/home.php";
-      }
-      function logout(){
-          session_unset();
-          echo '<script type="text/javascript">
-                     alert("Bạn đã đăng xuất");
-                    window.location.href = "?act=/";
-                  </script>';
-      }
-}
+    //  function login()
+    //  {
+    //      if (isset($_SESSION['name'])) {
+    //          header('Location: ' . BASE_URL);
+    //          exit;
+    //      }
+    //      if (isset($_POST['btn_submit'])) {
+    //          ;
+    //          $user = $this->productModel->checkUser($_POST['email'], $_POST['password']);
+    //          if ($user) {
+    //              $_SESSION['id'] = $user['id'];
+    //              $_SESSION['name'] = $user['name'];
+    //              $_SESSION['is_admin'] = $user['is_admin'];
+    //              if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
+    //                  header('Location: ' . BASE_URL . '/admin/index.php?act=dashboard');
+    //                  exit;
+    //              } else {
+    //                  header('Location: ' . BASE_URL);
+    //                  exit;
+    //              }
+    //          } else {
+    //              echo "<script>alert('Đăng nhập thất bại');</script>";
+    //          }
+    //      }
+    //      require "views/login.php";
+    //  }
+     
+     function logout()
+     {
+         session_unset();
+         echo '<script type="text/javascript">
+                      alert("Bạn đã đăng xuất");
+                     window.location.href = "?act=/";
+                   </script>';
+     }
+ }
 ?>
 
 

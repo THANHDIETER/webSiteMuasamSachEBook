@@ -43,21 +43,6 @@
                         <?php  endforeach; ?>
                     </ul>
                 </div>
-
-                <!-- <div class="border p-3">
-                    <h5 class="font-weight-bold">Tìm theo</h5>
-                    <h6 class="text-muted">Chủ đề</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="#">Bước vào agency Quảng cáo & Truyền thông</a></li>
-                        <li><a href="#">Biên cương Việt Nam</a></li>
-                        <li><a href="#">Đam mê xê dịch</a></li>
-                        <li><a href="#">Giải thưởng Sách Hay</a></li>
-                        <li><a href="#">Hạt giống tâm hồn</a></li>
-                        <li><a href="#">Ngày của mẹ</a></li>
-                        <li><a href="#">Sách Giáng Sinh</a></li>
-
-                    </ul>
-                </div> -->
             </div>
 
             <!-- Product List -->
