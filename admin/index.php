@@ -21,7 +21,7 @@ require_once 'models/orderModel.php';
 $act = $_GET['act'] ?? '/';
 match ($act) {
     // Trang chủ quản trị
-    '/' => (new productController)->login(),
+    '/' => (new productController)->dashboard(),
     'dashboard' => (new productController())->dashboard(),
     'insert' => (new productController())->insert(),
     'listproduct' => (new productController())->listProduct(),

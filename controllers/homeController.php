@@ -7,54 +7,47 @@ class homeController
     {
         $this->homeModel = new homeModel();
     }
-    function home()
-    {
+    function home(){
         $products = $this->homeModel->allProduct();
-        $top4 = $this->homeModel->top8Product();
+       
+        $top5 = $this->homeModel->top5Product();
+        $top4 = $this->homeModel->top4Product();
+        $top3 = $this->homeModel->to3Product();
         $danhmuc = $this->homeModel->alldanhmuc();
-        if (isset($_GET['submit'])) {
-            echo '<script type="text/javascript">
-                       window.location.href = "?act=search";
-               </script>';
+        if(isset($_GET['submit'])){
+               echo '<script type="text/javascript">
+                   window.location.href = "?act=search";
+           </script>';    
         }
-        require "views/home.php";
+       require "views/home.php";
     }
 
-    function detail($id)
-    {
+    public function detail($id) {
         // Lấy thông tin sản phẩm
         $productOne = $this->homeModel->findProductById($id);
         $top8 = $this->homeModel->top6Product();
-
-        // Lấy danh sách biến thể cho sản phẩm
         $variants = $this->homeModel->getVariantsByProductId($id);
-
-        // Xử lý bình luận
+    
+        // Kiểm tra nếu người dùng đã đăng nhập
         if (isset($_SESSION['id'])) {
-            if (isset($_POST['submit'])) {
-                $cmt = $this->homeModel->allCmt();
-            } else {
-                $cmt = $this->homeModel->Cmt();
-            }
             if (isset($_POST['btn_submit'])) {
-                $this->homeModel->addComment($_SESSION['id'], $id, $_POST['comment']);
-                echo '<script type="text/javascript">
-                            if (confirm("Bạn đã gửi comment. Bạn có muốn load lại trang không?")) {
-                                window.location.href = "?act=detail&id=' . $id . '";
-                            }
-                          </script>';
+                $comment = htmlspecialchars($_POST['comment']); // Xử lý an toàn dữ liệu
+                $this->homeModel->addComment($_SESSION['id'], $id, $comment);
+                
+                      header("location:index.php?act=detail&id=$id");
             }
+            $cmt = $this->homeModel->Cmt($id); // Lấy bình luận theo product_id
         } else {
             echo '<script type="text/javascript">
-                        if (confirm("Bạn chưa đăng nhập. Bạn có muốn chuyển sang trang đăng nhập không?")) {
-                            window.location.href = "?act=login";
-                        }
-                      </script>';
+                    alert("Bạn chưa đăng nhập. Vui lòng đăng nhập để bình luận.");
+                    window.location.href = "?act=login";
+                  </script>';
         }
-
-        // Gọi view và truyền dữ liệu sản phẩm cùng biến thể vào
+    
+        // Gọi view và truyền dữ liệu sản phẩm, biến thể, bình luận vào
         require_once 'views/detail.php';
     }
+    
     function product()
     {
         $products = $this->homeModel->allProduct();
@@ -67,32 +60,41 @@ class homeController
         $danhmucs = $this->homeModel->alldanhmuc();
         require_once 'views/dMuc_id.php';
     }
-
-    function cart($id) {}
-    function login()
-    {
+    function login() {
+        if (isset($_SESSION['name'])) {
+            header('Location: ' . BASE_URL . '/index.php?act=home');
+            exit; // Dừng thực thi script
+        }
+    
         if (isset($_POST['btn_submit'])) {
             $user = $this->homeModel->checkUser($_POST['email'], $_POST['password']);
             if ($user) {
                 $_SESSION['id'] = $user['id'];
                 $_SESSION['name'] = $user['name'];
                 $_SESSION['is_admin'] = $user['is_admin'];
-                if (isset($_SESSION['is_admin']) && $_SESSION['is_admin ' == 1])
-                    echo '<script type="text/javascript">
-                            window.location.href = "?act=dashboard";
-                            alert("Bạn đã login thành công");
-                        </script>';
+    
+                if ($user['is_admin'] == 1) { // Điều hướng admin
+                    header('Location: ' . BASE_URL . '/admin/index.php?act=dashboard');
+                } else { // Điều hướng người dùng thường
+                    header('Location: ' . BASE_URL . '/index.php?act=home');
+                }
+                exit; // Dừng script sau redirect
             } else {
                 echo "<script>alert('Đăng nhập thất bại');</script>";
             }
         }
+    
         require "views/login.php";
     }
+    
 
 
     function register()
     {
-
+        if (isset($_SESSION['name'])) {
+            header('Location: ' . BASE_URL);
+            exit;
+        }
         if (isset($_POST['btn_dk'])) {
             $email = $this->homeModel->getUserEmail($_POST['email']);
             if ($email) {
@@ -127,8 +129,8 @@ class homeController
                 header("Location: index.php?act=register");
                 exit;
             }
-            require_once 'views/register.php';
         }
+        require_once 'views/register.php';
     }
 
 

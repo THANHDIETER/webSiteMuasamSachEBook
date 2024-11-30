@@ -44,11 +44,6 @@
                                 <!-- <a href="#" class="btn btn-sm btn-outline-secondary">Thêm bìa</a> -->
                             </td>
                         </tr>
-
-
-
-
-
                         <script>
                             function confirmDelete() {
                                 return confirm('Bạn xác nhận xóa danh mục này!');
@@ -56,18 +51,9 @@
                         </script>
                     <?php endforeach; ?>
                     </tbody>
-
                 </table>
-
-
-
             </section>
-
-
-
         </div>
-
-
     </div>
     </div>
 
