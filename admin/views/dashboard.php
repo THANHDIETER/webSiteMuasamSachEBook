@@ -73,7 +73,7 @@ if (!isset($_SESSION['id'])) {
             <h5>Người dùng</h5>
             <p><i class="bi bi-people text-info fs-2"></i></p>
             <p><?= $userCount ?> Người dùng</p>
-            <a href="index.php?act=user" class="btn btn-outline-info">Quản lý Người dùng</a>
+            <a href="index.php?act=listUsers" class="btn btn-outline-info">Quản lý Người dùng</a>
         </div>
     </div>
 
