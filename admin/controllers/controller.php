@@ -255,10 +255,7 @@ public function insert()
      function logout()
      {
          session_unset();
-         echo '<script type="text/javascript">
-                      alert("Bạn đã đăng xuất");
-                     window.location.href = "?act=/";
-                   </script>';
+         header('location:'.BASE_URL.'?act=/');
      }
  }
 ?>

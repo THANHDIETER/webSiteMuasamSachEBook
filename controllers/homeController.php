@@ -60,33 +60,29 @@ class homeController
         $danhmucs = $this->homeModel->alldanhmuc();
         require_once 'views/dMuc_id.php';
     }
-    function login() {
+    function login()
+    {
         if (isset($_SESSION['name'])) {
-            header('Location: ' . BASE_URL . '/index.php?act=home');
-            exit; // Dừng thực thi script
+            header('Location: ' . BASE_URL);
+            exit;
         }
-    
         if (isset($_POST['btn_submit'])) {
             $user = $this->homeModel->checkUser($_POST['email'], $_POST['password']);
             if ($user) {
                 $_SESSION['id'] = $user['id'];
                 $_SESSION['name'] = $user['name'];
                 $_SESSION['is_admin'] = $user['is_admin'];
-    
-                if ($user['is_admin'] == 1) { // Điều hướng admin
+                if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
                     header('Location: ' . BASE_URL . '/admin/index.php?act=dashboard');
-                } else { // Điều hướng người dùng thường
-                    header('Location: ' . BASE_URL . '/index.php?act=home');
+                } else {
+                    header('Location: ' . BASE_URL);
                 }
-                exit; // Dừng script sau redirect
             } else {
                 echo "<script>alert('Đăng nhập thất bại');</script>";
             }
         }
-    
         require "views/login.php";
     }
-    
 
 
     function register()
@@ -134,16 +130,21 @@ class homeController
     }
 
 
+
+
+
+
     function logout()
     {
-
-        session_unset();
-        // unset($_SESSION['user_id'] );
-        echo '<script type="text/javascript">
-                        window.location.href = "?act=login";
-                        alert("Bạn đã đăng xuất thành công");
-                    </script>';
+        session_start(); // Đảm bảo session đã khởi tạo
+        session_unset(); // Xóa tất cả các biến session
+        session_destroy(); // Hủy toàn bộ session
+        setcookie(session_name(), '', time() - 3600, '/'); // Xóa session cookie
+        header('Location: ?act=login');
+        echo '<script>alert("Bạn đã đăng xuất thành công");</script>';
+        exit();
     }
+    
 
 
     function search($keySearch)

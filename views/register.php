@@ -196,8 +196,8 @@
                             <input type="password" name="password" class="form-control" placeholder="Password">
                             <span><?php if (isset($_SESSION['errorsPassword'])): ?>
                                     <div class="text-danger">
-                                        <?php echo htmlspecialchars($_SESSION['errorsName']);
-                                        unset($_SESSION['errorsName']) ?>
+                                        <?php echo htmlspecialchars($_SESSION['errorsPassword']);
+                                        unset($_SESSION['errorsPassword']) ?>
                                     </div>
                                 <?php endif; ?>
                             </span>

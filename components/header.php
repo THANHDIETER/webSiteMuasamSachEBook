@@ -67,6 +67,13 @@
 <body>
   
     <header>
+    <?php
+if (isset($_SESSION['message'])) {
+    echo '<div class="alert alert-info">' . $_SESSION['message'] . '</div>';
+    unset($_SESSION['message']); // Xóa thông báo sau khi hiển thị
+}
+?>
+
       <!-- nav 1 -->
      <nav style="background-color: lightgray;" class="navbar navbar-expand-lg  ">
           <div class="container  container-fluid">
@@ -90,28 +97,25 @@
                       <a class="nav-link active" aria-current="page" href="?act=order"><i class="bi bi-boxes"></i> - Kiểm Tra Đơn Hàng</a>
                     </li>
                     <?php
-                  
+                        if (isset($_SESSION['id'])) { // Check if the user session exists
+                            echo '
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="?act=profile"> <i class="bi bi-person-circle"> ' . $_SESSION['name'] . '</i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="?act=logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                            </li>';
+                        } else {
+                            echo '
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="?act=login"><i class="bi bi-box-arrow-in-left"></i> Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="?act=register"><i class="bi bi-file-earmark-person"></i> Register</a>
+                            </li>';
+                        }
+                        ?>
 
-                  
-                  if (isset($_SESSION['id'])) { // Check if the user session exists
-                                   // $userName = htmlspecialchars(); 
-                                   echo '
-                                   <li class="nav-item">
-                                       <a class="nav-link active" aria-current="page" href="?act=profile"><i class="bi bi-person-circle"> </i></a>
-                                   </li>
-                                   <li class="nav-item">
-                                       <a class="nav-link active" aria-current="page" href="?act=logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
-                                   </li>'; 
-                               } else {
-                                   echo '
-                                   <li class="nav-item">
-                                       <a class="nav-link active" aria-current="page" href="?act=login"><i class="bi bi-box-arrow-in-left"></i> Login</a>
-                                   </li>
-                                   <li class="nav-item">
-                                       <a class="nav-link active" aria-current="page" href="?act=register"><i class="bi bi-file-earmark-person"></i> Register</a>
-                                   </li>';
-                               }
-             ?>
                    
 
 

@@ -51,10 +51,11 @@ match ($act) {
     'order' => (new orderController())->adminOrders(),
     'confirmOrder' => (new orderController())->confirmOrder(),
     'orderDetail' => (new orderController())->viewOrderDetail(),
+    'completeOrder' => (new orderController())->completeOrder(),
     'shipOrder' => (new orderController())->shipOrder(),  // Giao hàng
     'cancelOrder' => (new orderController())->cancelOrder(),
     // quản lỳ bình luận
-        
+    
 
     'report' => (new orderController())->viewReport(),
     'comment' => (new productController())->comment(),

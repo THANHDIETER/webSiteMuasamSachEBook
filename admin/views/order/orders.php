@@ -96,45 +96,47 @@
             </thead>
             <tbody>
             <?php foreach ($orders as $order): ?>
-                <tr>
-                    <td><?= $order['id'] ?></td>
-                    <td><?= htmlspecialchars($order['name']) ?></td>
-                    <td><?= htmlspecialchars($order['address']) ?></td>
-                    <td><?= htmlspecialchars($order['phone']) ?></td>
-                    <td><?= htmlspecialchars($order['email']) ?></td>
-                    <td><?= number_format($order['total_amount'], 0, ',', '.') ?> VND</td>
-                    <td><?= date('d/m/Y H:i', strtotime($order['order_date'])) ?></td>
-                    <td>
-                        <span class="status-text <?= $order['payment_type'] == 'Đã thanh toán' ? 'paid-status' : 'unpaid-status' ?>">
-                            <?= htmlspecialchars($order['payment_type']) ?>
-                        </span>
-                    </td>
-                    <td>
-                        <span class="badge <?= 
-                            $order['status'] == 'đang giao hàng' ? 'badge-primary' : 
-                            ($order['status'] == 'Đã xác nhận' ? 'badge-warning' : 
-                            ($order['status'] == 'Đã hủy' ? 'badge-danger' : 
-                            ($order['status'] == 'Giao hàng thành công' ? 'badge-success' : 'badge-secondary'))) ?>">
-                            <?= htmlspecialchars($order['status']) ?>
-                        </span>
-                    </td>
-                    <td>
-                        <?php if ($order['status'] == 'Chờ xác nhận'): ?>
-                            <a href="?act=confirmOrder&order_id=<?= $order['id'] ?>" class="btn confirm-btn">Giao hàng</a>
-                            <a href="?act=cancelOrder&order_id=<?= $order['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?');">Hủy</a>
-                        <?php elseif ($order['status'] == 'đang giao hàng'): ?>
-                            <a href="?act=shipOrder&order_id=<?= $order['id'] ?>" class="btn btn-warning btn-sm">Xác nhận</a>
-                        <?php elseif ($order['status'] == 'Đã hủy'): ?>
-                            <span class="badge badge-danger">Đã hủy</span>
-                        <?php else: ?>
-                            <span class="badge badge-success">Giao hàng thành công</span>
-                        <?php endif; ?>
-                    </td>
-                    <td>
-                        <a href="?act=orderDetail&order_id=<?= $order['id'] ?>" class="btn btn-info btn-sm">Xem Chi Tiết</a>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
+    <tr>
+        <td><?= $order['id'] ?></td>
+        <td><?= htmlspecialchars($order['name']) ?></td>
+        <td><?= htmlspecialchars($order['address']) ?></td>
+        <td><?= htmlspecialchars($order['phone']) ?></td>
+        <td><?= htmlspecialchars($order['email']) ?></td>
+        <td><?= number_format($order['total_amount'], 0, ',', '.') ?> VND</td>
+        <td><?= date('d/m/Y H:i', strtotime($order['order_date'])) ?></td>
+        <td>
+            <span class="status-text <?= $order['payment_type'] == 'Đã thanh toán' ? 'paid-status' : 'unpaid-status' ?>">
+                <?= htmlspecialchars($order['payment_type']) ?>
+            </span>
+        </td>
+        <td>
+            <span class="badge <?= 
+                $order['status'] == 'đang giao hàng' ? 'badge-primary' : 
+                ($order['status'] == 'Đã xác nhận' ? 'badge-warning' : 
+                ($order['status'] == 'Đã hủy' ? 'badge-danger' : 
+                ($order['status'] == 'Giao hàng thành công' ? 'badge-success' : 'badge-secondary'))) ?>">
+                <?= htmlspecialchars($order['status']) ?>
+            </span>
+        </td>
+        <td>
+            <?php if ($order['status'] == 'Chờ xác nhận'): ?>
+                <a href="?act=confirmOrder&order_id=<?= $order['id'] ?>" class="btn btn-primary btn-sm">Giao hàng</a>
+                <a href="?act=cancelOrder&order_id=<?= $order['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?');">Hủy</a>
+            <?php elseif ($order['status'] == 'đang giao hàng'): ?>
+                <a href="?act=completeOrder&order_id=<?= $order['id'] ?>" class="btn btn-success btn-sm">Xác nhận</a>
+                <a href="?act=cancelOrder&order_id=<?= $order['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?');">Bom hàng</a>
+            <?php elseif ($order['status'] == 'Đã hủy'): ?>
+                <span class="badge badge-danger">Đã hủy</span>
+            <?php elseif ($order['status'] == 'Đã xác nhận'): ?>
+                <span class="badge badge-success">Giao hàng thành công</span>
+            <?php endif; ?>
+        </td>
+        <td>
+            <a href="?act=orderDetail&order_id=<?= $order['id'] ?>" class="btn btn-info btn-sm">Xem Chi Tiết</a>
+        </td>
+    </tr>
+<?php endforeach; ?>
+
 
             </tbody>
         </table>
