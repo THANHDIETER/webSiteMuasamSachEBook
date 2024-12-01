@@ -82,7 +82,7 @@
                     class="fa-solid fa-bookmark me-2"></i>Nhà xuất bản</a>
             <a href="index.php?act=order" class="nav-link text-light px-3"><i
                     class="fa-solid fa-cart-shopping me-2"></i>Đơn hàng</a>
-            <a href="index.php?act=account" class="nav-link text-light px-3"><i class="fa-regular fa-user me-2"></i>Tài
+            <a href="index.php?act=listUsers" class="nav-link text-light px-3"><i class="fa-regular fa-user me-2"></i>Tài
                 khoản</a>
             <a href="index.php?act=comment" class="nav-link text-light px-3"><i
                     class="fa-regular fa-comment me-2"></i>Bình luận</a>

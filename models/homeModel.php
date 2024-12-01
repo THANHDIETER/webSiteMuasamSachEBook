@@ -102,6 +102,12 @@
         $user = $stmt->fetch();
         return $user ? $user : null;
     }
+    
+    
+    
+    
+    
+    
     function addComment($user_id,$product_id,$comment){
         $sql = "INSERT INTO `comments` (`user_id`, `product_id`, `content`, `created_at`) 
         VALUES ('$user_id', '$product_id', '$comment', NOW())";

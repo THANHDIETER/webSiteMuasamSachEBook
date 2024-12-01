@@ -21,7 +21,7 @@
       <form action="?act=addToCart" method="POST">
     <div class="row bg-white">
     <div class="col-4">
-    <img style=" max-width:100%;" class="mt-5" src="./assets/images/prod/books/<?php echo $name['img'] ?>" class="top-pro-img" alt="">
+    <img style=" max-width:100%;" class="" src="./assets/images/prod/books/<?php echo $name['img'] ?>" class="top-pro-img" alt="">
     </div>
     
     <div class="col-8">
@@ -77,7 +77,7 @@
         <?php endforeach; ?>
     </select><br>
 
-    <button type="submit" class="btn btn-danger" style="width: 200px; height:40px; background-color:red; line-height:40px;">
+    <button type="submit" class="btn btn-danger" style="width: 200px; height:40px; background-color:red; ">
         Thêm vào giỏ hàng
     </button>
 </form>

@@ -50,7 +50,26 @@ class orderController {
         $report_data = $this->orderModel->getReportData();
         include 'views/order/reportPage.php';
     }
+    public function completeOrder() {
+        if (!isset($_GET['order_id'])) {
+            echo "Không tìm thấy ID đơn hàng.";
+            return;
+        }
     
+        $order_id = intval($_GET['order_id']);
+        
+        try {
+            $this->orderModel->updateStatus($order_id, 'Đã xác nhận');
+            echo "<script>
+                    alert('Đơn hàng #{$order_id} đã hoàn thành!');
+                    window.location.href = '?act=order';
+                  </script>";
+            exit();
+        } catch (Exception $e) {
+            echo "Lỗi khi hoàn thành đơn hàng: " . $e->getMessage();
+        }
+    }
+        
     public function shipOrder() {
         if (!isset($_GET['order_id'])) {
             echo "Không tìm thấy ID đơn hàng.";

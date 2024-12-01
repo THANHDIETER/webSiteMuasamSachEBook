@@ -1,0 +1,54 @@
+/* Thay đổi màu nền của nút */
+.carousel-control-prev,
+.carousel-control-next {
+  background-color: transparent;
+  margin-top: 20%; /* Đẩy các nút xuống dưới */
+  border: none;
+}
+
+/* Thay đổi kích thước của các nút */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 40px;
+  height: 40px;
+  background-color: darkgrey;
+}
+/* Tùy chỉnh kích thước của nút điều khiển */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 60px;
+  height: 60px;
+}
+a {
+  color: aqua;
+}
+a:hover {
+  background-color: gray;
+  color: aliceblue;
+}
+.link-hover a {
+  transition: color 0.3s ease; /* Thêm hiệu ứng chuyển màu mượt mà */
+}
+
+.link-hover a:hover {
+  color: white !important;
+  transition: ease 1s;
+}
+
+/* css sản phẩm */
+.card-img-top {
+  object-fit: cover;
+  height: 200px;
+  width: 100%;
+}
+.card-body {
+  padding: 15px;
+}
+.card-title {
+  font-size: 1rem;
+  color: #333;
+}
+.card-text {
+  font-size: 0.875rem;
+  color: #ff8c00;
+}

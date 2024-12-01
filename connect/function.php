@@ -15,7 +15,7 @@
             exit;
         }
     }
-    define('BASE_URL', 'hhttp://localhost/webSiteMuasamSachEBook-DuAn1/');
+    define('BASE_URL', 'http://localhost/webSiteMuasamSachEBook-DuAn1');
     function dd($data){
         echo '<pre>';
         print_r($data);
