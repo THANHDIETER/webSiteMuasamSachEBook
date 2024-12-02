@@ -81,12 +81,17 @@
         return $stmt->fetchAll(PDO::FETCH_ASSOC); 
     }
     public function updateId($id) {
-        // SQL để tăng số lượt click
+        // Câu lệnh SQL để cập nhật click_count
         $sql = "UPDATE products SET click_count = click_count + 1 WHERE id = :id";
+        
+        // Chuẩn bị và thực thi câu lệnh SQL
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);  // Liên kết ID sản phẩm
+        
+        // Thực thi câu lệnh
         $stmt->execute();
     }
+    
     function add_user($email,$name,$password){
         $sql= "INSERT INTO users (email, name, password) VALUES ('$email', '$name', '$password')";
         $stmt = $this->conn->prepare($sql);
@@ -141,6 +146,42 @@
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getUserByEmail($email) {
+        $sql = "SELECT * FROM users WHERE email = :email";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    public function savePasswordResetToken($userId, $token) {
+        $sql = "UPDATE users SET reset_token = :token WHERE id = :userId";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':token', $token);
+        $stmt->bindParam(':userId', $userId);
+        $stmt->execute();
+    }
+    public function getUserByToken($token) {
+        $sql = "SELECT * FROM users WHERE reset_token = :token";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':token', $token);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    public function updatePassword($userId, $password) {
+        $sql = "UPDATE users SET password = :password WHERE id = :userId";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':password', $password);
+        $stmt->bindParam(':userId', $userId);
+        $stmt->execute();
+    }
+    public function deletePasswordResetToken($userId) {
+        $sql = "UPDATE users SET reset_token = NULL WHERE id = :userId";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':userId', $userId);
+        $stmt->execute();
+    }
+    
+    
 
 }
 ?>
