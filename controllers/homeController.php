@@ -27,7 +27,7 @@ class homeController
         $productOne = $this->homeModel->findProductById($id);
         $top8 = $this->homeModel->top6Product();
         $variants = $this->homeModel->getVariantsByProductId($id);
-    
+        $updateId = $this->homeModel->updateId($id);
         // Kiểm tra nếu người dùng đã đăng nhập
         if (isset($_SESSION['id'])) {
             if (isset($_POST['btn_submit'])) {
@@ -145,7 +145,60 @@ class homeController
         exit();
     }
     
+    // homeController.php
+public function forgotPassword() {
+    if (isset($_POST['email'])) {
+        $email = $_POST['email'];
 
+        // Kiểm tra email trong cơ sở dữ liệu
+        $user = $this->homeModel->getUserByEmail($email);
+        if ($user) {
+            // Tạo token để gửi qua email
+            $token = bin2hex(random_bytes(50));
+            $this->homeModel->savePasswordResetToken($user['id'], $token);
+
+            // Gửi email với đường dẫn reset
+            $resetLink = "http://localhost/webSiteMuasamSachEBook-DuAn1/index.php?act=resetPassword&token=$token";
+            mail($email, "Reset Mật khẩu", "Click vào liên kết để thay đổi mật khẩu: $resetLink");
+
+            echo "Chúng tôi đã gửi một email đến bạn với hướng dẫn thay đổi mật khẩu.";
+        } else {
+            echo "Email không tồn tại.";
+        }
+    }
+    require 'views/forgot_password.php'; // Form quên mật khẩu
+}
+
+public function resetPassword() {
+    if (isset($_GET['token'])) {
+        $token = $_GET['token'];
+        $user = $this->homeModel->getUserByToken($token);
+
+        if ($user) {
+            // Kiểm tra xem người dùng đã gửi form hay chưa
+            if (isset($_POST['password'])) {
+                $password = $_POST['password'];
+
+                // Cập nhật mật khẩu mới và xóa token
+                $this->homeModel->updatePassword($user['id'], $password);
+                $this->homeModel->deletePasswordResetToken($user['id']);
+
+                echo "Mật khẩu của bạn đã được thay đổi thành công.";
+                header('Location: ?act=login'); // Quay lại trang đăng nhập
+            } else {
+                // Nếu chưa gửi form, hiển thị form đổi mật khẩu
+                require 'views/reset_password.php'; // Form đổi mật khẩu
+            }
+        } else {
+            echo "Token không hợp lệ hoặc đã hết hạn.";
+        }
+    } else {
+        echo "Không có token được cung cấp.";
+    }
+}
+
+
+    
 
     function search($keySearch)
     {

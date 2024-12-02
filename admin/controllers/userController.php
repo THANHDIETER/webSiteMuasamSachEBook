@@ -31,24 +31,7 @@ class userController {
     }
 
     // Sao chép người dùng
-    public function copyUser() {
-        if (!isset($_GET['user_id'])) {
-            echo "Dữ liệu không hợp lệ.";
-            return;
-        }
-
-        $user_id = $_GET['user_id'];
-        $user = $this->userModel->getUserById($user_id);
-
-        if ($user) {
-            // Sao chép người dùng với thông tin từ người dùng cũ
-            $this->userModel->copyUser($user);
-            header('Location: ?act=listUsers');
-            exit();
-        } else {
-            echo "Người dùng không tồn tại.";
-        }
-    }
+    
 
     // Chỉnh sửa thông tin người dùng
     public function editUser() {

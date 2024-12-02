@@ -188,7 +188,7 @@
                     <?php endif; ?>
 
                     <div class="text-center">
-                        <a href="#" class="text-primary">Quên mật khẩu</a>
+                    <a href="index.php?act=forgotPassword" class="text-primary">Quên mật khẩu</a>
                     </div>
                     <hr>
                     <p class="text-center">Bạn chưa có tài khoản? <a href="?act=register" class="text-primary">Đăng ký ngay</a></p>
