@@ -73,6 +73,8 @@
                     class="fa-solid fa-house me-2"></i>Trang chủ</a>
             <a href="index.php?act=listproduct" class="nav-link text-light px-3"><i
                     class="fa-solid fa-book me-2"></i>Sách</a>
+            <a href="index.php?act=listVariants" class="nav-link text-light px-3"><i
+                    class="fa-solid fa-book me-2"></i>Biến thể</a>
             <a href="index.php?act=listdanhmuc" class="nav-link text-light px-3"><i
                     class="fa-solid fa-list me-2"></i>Danh
                 mục</a>

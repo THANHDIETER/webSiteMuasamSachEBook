@@ -1,5 +1,4 @@
 <?php
-    // models/UserModel.php
 
 class UserModel {
      public $conn;
