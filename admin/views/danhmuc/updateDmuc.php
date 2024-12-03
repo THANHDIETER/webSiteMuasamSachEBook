@@ -18,7 +18,8 @@
 </head>
 
 <body>
-    <div class="main-content">
+<?php require_once 'components/header.php' ?>
+<div class="main-content">
         <div class="container">
             <h1 class="fw-bold text-center">Cập nhật danh mục</h1>
             <form action="" enctype="multipart/form-data" method="post">

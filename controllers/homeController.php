@@ -154,7 +154,7 @@ public function forgotPassword() {
         $user = $this->homeModel->getUserByEmail($email);
         if ($user) {
             // Tạo token để gửi qua email
-            $token = bin2hex(random_bytes(50));
+            $token = bin2hex(random_bytes(5));
             $this->homeModel->savePasswordResetToken($user['id'], $token);
 
             // Gửi email với đường dẫn reset
