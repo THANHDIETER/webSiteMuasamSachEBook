@@ -36,13 +36,14 @@
     <?php require_once './components/header.php'; ?>
     <div class="container">
         <h4>Giỏ Hàng</h4>
+        <hr>
         <form action="index.php?act=updateQuantity" method="POST">
     <?php if (!empty($cartItems)): ?>
         <?php foreach ($cartItems as $item): ?>
             <div class="row mb-3 cart-item">
                 <div class="col-2">
                     <a href="?act=detail&id=<?= $item['product_id'] ?>">
-                        <img src="./assets/images/prod/books/<?= $item['img'] ?>" style="width: 100px; height: 150px;" alt="<?= $item['name'] ?>">
+                        <img src="./assets/images/prod/books/<?= $item['img'] ?>" style="width: 120px; height: 120px;" alt="<?= $item['name'] ?>">
                     </a>
                 </div>
                 <div class="col-6">
@@ -56,7 +57,7 @@
                     </div>
                 </div>
                 <div class="col-2">
-                    <span class="item-price" data-price="<?=$sale = ($item['price']-($item['price']/100)*$item['sale'])?>"> <?= number_format($sale, 0, ',', '.') ?> + <?=  number_format($item['variant_price'], 0, ',', '.') ?>đ </span>
+                    <span class="item-price" data-price="<?=$sale = ($item['price']-($item['price']/100)*$item['sale'])+$item['variant_price']?>"> <?= number_format($sale, 0, ',', '.') ?>đ </span>
                 </div>
                 <div class="col-2 text-end">
                     <a href="?act=remove_from_cart&product_id=<?= $item['product_id'] ?>&variant_id=<?= $item['variant_id'] ?>" 

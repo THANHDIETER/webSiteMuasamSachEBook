@@ -58,6 +58,7 @@
         .btn-primary:hover {
             background-color: #0056b3;
             border-color: #004085;
+          
         }
 
         .btn-danger:hover {
@@ -177,6 +178,11 @@
                         </div><br>
                         <button type="submit" name="btn_submit" class="btn btn-primary btn-block mb-3">Đăng nhập</button>
                     </form>
+                    <div class="" style="margin-left:250px ;" >
+                    <a href="index.php?act=forgotPassword" class="text-primary">Quên mật khẩu </a>
+                   
+                    </div>
+                    <div class="box text-center">
                     <div class="text-center text-muted mb-3">HOẶC</div>
                     <button type="button" class="btn btn-outline-primary btn-block mb-3">
                         <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google Logo"
@@ -187,12 +193,11 @@
                         <div class="alert alert-danger"><?php echo htmlspecialchars($err); ?></div>
                     <?php endif; ?>
 
-                    <div class="text-center">
-                    <a href="index.php?act=forgotPassword" class="text-primary">Quên mật khẩu</a>
-                    </div>
+                        
                     <hr>
                     <p class="text-center">Bạn chưa có tài khoản? <a href="?act=register" class="text-primary">Đăng ký ngay</a></p>
                 </div>
+                    </div>
 
                 <!-- Phần hình ảnh bên phải -->
                 <div class="col-md-6 h-100">

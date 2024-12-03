@@ -18,7 +18,7 @@
 </head>
 
 <body>
-
+<?php require_once 'components/header.php' ?>
     <div class="main-content">
         <div class="container">
             <h1 class="fw-bold text-center mt-5">Thêm danh mục</h1>

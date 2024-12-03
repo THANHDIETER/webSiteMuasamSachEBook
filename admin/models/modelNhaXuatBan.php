@@ -42,14 +42,31 @@ class nhaXuatBanModel
 
     public function print($id)
     {
-        $sql = "SELECT * FROM publishing_houses WHERE id=$id";
-        return $this->conn->query($sql)->fetch();
+        try {
+            $sql = "SELECT * FROM publishing_houses WHERE id = :id";
+            $stmt = $this->conn->prepare($sql); // Chuẩn bị câu lệnh
+            $stmt->execute([':id' => $id]);     // Thực thi với giá trị ràng buộc
+            return $stmt->fetch();             // Lấy một dòng dữ liệu
+        } catch (PDOException $e) {
+            echo "Lỗi khi truy vấn nhà xuất bản: " . $e->getMessage();
+            return false; // Trả về false nếu xảy ra lỗi
+        }
     }
-    function updateNhaXuatBan($id, $name)
+
+    public function updateNhaXuatBan($id, $name)
     {
-        $sql = "UPDATE publishing_houses SET name='$name' WHERE id=$id";
-        $stmt = $this->conn->prepare($sql);
-        return $stmt->execute();
+        try {
+            $sql = "UPDATE publishing_houses SET name = :name WHERE id = :id";
+            $stmt = $this->conn->prepare($sql); // Chuẩn bị câu lệnh
+            $stmt->execute([
+                ':id' => $id,
+                ':name' => $name
+            ]); // Thực thi với giá trị ràng buộc
+            return true; // Trả về true nếu cập nhật thành công
+        } catch (PDOException $e) {
+            echo "Lỗi khi cập nhật nhà xuất bản: " . $e->getMessage();
+            return false; // Trả về false nếu xảy ra lỗi
+        }
     }
 
 
