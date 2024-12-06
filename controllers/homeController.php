@@ -142,6 +142,30 @@ class homeController
             exit;
         }
     }
+    // homeController.php
+public function editProfile() {
+    if (isset($_SESSION['id'])) {
+        $userId = $_SESSION['id'];
+        $user = $this->homeModel->getUserById($userId);
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $name = $_POST['name'] ?? $user['name'];
+            $phone = $_POST['phone'] ?? $user['phone'];
+            $address = $_POST['address'] ?? $user['address'];
+
+            $this->homeModel->updateUserProfile($userId, $name, $phone, $address); // Cập nhật thông tin
+            echo "Cập nhật thành công!";
+            header("Location: ?act=profile");
+            exit;
+        }
+
+        require 'views/edit_profile.php'; // Hiển thị form chỉnh sửa
+    } else {
+        echo "Bạn cần đăng nhập để truy cập trang này.";
+        header("Location: ?act=login");
+        exit;
+    }
+}
 
 
     function logout()

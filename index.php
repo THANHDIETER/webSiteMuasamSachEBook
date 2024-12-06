@@ -23,7 +23,9 @@ try {
         'product'     => (new homeController())->product(),
         'register'    => (new homeController())->register(),
         'dmid'        => (new homeController())->dmshow($_GET['id']), // Xử lý danh mục theo ID
+        
         'profile' => (new homeController())->profile(),
+        'editProfile' => (new homeController())->editProfile(), // Gọi action editProfile
 
         // Các hành động của cartController
         'addToCart'   => (new CartController())->addToCart($id),

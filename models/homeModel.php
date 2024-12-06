@@ -190,6 +190,16 @@
         return $stmt->fetch(PDO::FETCH_ASSOC); // Trả về thông tin người dùng
     }
 
+    // homeModel.php
+    public function updateUserProfile($userId, $name, $phone, $address) {
+        $sql = "UPDATE users SET name = :name, phone = :phone, address = :address WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+        $stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
+        $stmt->bindParam(':address', $address, PDO::PARAM_STR);
+        $stmt->bindParam(':id', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+    }
 
 }
 ?>
