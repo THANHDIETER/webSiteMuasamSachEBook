@@ -111,7 +111,23 @@ public function updateQuantity() {
     }
 }
 
-    
+    public function getCartItemCount() {
+        if (isset($_SESSION['id'])) {
+            $userId = $_SESSION['id'];
+            $cartId = $this->cartModel->getCartIdByUserId($userId); // Lấy cart_id từ user_id
+
+            if ($cartId) {
+                $itemCount = $this->cartModel->countCartItems($cartId); // Lấy tổng số lượng từ CartModel
+                echo $itemCount; // Trả về số lượng
+            } else {
+                echo 0; // Trả về 0 nếu không có giỏ hàng
+            }
+        } else {
+            echo 0; // Trả về 0 nếu người dùng chưa đăng nhập
+        }
+    }
+
+
     
 
     // Xóa sản phẩm khỏi giỏ hàng

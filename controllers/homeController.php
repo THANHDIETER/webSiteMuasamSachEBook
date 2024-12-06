@@ -38,10 +38,7 @@ class homeController
             }
             $cmt = $this->homeModel->Cmt($id); // Lấy bình luận theo product_id
         } else {
-            echo '<script type="text/javascript">
-                    alert("Bạn chưa đăng nhập. Vui lòng đăng nhập để bình luận.");
-                    window.location.href = "?act=login";
-                  </script>';
+            $cmt = $this->homeModel->Cmt($id);
         }
     
         // Gọi view và truyền dữ liệu sản phẩm, biến thể, bình luận vào
@@ -128,10 +125,47 @@ class homeController
         }
         require_once 'views/register.php';
     }
+    
+    // homeController.php
+    public function profile() {
+        if (isset($_SESSION['id'])) {
+            $userId = $_SESSION['id'];
+            $user = $this->homeModel->getUserById($userId); // Lấy thông tin người dùng từ model
+            if ($user) {
+                require 'views/profile.php'; // Gọi giao diện Profile
+            } else {
+                echo "Không tìm thấy thông tin người dùng.";
+            }
+        } else {
+            echo "Bạn cần đăng nhập để truy cập trang này.";
+            header("Location: ?act=login");
+            exit;
+        }
+    }
+    // homeController.php
+public function editProfile() {
+    if (isset($_SESSION['id'])) {
+        $userId = $_SESSION['id'];
+        $user = $this->homeModel->getUserById($userId);
 
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $name = $_POST['name'] ?? $user['name'];
+            $phone = $_POST['phone'] ?? $user['phone'];
+            $address = $_POST['address'] ?? $user['address'];
 
+            $this->homeModel->updateUserProfile($userId, $name, $phone, $address); // Cập nhật thông tin
+            echo "Cập nhật thành công!";
+            header("Location: ?act=profile");
+            exit;
+        }
 
-
+        require 'views/edit_profile.php'; // Hiển thị form chỉnh sửa
+    } else {
+        echo "Bạn cần đăng nhập để truy cập trang này.";
+        header("Location: ?act=login");
+        exit;
+    }
+}
 
 
     function logout()
