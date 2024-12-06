@@ -181,7 +181,15 @@
         $stmt->execute();
     }
     
-    
+    // homeModel.php
+    public function getUserById($userId) {
+        $sql = "SELECT id, name, email, phone, address, avatar FROM users WHERE id = :id LIMIT 1";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC); // Trả về thông tin người dùng
+    }
+
 
 }
 ?>

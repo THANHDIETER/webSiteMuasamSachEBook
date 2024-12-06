@@ -23,12 +23,14 @@ try {
         'product'     => (new homeController())->product(),
         'register'    => (new homeController())->register(),
         'dmid'        => (new homeController())->dmshow($_GET['id']), // Xử lý danh mục theo ID
+        'profile' => (new homeController())->profile(),
 
         // Các hành động của cartController
         'addToCart'   => (new CartController())->addToCart($id),
         'updateQuantity' => (new CartController())->updateQuantity(),
         'cart'        => (new CartController())->viewCart(),
         'remove_from_cart' => (new CartController())->removeFromCart($id),
+        'cartItemCount'   => (new CartController())->getCartItemCount(),
 
         // Các hành động của addressController
         'checkout'    => (new addressController())->checkout(),

@@ -126,7 +126,19 @@ class CartModel {
         $stmt->bindParam(':variant_id', $variant_id, PDO::PARAM_INT);
         $stmt->execute();
     }
-    
+        // CartModel.php
+    // CartModel.php
+    public function countCartItems($cartId) {
+        $sql = "SELECT SUM(quantity) AS total_quantity FROM cart_items WHERE cart_id = :cart_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':cart_id', $cartId, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total_quantity'] ?? 0; // Trả về 0 nếu không có sản phẩm
+    }
+
+
+
    
     public function updateCartItemQuantityById($cart_id, $cartItemId, $quantity) {
         // Cập nhật số lượng sản phẩm trong giỏ hàng
