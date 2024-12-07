@@ -69,7 +69,16 @@
 
         <hr>
         <div class="text-end">
-            <h5 class="total-price">Tổng cộng: <?= number_format(array_sum(array_map(fn($item) => $sale+$item['variant_price'] * $item['quantity'], $cartItems)), 0, ',', '.') ?>đ</h5>
+        <h5 class="total-price">
+    Tổng cộng: 
+    <?php 
+    $totalPrice = array_sum(array_map(function($item) {
+        $finalPrice = ($item['price'] - ($item['price'] * $item['sale'] / 100)) + $item['variant_price'];
+        return $finalPrice * $item['quantity'];
+    }, $cartItems));
+    echo number_format($totalPrice, 0, ',', '.') . "đ";
+    ?>
+</h5>
             <a href="?act=checkout" class="btn btn-success">Tiến Hành Đặt Hàng</a>
         </div>
     <?php else: ?>
@@ -81,29 +90,29 @@
 
     <script>
     document.querySelectorAll('.increase').forEach(button => {
-        button.addEventListener('click', function() {
-            const input = button.parentElement.querySelector('input[type="number"]');
-            input.value = parseInt(input.value) + 1;
-            updateQuantity(input);
-        });
+    button.addEventListener('click', function () {
+        const input = button.parentElement.querySelector('input[type="number"]');
+        input.value = parseInt(input.value) + 1;
+        updateQuantityAJAX(input);
     });
+});
 
-    document.querySelectorAll('.decrease').forEach(button => {
-        button.addEventListener('click', function() {
-            const input = button.parentElement.querySelector('input[type="number"]');
-            if (parseInt(input.value) > 1) {
-                input.value = parseInt(input.value) - 1;
-                updateQuantity(input);
-            }
-        });
+document.querySelectorAll('.decrease').forEach(button => {
+    button.addEventListener('click', function () {
+        const input = button.parentElement.querySelector('input[type="number"]');
+        if (parseInt(input.value) > 1) {
+            input.value = parseInt(input.value) - 1;
+            updateQuantityAJAX(input);
+        }
     });
+});
 
-    // Cập nhật số lượng khi người dùng thay đổi số lượng
-    function updateQuantity(input) {
-        const cartItemId = input.name.match(/\d+/)[0]; // Lấy ID sản phẩm trong giỏ
-        const quantity = input.value;
 
-        // Gửi yêu cầu AJAX để cập nhật số lượng
+function updateQuantityAJAX(input) {
+    const cartItemId = input.name.match(/\d+/)[0]; // Lấy ID của sản phẩm trong giỏ hàng
+    const quantity = input.value;
+
+    // Gửi yêu cầu AJAX để cập nhật số lượng
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "index.php?act=updateQuantity", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -111,25 +120,29 @@
             if (xhr.readyState === 4 && xhr.status === 200) {
                 const response = JSON.parse(xhr.responseText);
                 if (response.success) {
-                    // Cập nhật giá trị tổng cộng nếu cần
+                    // Cập nhật giá và tổng tiền
                     updateTotalPrice();
                 } else {
                     alert('Có lỗi xảy ra khi cập nhật số lượng.');
+                    // Reset số lượng về giá trị cũ nếu lỗi xảy ra
+                    input.value = response.old_quantity;
                 }
             }
         };
         xhr.send("quantities[" + cartItemId + "]=" + quantity);
     }
 
+
     function updateTotalPrice() {
-        let totalPrice = 0;
-        document.querySelectorAll('.item-price').forEach(item => {
-            const price = parseFloat(item.getAttribute('data-price'));
-            const quantity = item.closest('.cart-item').querySelector('input[type="number"]').value;
-            totalPrice += price * quantity;
-        });
-        document.querySelector('.total-price').textContent = "Tổng cộng: " + totalPrice.toLocaleString() + "đ";
-    }
+    let totalPrice = 0;
+    document.querySelectorAll('.cart-item').forEach(item => {
+        const price = parseFloat(item.querySelector('.item-price').getAttribute('data-price'));
+        const quantity = parseInt(item.querySelector('input[type="number"]').value);
+        totalPrice += price * quantity;
+    });
+    document.querySelector('.total-price').textContent = "Tổng cộng: " + totalPrice.toLocaleString() + "đ";
+}
+
 </script>
 
 

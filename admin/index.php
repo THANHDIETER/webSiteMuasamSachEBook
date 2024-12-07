@@ -57,6 +57,9 @@ match ($act) {
     'deleteUser' => (new userController())->deleteUser(),
     'editUser' => (new userController())->editUser(), 
     'addUser' => (new userController())->addUser(),
+    
+    'profile' => (new userController())->profile(),
+    'editProfile' => (new userController())->editProfile(), // Gọi action editProfile
 
     // order management
     'order' => (new orderController())->adminOrders(),
@@ -70,6 +73,7 @@ match ($act) {
     'report' => (new orderController())->viewReport(),
     'comment' => (new productController())->comment(),
     'logout' => (new productController())->logout(),
+
 
     // Quản lý Biến thể
     'listVariants' => (new VariantController())->listVariants(),

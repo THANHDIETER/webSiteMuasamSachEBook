@@ -47,7 +47,7 @@ class CartController {
         // Lấy thông tin sản phẩm và biến thể từ POST
         $productId = $_POST['id'];
         $variantId = $_POST['variant_id'];
-        $quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 1; // Default quantity is 1
+        $quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 1; 
     
         // Lấy thông tin sản phẩm và biến thể
         $product = $this->cartModel->getProductById($productId);
@@ -79,37 +79,30 @@ class CartController {
         }
     }
     
-    
-    
-    
-
-
-    // Cập nhật số lượng sản phẩm trong giỏ hàng
-    // Cập nhật số lượng sản phẩm trong giỏ hàng
-public function updateQuantity() {
-    if (!isset($_SESSION['id'])) {
-        header("Location: index.php?act=login");
-        exit;
-    }
-
-    $user_id = $_SESSION['id'];
-    $cart_id = $this->cartModel->getCartIdByUserId($user_id);
-
-    if (isset($_POST['quantities']) && $cart_id) {
-        foreach ($_POST['quantities'] as $cartItemId => $quantity) {
-            // Kiểm tra và đảm bảo số lượng không dưới 1
-            $quantity = max(1, (int)$quantity);
-            $this->cartModel->updateCartItemQuantityById($cart_id, $cartItemId, $quantity);
+    public function updateQuantity() {
+        if (!isset($_SESSION['id'])) {
+            header("Location: index.php?act=login");
+            exit;
         }
-        
-        // Trả về kết quả cập nhật dạng JSON
-        echo json_encode(['success' => true]);
-        exit;
-    } else {
-        echo json_encode(['error' => 'Giỏ hàng không tìm thấy.']);
-        exit;
+
+        $user_id = $_SESSION['id'];
+        $cart_id = $this->cartModel->getCartIdByUserId($user_id);
+
+        if (isset($_POST['quantities']) && $cart_id) {
+            foreach ($_POST['quantities'] as $cartItemId => $quantity) {
+                // Kiểm tra và đảm bảo số lượng không dưới 1
+                $quantity = max(1, (int)$quantity);
+                $this->cartModel->updateCartItemQuantityById($cart_id, $cartItemId, $quantity);
+            }
+            
+            // Trả về kết quả cập nhật dạng JSON
+            echo json_encode(['success' => true]);
+            exit;
+        } else {
+            echo json_encode(['error' => 'Giỏ hàng không tìm thấy.']);
+            exit;
+        }
     }
-}
 
     public function getCartItemCount() {
         if (isset($_SESSION['id'])) {

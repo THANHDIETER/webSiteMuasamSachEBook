@@ -98,6 +98,45 @@ class userController {
 
         require_once 'views/user/addUser.php'; // Tạo view để thêm người dùng
     }
+    public function profile() {
+        if (isset($_SESSION['id'])) {
+            $userId = $_SESSION['id'];
+            $user = $this->userModel->getUserById($userId); 
+            if ($user) {
+                require 'views/user/profile.php'; // Gọi giao diện Profile
+            } else {
+                echo "Không tìm thấy thông tin người dùng.";
+            }
+        } else {
+            echo "Bạn cần đăng nhập để truy cập trang này.";
+            header("Location: ?act=login");
+            exit;
+        }
+    }
+    // homeController.php
+public function editProfile() {
+    if (isset($_SESSION['id'])) {
+        $userId = $_SESSION['id'];
+        $user = $this->userModel->getUserByIdProfile($userId);
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $name = $_POST['name'] ?? $user['name'];
+            $phone = $_POST['phone'] ?? $user['phone'];
+            $address = $_POST['address'] ?? $user['address'];
+
+            $this->userModel->updateUserProfile($userId, $name, $phone, $address); // Cập nhật thông tin
+            echo "Cập nhật thành công!";
+            header("Location: ?act=profile");
+            exit;
+        }
+
+        require 'views/user/edit_profile.php'; // Hiển thị form chỉnh sửa
+    } else {
+        echo "Bạn cần đăng nhập để truy cập trang này.";
+        header("Location: ?act=login");
+        exit;
+    }
+}
 }
 
 ?>

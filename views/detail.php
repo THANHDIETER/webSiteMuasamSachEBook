@@ -235,7 +235,7 @@
                   src="https://lms.languagehub.vn/store/1/default_images/default_profile.jpg" alt="avatar" width="40"
                   height="40" />
                 <div class="form-outline w-100">
-                  <textarea class="form-control" name="comment" rows="4" placeholder="Bình luận..." style="background: #fff;" ></textarea>
+                  <textarea class="form-control" name="comment" rows="4" placeholder="Bình luận..." style="background: #fff;" required ></textarea>
                   <label class="form-label" for="textAreaExample">Message</label>
                 </div>
               </div>

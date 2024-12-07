@@ -103,7 +103,7 @@
         <td><?= htmlspecialchars($order['phone']) ?></td>
         <td><?= htmlspecialchars($order['email']) ?></td>
         <td><?= number_format($order['total_amount'], 0, ',', '.') ?> VND</td>
-        <td><?= date('d/m/Y H:i', strtotime($order['order_date'])) ?></td>
+        <td><?= date('d/m/Y', strtotime($order['order_date'])) ?></td>
         <td>
             <span class="status-text <?= $order['payment_type'] == 'Đã thanh toán' ? 'paid-status' : 'unpaid-status' ?>">
                 <?= htmlspecialchars($order['payment_type']) ?>

@@ -126,31 +126,57 @@ class CartModel {
         $stmt->bindParam(':variant_id', $variant_id, PDO::PARAM_INT);
         $stmt->execute();
     }
-        // CartModel.php
-    // CartModel.php
     public function countCartItems($cartId) {
-        $sql = "SELECT SUM(quantity) AS total_quantity FROM cart_items WHERE cart_id = :cart_id";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':cart_id', $cartId, PDO::PARAM_INT);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result['total_quantity'] ?? 0; // Trả về 0 nếu không có sản phẩm
+        try {
+            $sql = "SELECT SUM(quantity) AS total_quantity FROM cart_items WHERE cart_id = :cart_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':cart_id', $cartId, PDO::PARAM_INT);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            // Trả về tổng số lượng hoặc 0 nếu không có sản phẩm
+            return $result['total_quantity'] ?? 0;
+        } catch (PDOException $e) {
+            // Ghi log lỗi hoặc xử lý lỗi
+            error_log("Lỗi đếm sản phẩm trong giỏ hàng: " . $e->getMessage());
+            return 0; // Trả về 0 khi xảy ra lỗi
+        }
     }
+    
 
 
 
    
-    public function updateCartItemQuantityById($cart_id, $cartItemId, $quantity) {
-        // Cập nhật số lượng sản phẩm trong giỏ hàng
-        $sql = "UPDATE cart_items 
-                SET quantity = :quantity
-                WHERE cart_id = :cart_id AND id = :cartItemId";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
-        $stmt->bindParam(':cart_id', $cart_id, PDO::PARAM_INT);
-        $stmt->bindParam(':cartItemId', $cartItemId, PDO::PARAM_INT);
-        $stmt->execute();
+    public function updateCartItemQuantityById($cartId, $cartItemId, $quantity) {
+        try {
+            // Kiểm tra sản phẩm có tồn tại trong giỏ hàng không
+            $checkSql = "SELECT id FROM cart_items WHERE cart_id = :cart_id AND id = :cartItemId";
+            $checkStmt = $this->conn->prepare($checkSql);
+            $checkStmt->bindParam(':cart_id', $cartId, PDO::PARAM_INT);
+            $checkStmt->bindParam(':cartItemId', $cartItemId, PDO::PARAM_INT);
+            $checkStmt->execute();
+    
+            if ($checkStmt->rowCount() > 0) {
+                // Nếu sản phẩm tồn tại, tiến hành cập nhật
+                $updateSql = "UPDATE cart_items 
+                              SET quantity = :quantity
+                              WHERE cart_id = :cart_id AND id = :cartItemId";
+                $updateStmt = $this->conn->prepare($updateSql);
+                $updateStmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+                $updateStmt->bindParam(':cart_id', $cartId, PDO::PARAM_INT);
+                $updateStmt->bindParam(':cartItemId', $cartItemId, PDO::PARAM_INT);
+                return $updateStmt->execute(); // Trả về true nếu thành công
+            } else {
+                // Nếu sản phẩm không tồn tại, trả về false
+                return false;
+            }
+        } catch (PDOException $e) {
+            // Ghi log lỗi hoặc xử lý lỗi
+            error_log("Lỗi cập nhật số lượng sản phẩm: " . $e->getMessage());
+            return false; // Trả về false khi xảy ra lỗi
+        }
     }
+    
     
     
 }

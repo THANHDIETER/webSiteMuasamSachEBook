@@ -63,7 +63,7 @@ if (!isset($_SESSION['id'])) {
             <h5>Sản phẩm</h5>
             <p><i class="bi bi-book text-success fs-2"></i></p>
             <p><?= $productCount ?> Sản phẩm</p>
-            <a href="index.php?act=product" class="btn btn-outline-success">Quản lý Sản phẩm</a>
+            <a href="index.php?act=listproduct" class="btn btn-outline-success">Quản lý Sản phẩm</a>
         </div>
     </div>
 

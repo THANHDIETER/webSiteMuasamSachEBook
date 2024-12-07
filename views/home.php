@@ -424,21 +424,22 @@ footer {
                         <div class="product-card-body">
                             <h6 class="product-card-title"><?php echo $key['name'] ?></h6>
                             <p class="product-author text-success"><?php echo $key['author'] ?></p>
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between my-4 gap-4">
                                 <p class="product-price text-danger font-weight-bold ">
+                                    
+                                    <?php 
+                                            $sale_price = $key['price'] - ($key['price'] * $key['sale'] / 100);
+                                            $formatted_sale_price = number_format($sale_price, 0, ',', '.');
+                                            echo $formatted_sale_price . 'đ'; 
+                                        ?>
+                                </p>
+                                <p class="product-sale text-muted ">
+                                    <del>
                                     <?php 
                                         $price = $key['price'];
                                         $formatted_price = number_format($price, 0, ',', '.');
                                         echo $formatted_price . 'đ'; 
                                     ?>
-                                </p>
-                                <p class="product-sale text-muted ">
-                                    <del>
-                                        <?php 
-                                            $sale_price = $key['price'] - ($key['price'] * $key['sale'] / 100);
-                                            $formatted_sale_price = number_format($sale_price, 0, ',', '.');
-                                            echo $formatted_sale_price . 'đ'; 
-                                        ?>
                                     </del>
                                     <span class="badge " style="color: white;"></style> >-<?php echo $key['sale'] ?>%</span>
                                 </p>
@@ -472,21 +473,22 @@ footer {
                         <div class="product-card-body">
                             <h6 class="product-card-title"><?php echo $key['name'] ?></h6>
                             <p class="product-author text-success"><?php echo $key['author'] ?></p>
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between gap-4">
                                 <p class="product-price text-danger font-weight-bold ">
+                                <?php 
+                                            $sale_price = $key['price'] - ($key['price'] * $key['sale'] / 100);
+                                            $formatted_sale_price = number_format($sale_price, 0, ',', '.');
+                                            echo $formatted_sale_price . 'đ'; 
+                                        ?>
+                                </p>
+                                <p class="product-sale text-muted ">
+                                    <del>
                                     <?php 
                                         $price = $key['price'];
                                         $formatted_price = number_format($price, 0, ',', '.');
                                         echo $formatted_price . 'đ'; 
                                     ?>
-                                </p>
-                                <p class="product-sale text-muted ">
-                                    <del>
-                                        <?php 
-                                            $sale_price = $key['price'] - ($key['price'] * $key['sale'] / 100);
-                                            $formatted_sale_price = number_format($sale_price, 0, ',', '.');
-                                            echo $formatted_sale_price . 'đ'; 
-                                        ?>
+                                       
                                     </del>
                                     <span class="badge " style="color: white;"></style> >-<?php echo $key['sale'] ?>%</span>
                                 </p>

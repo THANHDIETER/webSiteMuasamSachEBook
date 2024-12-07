@@ -130,7 +130,7 @@ class homeController
     public function profile() {
         if (isset($_SESSION['id'])) {
             $userId = $_SESSION['id'];
-            $user = $this->homeModel->getUserById($userId); // Lấy thông tin người dùng từ model
+            $user = $this->homeModel->getUserById($userId); 
             if ($user) {
                 require 'views/profile.php'; // Gọi giao diện Profile
             } else {
